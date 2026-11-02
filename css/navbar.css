@@ -7,14 +7,6 @@
     font-family: "Montserrat", sans-serif;
 }
 
-:root {
-    --cor-btn-topbar: green;
-    --cor-btn-topbar-hover: white;
-    --cor-principal: black;
-    --cor-texto-t1: white;
-    --cor-texto-animacao: green;
-}
-
 body {
     background-color: var(--cor-principal);
 }
@@ -75,66 +67,19 @@ a {
 .links:hover {
     color: var(--cor-texto-animacao);
     padding: 0.7rem 0px;
-    border-bottom: 2px solid greenyellow;
+    border-bottom: 2px solid  var(--cor-texto-animacao);
 }
 
 .btn-topbar {
     background-color: var(--cor-btn-topbar);
     padding: 0.75rem 2rem;
     border-radius: 20px;
-    color: white;
+    color: var(--cor-btn-topbar-hover);
     font-weight: 600;
     cursor: pointer;
 }
 
 .btn-topbar:hover {
     background-color: var(--cor-btn-topbar-hover);
-    color: black;
-}
-
-
-/* PAGINA HOME */
-
-.hero {
-    width: 100%;
-}
-
-.alinhar-texto-hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
-    height: 100%;
-}
-
-.texto-hero {
-    font-weight: 500;
-    color: var(--cor-texto-t1);
-    max-width: 500px;
-    width: 100%;
-    text-shadow: 2px 2px 10px black;
-    font-size: 1.1rem;
-    margin-top: 15px;
-}
-
-.titulo-hero {
-    color: var(--cor-texto-t1);
-    max-width: 500px; 
-    width: 100%;
-    text-shadow: 2px 2px 10px black;  
-    font-size: 2.5rem;
-}       
-
-.imagem-fundo {
-    display: flex;
-    flex-direction: column; 
-    justify-content: center;
-    background-image: url('img/chess-hero.png');
-    height: 600px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    color: var(--cor-btn-texto-hover);
 }
