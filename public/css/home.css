@@ -44,8 +44,8 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-image: url('../assets/imgs/danca-chess.png');
-    height: 900px;
+    background-image: url('../assets/imgs/danca-chess2.png');
+    height: 850px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
