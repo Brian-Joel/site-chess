@@ -1,0 +1,78 @@
+/* PAGINA HOME */
+* {
+    color: white;
+}
+
+main {
+    flex: 1;
+}
+
+.hero {
+    width: 100%;
+}
+
+.alinhar-texto-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 100%;
+}
+
+.texto-hero {
+    font-weight: 500;
+    color: var(--cor-texto-t1);
+    max-width: 500px;
+    width: 100%;
+    text-shadow: 2px 2px 10px black;
+    font-size: 1.1rem;
+    margin-top: 15px;
+}
+
+.titulo-hero {
+    color: var(--cor-texto-t1);
+    max-width: 500px;
+    width: 100%;
+    text-shadow: 2px 2px 10px black;
+    font-size: 2.5rem;
+}
+
+.imagem-fundo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url('../assets/imgs/danca-chess.png');
+    height: 900px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* CARDS  */
+
+.alinhar-moldura {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    margin: 90px;
+}
+
+.moldura {
+    padding: 120px;
+    background-color: #262626;
+    border: 2px solid rgb(49, 49, 49);
+}
+
+/* QUIZ  */
+.box-quiz {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    padding: 100px;
+    background-color: #149e263d;
+    border: rgb(22, 189, 58) solid 2px;
+}
