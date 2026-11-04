@@ -4,6 +4,13 @@
     --cor-btn-topbar-hover: white;
     --cor-btn-texto-hover: black;
     --cor-principal: black;
-    --cor-texto-t1: white;
     --cor-texto-animacao: greenyellow;
+
+
+    --cor-texto-t1: white;
+
+    --cor-borda-card: #505050;
+    --cor-fundo-card: #1A1A1A;
+
+    --cor-input: #000000;
 }

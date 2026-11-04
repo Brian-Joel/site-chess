@@ -1,0 +1,186 @@
+/* LOGIN */
+
+.login {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 5%;
+}
+
+.login .container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: var(--cor-borda-card) solid 2px;
+  background-color: var(--cor-fundo-card);
+  border-radius: 15px;
+  width: 100%;
+  justify-content: space-evenly;
+  color: var(--cor-texto-t1);
+  align-items: center;
+}
+
+.formulario {
+  display: flex;
+  height: 100%;
+  width: 70%;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.linha {
+  border-bottom: var(--cor-borda-card) solid 2px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 20px;
+  font-size: 20px;
+  color:  var(--cor-texto-t1);
+}
+
+.formulario select {
+  border: 2px solid #32b9cd;
+  background-color: white;
+  color: gray;
+  height: 36px;
+  text-align: center;
+  border-radius: 10px;
+  margin: 0;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 5px 0;
+}
+
+.botao {
+  cursor: pointer;
+  border: 0;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--cor-texto-t1);
+  background-color: var(--cor-btn-topbar);
+  padding: 15px 200px;
+  align-self: center;
+  margin: 50px 0px 
+}
+
+.loading-div {
+  width: 50px;
+  display: none;
+}
+
+.loading-div img {
+  height: 50px;
+  width: 50px;
+}
+
+#div_erros_login {
+  display: none
+}
+
+/* FORMULARIO */
+
+.alerta_erro {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card_erro {
+  display: none;
+  background-color: #fff;
+  color: black;
+  width: 230px;
+  position: fixed;
+  border-radius: 4px;
+  border: #ED145B 3px solid;
+  padding: 10px;
+  margin-right: 10%;
+}
+
+.card_erro #mensagem_erro {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.formulario .tipo_campo {
+  font-size: 20px;
+  font-weight: 600 !important;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin-bottom: 10px;
+  border: var(--cor-borda-card) solid 2px;
+  background-color: var(--cor-input);
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 15px;
+  color: white;
+  background-color: #ED145B;
+  width: 120px;
+  align-self: center;
+  margin-top: 5px;
+}
+
+.loading-div {
+  width: 50px;
+  margin: auto;
+  display: none;
+}
+
+.loading-div img {
+  height: 50px;
+  width: 50px;
+}
+
+
+/* sessao  */
+.sessao {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.alinhar-imagem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.imagem-login {
+  background-image: url('../assets/imgs/xadrez-pecas.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 850px;
+}
+
+
+/* EFEITOS VISUAIS  */
+.botao:hover {
+    background-color: var(--cor-btn-topbar-hover);
+    color: var(--cor-btn-texto-hover);
+}
