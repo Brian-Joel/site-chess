@@ -6,95 +6,105 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>AquaTech | Cadastro</title>
+  <title>Xeque-Mate | Cadastro</title>
 
   <script src="./js/sessao.js"></script>
 
-  <link rel="stylesheet" href="./css/estilo.css" />
-  <link rel="icon" href="./assets/icon/favicon2.ico" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base/variaveis.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/base/footer.css">
 </head>
 
 <body onload="listar()">
   <!--header inicio-->
-  <div class="header">
-    <div class="container">
-      <h1 class="titulo">AquaTech</h1>
-      <ul class="navbar">
-        <li>
-          <a href="index.html">Inicial</a>
-        </li>
-        <li>
-          <a href="simulador.html">Simulador</a>
-        </li>
-        <li>|</li>
-        <li>
-          <a href="login.html">Login</a>
-        </li>
-        <li class="agora">
-          <a href="#">Cadastro</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <!--header fim-->
-
-  <div class="login">
-    <div class="alerta_erro">
-      <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
+  <header>
+    <nav class="navegador">
+      <div class="topbar">
+        <span class="alinhar-topbar">
+          <img class="logo" src="./assets/imgs/logo-horse.png" alt="Logotipo Xeque-Mate">
+          <p class="logo-titulo">Xeque-Mate</p>
+        </span>
+        <span class="alinhar-texto-navbar">
+          <a class="links" href="index.html">Home</a>
+          <a class="links" href="#">O que é xadrez?</a>
+          <a class="links" href="#">Sobre mim</a>
+          <a class="links" href="#">Quiz</a>
+        </span>
+        <span class="alinhar-btn-navbar">
+          <button class="btn-topbar" onclick="window.location.href='login.html'">Entrar</button>
+        </span>
       </div>
+    </nav>
+  </header>
+  <!--header fim-->
+  <main>
+    <section class="sessao">
+      <div class="alinhar-imagem">
+        <span class="imagem-login">
+        <p>texto bom</p>
+      </span>
     </div>
-    <div class="container">
-      <div class="card card-cadastro">
-        <h2>Bem-vindo!</h2>
-        <div class="formulario">
-          <!--
+
+    <div class="login">
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
+        </div>
+      </div>
+      <div class="container">
+        <div class="card card-cadastro">
+          <span class="linha">
+            <h2>Cadastre-se</h2>
+          </span>
+          <div class="formulario">
+            <!--
                          Para inserir mais um campo, copie uma das inputs abaixo.
                          Assim que inserir vá para o script abaixo.
-                     -->
-          <div class="campo">
+                         -->
+            <!-- <div class="campo">
             <span>Código de ativação:</span>
             <input id="codigo_input" type="text" placeholder="Insira aqui seu código" />
+          </div> -->
+            <div class="campo">
+              <span>Nome:</span>
+              <input id="nome_input" type="text" placeholder="Seu nome" />
+            </div>
+            <div class="campo">
+              <span>E-mail:</span>
+              <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
+            </div>
+            <div class="campo">
+              <span>CPF:</span>
+              <input id="cpf_input" type="texto" placeholder="000.000.000-00" />
+            </div>
+            <div class="campo">
+              <span>Senha:</span>
+              <input id="senha_input" type="password" placeholder="******" />
+            </div>
+            <div class="campo">
+              <span>Confirmação da Senha:</span>
+              <input id="confirmacao_senha_input" type="password" placeholder="******" />
+            </div>
+            <button class="botao" onclick="cadastrar()">Cadastrar</button>
           </div>
-          <div class="campo">
-            <span>Nome:</span>
-            <input id="nome_input" type="text" placeholder="Seu nome" />
+          <div id="div_aguardar" class="loading-div">
+            <img src="./assets/circle-loading.gif" id="loading-gif" />
           </div>
-          <div class="campo">
-            <span>E-mail:</span>
-            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
-          </div>
-          <div class="campo">
-            <span>CPF:</span>
-            <input id="cpf_input" type="texto" placeholder="000.000.000-00" />
-          </div>
-          <div class="campo">
-            <span>Senha:</span>
-            <input id="senha_input" type="password" placeholder="******" />
-          </div>
-          <div class="campo">
-            <span>Confirmação da Senha:</span>
-            <input id="confirmacao_senha_input" type="password" placeholder="******" />
-          </div>
-          <button class="botao" onclick="cadastrar()">Cadastrar</button>
-        </div>
-        <div id="div_aguardar" class="loading-div">
-          <img src="./assets/circle-loading.gif" id="loading-gif" />
-        </div>
 
-        <div id="div_erros_login"></div>
+          <div id="div_erros_login"></div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!--footer inicio-->
-  <div class="footer">
-    <div class="container">
-      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
-    </div>
-  </div>
-  <!--footer fim-->
+  </section>
+  </main>
 </body>
 
 </html>
