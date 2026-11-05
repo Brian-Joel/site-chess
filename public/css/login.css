@@ -1,3 +1,19 @@
+/* CONFIGURAÇÃO INICIAL  */
+* {
+    color:  var(--cor-texto-t1);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    min-width: 100%;
+    flex: 1 0 auto; 
+}
+
+
 /* LOGIN */
 
 .login {

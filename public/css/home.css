@@ -1,11 +1,18 @@
 /* PAGINA HOME */
 * {
-    color: white;
+    color:  var(--cor-texto-t1);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 main {
-    flex: 1;
+    min-width: 100%;
+    flex: 1 0 auto; 
 }
+
 
 .hero {
     width: 100%;
