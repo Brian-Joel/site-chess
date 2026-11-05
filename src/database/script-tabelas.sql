@@ -32,8 +32,10 @@ CREATE TABLE comentario (
 
 /* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
 -- tabela em desenvolvimento
-create table quiz (
+CREATE TABLE quiz (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	opcao CHAR(1),
 	data_hora DATETIME
 );
+
+SELECT*FROM usuario;

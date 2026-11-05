@@ -68,18 +68,18 @@
 
               <!-- ETAPAS  -->
               <div class="container-etapas">
-                <div id="etapa-1" class="etapa ativo">
-                  <span class="circulo"><img src="./assets/imgs/peao.png" alt="Peão"></span>
+                <div class="etapa">
+                  <span id="etapa-1" class="circulo"><img src="./assets/imgs/peao.png" alt="Peão"></span>
                   <span class="texto-etapa">Abertura</span>
                 </div>
                 <div class="linha-etapa" id="linha-1"></div>
-                <div id="etapa-2" class="etapa">
-                  <span class="circulo"><img src="./assets/imgs/peao.png" alt="Cavalo"></span>
+                <div class="etapa">
+                  <span id="etapa-2" class="circulo"><img src="./assets/imgs/peao.png" alt="Cavalo"></span>
                   <span class="texto-etapa">Meio-Jogo</span>
                 </div>
                 <div class="linha-etapa" id="linha-2"></div>
-                <div id="etapa-3" class="etapa">
-                  <span class="circulo"><img src="./assets/imgs/peao.png" alt="Rei"></span>
+                <div class="etapa">
+                  <span id="etapa-3" class="circulo"><img src="./assets/imgs/peao.png" alt="Rei"></span>
                   <span class="texto-etapa">Final</span>
                 </div>
               </div>
@@ -87,25 +87,25 @@
               <!-- TELA 1 - CADASTRO USUARIO E LOGIN -->
               <div id="conteudo-etapa-1" class="etapa-formulario ativo">
                 <div class="campo">
-                <span>Nome:</span>
-                <input id="nome_input" type="text" placeholder="Seu nome" />
-              </div>
-              <div class="campo">
-                <span>E-mail:</span>
-                <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
-              </div>
+                  <span>Nome:</span>
+                  <input id="nome_input" type="text" placeholder="Seu nome" />
+                </div>
+                <div class="campo">
+                  <span>E-mail:</span>
+                  <input id="email_input" type="text" placeholder="usuario@provedor.com" />
+                </div>
               </div>
 
               <!-- TELA 2 - CADASTRAR SENHA -->
               <div id="conteudo-etapa-2" class="etapa-formulario">
                 <div class="campo">
-                <span>Senha:</span>
-                <input id="senha_input" type="password" placeholder="******" />
-              </div>
-              <div class="campo">
-                <span>Confirmação da Senha:</span>
-                <input id="confirmacao_senha_input" type="password" placeholder="******" />
-              </div>
+                  <span>Senha:</span>
+                  <input id="senha_input" type="password" placeholder="******" />
+                </div>
+                <div class="campo">
+                  <span>Confirmação da Senha:</span>
+                  <input id="confirmacao_senha_input" type="password" placeholder="******" />
+                </div>
                 <p class="senha-status">🔒 Senha Forte</p>
                 <div class="requisitos">
                   <p>Requisitos Mínimos:</p>
@@ -134,11 +134,10 @@
 
               <!-- botões para navegação -->
               <div class="botoes-container">
-                <button class="btn-voltar" onclick="voltar()">Voltar</button>
-                <button class="btn-continuar" onclick="avancar()">Continuar</button>
+                <button id="btnVoltar" class="botao btn-voltar" onclick="voltar()">Voltar</button>
+                <button id="botao" class="botao btn-cadastro" onclick="cadastrar()">Continuar</button>
               </div>
-              
-              <button class="botao" onclick="cadastrar()">Cadastrar</button>
+
             </div>
             <div id="div_aguardar" class="loading-div">
               <img src="./assets/circle-loading.gif" id="loading-gif" />
@@ -164,40 +163,59 @@
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
+
     var nomeVar = nome_input.value;
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
-    // Verificando se há algum campo em branco
-    if (
-      nomeVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      confirmacaoSenhaVar == ""
-    ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
-      finalizarAguardar();
-      return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
-    }
-
-    // Verificando se o código de ativação é de alguma usuario cadastrada
-    for (let i = 0; i < listaUsuario.length; i++) {
-      if (listaUsuario[i] != nomeVar) {
-        idUsuarioVincular = listaUsuario[i].id
-        console.log("Nome de usuario válido.");
-        break;
-      } else {
+    // ETAPA 1: valida nome e email e só avança
+    if (etapa == 1) {
+      if (nomeVar == "" || emailVar == "") {
         cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(Mensagem de erro para usuario inválido)";
+        mensagem_erro.innerHTML = "(ERRO: Preencha o campo nome e email!)";
+        setTimeout(sumirMensagem, 5000);
         finalizarAguardar();
+        return false;
       }
+      avancar();
+      return false;
     }
+
+    if (etapa == 2) {
+      if (senhaVar == "" || confirmacaoSenhaVar == "") {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(ERRO: Preencha os campos de senha!)";
+        setTimeout(sumirMensagem, 5000);
+        finalizarAguardar();
+        return false;
+      }
+      else if (senhaVar != confirmacaoSenhaVar) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(ERRO: As senhas são diferentes!)";
+        setTimeout(sumirMensagem, 5000);
+        finalizarAguardar();
+        return false;
+      }
+      avancar();
+    }
+
+
+    // Validação passou: vai para a última etapa
+
+
+    // // Verificando se o código de ativação é de alguma usuario cadastrada
+    // for (let i = 0; i < listaUsuario.length; i++) {
+    //   if (listaUsuario[i] != nomeVar) {
+    //     idUsuarioVincular = listaUsuario[i].id
+    //     console.log("Nome de usuario válido.");
+    //     break;
+    //   } else {
+    //     cardErro.style.display = "block";
+    //     mensagem_erro.innerHTML = "(Mensagem de erro para usuario inválido)";
+    //     finalizarAguardar();
+    //   }
+    // }
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -266,3 +284,5 @@
   // }
 
 </script>
+
+<script src="./js/cadastro.js"></script>

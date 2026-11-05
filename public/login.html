@@ -75,8 +75,8 @@
                             <div class="campo">
                                 <span>Senha:</span>
                                 <input id="senha_input" type="password" placeholder="******">
-                            </div>
-                            <button class="botao" onclick="entrar()">Entrar</button>
+                            </div class="botoes-container">
+                            <button class="botao btn-login" onclick="entrar()">Entrar</button>
                         </div>
 
                         <div id="div_aguardar" class="loading-div">
@@ -132,7 +132,7 @@
                 console.log(resposta);
 
                 resposta.json().then(json => {
-                    console.log(json);  
+                    console.log(json);
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
