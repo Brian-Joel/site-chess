@@ -49,57 +49,106 @@
     <section class="sessao">
       <div class="alinhar-imagem">
         <span class="imagem-login">
-        <p>texto bom</p>
-      </span>
-    </div>
+          <p>texto bom</p>
+        </span>
+      </div>
 
-    <div class="login">
-      <div class="alerta_erro">
-        <div class="card_erro" id="cardErro">
-          <span id="mensagem_erro"></span>
+      <div class="login">
+        <div class="alerta_erro">
+          <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+          </div>
+        </div>
+        <div class="container">
+          <div class="card card-cadastro">
+            <span class="linha">
+              <h2>Cadastre-se</h2>
+            </span>
+            <div class="formulario">
+
+              <!-- ETAPAS  -->
+              <div class="container-etapas">
+                <div id="etapa-1" class="etapa ativo">
+                  <span class="circulo"><img src="./assets/imgs/peao.png" alt="Peão"></span>
+                  <span class="texto-etapa">Abertura</span>
+                </div>
+                <div class="linha-etapa" id="linha-1"></div>
+                <div id="etapa-2" class="etapa">
+                  <span class="circulo"><img src="./assets/imgs/peao.png" alt="Cavalo"></span>
+                  <span class="texto-etapa">Meio-Jogo</span>
+                </div>
+                <div class="linha-etapa" id="linha-2"></div>
+                <div id="etapa-3" class="etapa">
+                  <span class="circulo"><img src="./assets/imgs/peao.png" alt="Rei"></span>
+                  <span class="texto-etapa">Final</span>
+                </div>
+              </div>
+
+              <!-- TELA 1 - CADASTRO USUARIO E LOGIN -->
+              <div id="conteudo-etapa-1" class="etapa-formulario ativo">
+                <div class="campo">
+                <span>Nome:</span>
+                <input id="nome_input" type="text" placeholder="Seu nome" />
+              </div>
+              <div class="campo">
+                <span>E-mail:</span>
+                <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
+              </div>
+              </div>
+
+              <!-- TELA 2 - CADASTRAR SENHA -->
+              <div id="conteudo-etapa-2" class="etapa-formulario">
+                <div class="campo">
+                <span>Senha:</span>
+                <input id="senha_input" type="password" placeholder="******" />
+              </div>
+              <div class="campo">
+                <span>Confirmação da Senha:</span>
+                <input id="confirmacao_senha_input" type="password" placeholder="******" />
+              </div>
+                <p class="senha-status">🔒 Senha Forte</p>
+                <div class="requisitos">
+                  <p>Requisitos Mínimos:</p>
+                  <ul>
+                    <li>Pelo menos 8 caracteres</li>
+                    <li>Pelo menos 1 letra maiúscula</li>
+                    <li>Pelo menos 1 número</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- TELA 3 - ESCOLHA DAS FOTOS DE PERFIL -->
+              <div id="conteudo-etapa-3" class="etapa-formulario">
+                <p class="titulo-etapa3">Escolha uma foto de perfil</p>
+
+                <div class="avatares">
+                  <!-- Foto dos avatares -->
+                  <div class="avatar-item"><img src="avatar-cavalo.png" alt="Cavalo"></div>
+                  <div class="avatar-item"><img src="avatar-peao.png" alt="Peão"></div>
+                  <div class="avatar-item"><img src="avatar-torre.png" alt="Torre"></div>
+                  <div class="avatar-item"><img src="avatar-rainha.png" alt="Rainha"></div>
+                  <div class="avatar-item"><img src="avatar-rei.png" alt="Rei"></div>
+                  <div class="avatar-item"><img src="avatar-bispo.png" alt="Bispo"></div>
+                </div>
+              </div>
+
+              <!-- botões para navegação -->
+              <div class="botoes-container">
+                <button class="btn-voltar" onclick="voltar()">Voltar</button>
+                <button class="btn-continuar" onclick="avancar()">Continuar</button>
+              </div>
+              
+              <button class="botao" onclick="cadastrar()">Cadastrar</button>
+            </div>
+            <div id="div_aguardar" class="loading-div">
+              <img src="./assets/circle-loading.gif" id="loading-gif" />
+            </div>
+
+            <div id="div_erros_login"></div>
+          </div>
         </div>
       </div>
-      <div class="container">
-        <div class="card card-cadastro">
-          <span class="linha">
-            <h2>Cadastre-se</h2>
-          </span>
-          <div class="formulario">
-            <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                         -->
-            <!-- <div class="campo">
-            <span>Código de ativação:</span>
-            <input id="codigo_input" type="text" placeholder="Insira aqui seu código" />
-          </div> -->
-            <div class="campo">
-              <span>Nome:</span>
-              <input id="nome_input" type="text" placeholder="Seu nome" />
-            </div>
-            <div class="campo">
-              <span>E-mail:</span>
-              <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
-            </div>
-            <div class="campo">
-              <span>Senha:</span>
-              <input id="senha_input" type="password" placeholder="******" />
-            </div>
-            <div class="campo">
-              <span>Confirmação da Senha:</span>
-              <input id="confirmacao_senha_input" type="password" placeholder="******" />
-            </div>
-            <button class="botao" onclick="cadastrar()">Cadastrar</button>
-          </div>
-          <div id="div_aguardar" class="loading-div">
-            <img src="./assets/circle-loading.gif" id="loading-gif" />
-          </div>
-
-          <div id="div_erros_login"></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
   </main>
 </body>
 
@@ -192,6 +241,10 @@
     return false;
   }
 
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+
   // // Listando empresas cadastradas 
   // function listar() {
   //   fetch("/empresas/listar", {
@@ -212,7 +265,4 @@
   //     });
   // }
 
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
 </script>

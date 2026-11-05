@@ -1,168 +1,21 @@
 /* CONFIGURAÇÃO INICIAL  */
 * {
-    color:  var(--cor-texto-t1);
+  box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
 main {
-    min-width: 100%;
-    flex: 1 0 auto; 
-}
-
-
-/* LOGIN */
-
-.login {
   display: flex;
-  flex-direction: column;
-  flex: 1;
-  margin: 0% 5%;
-}
-
-.login .container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  border: var(--cor-borda-card) solid 2px;
-  background-color: var(--cor-fundo-card);
-  border-radius: 15px;
   width: 100%;
-  justify-content: space-evenly;
-  color: var(--cor-texto-t1);
-  align-items: center;
+  flex: 1;
 }
 
-.formulario {
-  display: flex;
-  height: 100%;
-  width: 70%;
-  justify-content: space-around;
-  flex-direction: column;
-}
-
-.linha {
-  border-bottom: var(--cor-borda-card) solid 2px;
-  width: 100%;
-  text-align: center;
-  margin-bottom: 50px;
-  padding: 20px;
-  font-size: 20px;
-  color:  var(--cor-texto-t1);
-}
-
-.campo {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  padding: 5px 0;
-}
-
-.botao {
-  cursor: pointer;
-  border: 0;
-  border-radius: 15px;
-  font-weight: 600;
-  font-size: 18px;
-  color: var(--cor-texto-t1);
-  background-color: var(--cor-btn-topbar);
-  padding: 15px 200px;
-  align-self: center;
-  margin: 50px 0px 
-}
-
-.loading-div {
-  width: 50px;
-  display: none;
-}
-
-.loading-div img {
-  height: 50px;
-  width: 50px;
-}
-
-#div_erros_login {
-  display: none
-}
-
-/* FORMULARIO */
-
-.alerta_erro {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.card_erro {
-  display: none;
-  background-color: #fff;
-  color: black;
-  width: 230px;
-  position: fixed;
-  border-radius: 4px;
-  border: #ED145B 3px solid;
-  padding: 10px;
-  margin-right: 10%;
-}
-
-.card_erro #mensagem_erro {
-  font-weight: 500;
-  font-size: 20px;
-}
-
-.formulario .tipo_campo {
-  font-size: 20px;
-  font-weight: 600 !important;
-}
-
-.formulario {
-  display: flex;
-  flex-direction: column;
-}
-
-input {
-  margin-bottom: 10px;
-  border: var(--cor-borda-card) solid 2px;
-  background-color: var(--cor-input);
-  padding: 10px;
-  text-align: center;
-  border-radius: 10px;
-}
-
-.btn {
-  border: 0;
-  border-radius: 5px;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 10px 15px;
-  color: white;
-  background-color: #ED145B;
-  width: 120px;
-  align-self: center;
-  margin-top: 5px;
-}
-
-.loading-div {
-  width: 50px;
-  margin: auto;
-  display: none;
-}
-
-.loading-div img {
-  height: 50px;
-  width: 50px;
-}
-
-
-/* sessao  */
+/* SESSÃO PRINCIPAL */
 .sessao {
   display: flex;
   width: 100%;
@@ -181,12 +34,216 @@ input {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 850px;
+  height: 100%;
+}
+
+/* LOGIN E CADASTRO*/
+.login {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+}
+
+.login .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: var(--cor-borda-card) solid 2px;
+  background-color: var(--cor-fundo-card);
+  border-radius: 15px;
+  width: 450px;
+  max-width: 100%;
+  padding: 30px 0px;
+  align-items: center;
+}
+
+.linha {
+  border-bottom: var(--cor-borda-card) solid 2px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  font-size: 20px;
+  color: var(--cor-texto-t1);
+}
+
+.formulario {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 15px;
+  color: var(--cor-texto-t1);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 0px 50px;
+}
+
+input {
+  margin-bottom: 10px;
+  border: var(--cor-borda-card) solid 2px;
+  background-color: var(--cor-input);
+  padding: 12px;
+  text-align: left;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 16px;
+  color: var(--cor-texto-t1);
+}
+
+.botao {
+  cursor: pointer;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--cor-texto-t1);
+  background-color: var(--cor-btn-topbar);
+  padding: 15px;
+  width: 75%;
+  margin-top: 20px;
+  align-self: center;
+}
+
+
+/* CADASTRO ELEMENTOS ADICIONAIS  */
+.container-etapas {
+  display: flex;
+  justify-content: center;
+}
+
+.circulo {
+  display: flex;
+  align-items: center;
+  background-color: #000000;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  border: #505050 solid 3px;
+  overflow: hidden;
+}
+
+.circulo img {
+  width: 70%;
+  height: 70%;
+  margin: 10px;
+}
+
+.linha-etapa {
+  background-color: #505050;
+  padding: 2px 25px;
+  margin: 5px;
+  height: 2px;
+  align-self: center;
+  margin-bottom: 25px;
+}
+
+.texto-etapa {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 12px;
+  color: #505050;
+  font-weight: 700;
+}
+
+/* BOTOES CADASTRO  */
+.botoes-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  gap: 15px;
+  margin: 0 10%;
+}
+
+.btn-voltar {
+  background-color: #000000;
+  border: 3px solid #333333;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 12px;
+  width: 40%;
+}
+
+.btn-continuar {
+  cursor: pointer;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--cor-texto-t1);
+  background-color: var(--cor-btn-topbar);
+  padding: 12px;
+  width: 60%;
+}
+
+
+/* OUTROS ELEMENTOS DE SUPORTE */
+.loading-div {
+  width: 50px;
+  margin: 20px auto 0 auto;
+  display: none;
+}
+
+.loading-div img {
+  height: 50px;
+  width: 50px;
+}
+
+#div_erros_login {
+  display: none;
+}
+
+.alerta_erro {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card_erro {
+  display: none;
+  background-color: #fff;
+  color: black;
+  width: 200px;
+  position: fixed;
+  border-radius: 4px;
+  border: #ED145B 3px solid;
+  padding: 10px;
+}
+
+.card_erro #mensagem_erro {
+  font-weight: 500;
+  font-size: 20px;
 }
 
 
 /* EFEITOS VISUAIS  */
 .botao:hover {
-    background-color: var(--cor-btn-topbar-hover);
-    color: var(--cor-btn-texto-hover);
+  background-color: var(--cor-btn-topbar-hover);
+  color: var(--cor-btn-texto-hover);
+}
+
+input:hover {
+  border: white solid 2px;
+}
+
+input:focus {
+  outline: none;
+  border: white solid 2px;
+}
+
+input::placeholder {
+  color: var(--cor-texto-t1);
+  opacity: 0.6;
+  font-size: 14px;
+  text-align: center;
 }
