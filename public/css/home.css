@@ -1,6 +1,6 @@
 /* PAGINA HOME */
 * {
-    color:  var(--cor-texto-t1);
+    color: var(--cor-texto-t1);
 }
 
 body {
@@ -10,9 +10,8 @@ body {
 
 main {
     min-width: 100%;
-    flex: 1 0 auto; 
+    flex: 1;
 }
-
 
 .hero {
     width: 100%;
@@ -58,9 +57,16 @@ main {
     background-position: center;
 }
 
+.botao {
+    background: var(--cor-btn-topbar);
+    color: var(--cor-btn-texto);
+    font-weight: 700;
+    padding: 0.6rem 2.5rem;
+    border-radius: 12px;
+    margin-top: 20px;
+}
 
 /* CARDS  */
-
 .alinhar-moldura {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -74,12 +80,132 @@ main {
     border: 2px solid rgb(49, 49, 49);
 }
 
-/* QUIZ  */
-.box-quiz {
-    display: flex;
-    justify-content: center;
+.alinhar-texto-secao {
     margin: 20px;
-    padding: 100px;
-    background-color: #149e263d;
-    border: rgb(22, 189, 58) solid 2px;
+}
+
+/* ---------- CARDS ---------- */
+.secao {
+    margin: 50px 80px;
+}
+
+.passos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.card {
+    background: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda-card);
+    border-radius: 15px;
+    padding: 3rem 2em;
+}
+
+.passo-numero {
+    color: green;
+    font-size: 2rem;
+    font-weight: bolder;
+    margin-bottom: 0.5rem;
+}
+
+.passo h3 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    font-weight: bolder;
+}
+
+.passo p {
+    font-weight: lighter;
+    font-size: 0.85rem;
+}
+
+/* ---------- SESSAO TRILHA---------- */
+.card-trilha {
+    background: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda-card);
+    border-radius: 15px;
+    padding: 3rem;
+}
+
+.trilha-lista {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.trilha-lista li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.peca {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.peca--tabuleiro {
+    width: 2.6rem;
+    height: 2.6rem;
+    border: 1px solid white;
+    align-self: center;
+    margin-bottom: 5px;
+    background: repeating-conic-gradient(black 0 25%, white 0 50%) 0 0 / 50% 50%;
+}
+
+/* ---------- CTA : CHAMADA PARA AÇÃO ---------- */
+.cta {
+    background: rgba(0, 128, 0, 0.342);
+    border: 1px solid green;
+    border-radius: 12px;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.cta h2 {
+    margin-bottom: 1rem;
+}
+
+/* ---------- FAQ ---------- */
+.faq {
+    display: grid;
+    gap: 1rem;
+}
+
+.faq-item {
+    background: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda-card);
+    border-radius: 10px;
+}
+
+.faq-item summary {
+    padding: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.faq-item p {
+    padding: 1rem 2.4rem;
+    color: var(--cor-texto-t1);
+    font-size: 0.85rem;
+}
+
+/* ANIMAÇÕES  */
+
+.faq-item:hover{
+    border: 1px solid var(--cor-btn-topbar-hover);
+}
+
+.botao:hover {
+    background: var(--cor-btn-topbar-hover);
+    color: var(--cor-btn-texto-hover);
 }

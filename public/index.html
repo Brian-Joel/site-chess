@@ -7,17 +7,17 @@
   <title>Xeque-Mate | Home-Page</title>
   <script src="./js/sessao.js"></script>
 
-  
+
   <link rel="preconnect" href="https://googleapis.com">
   <link rel="preconnect" href="https://gstatic.com" crossorigin>
   <link href="https://googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&display=swap"
     rel="stylesheet">
 
-    <link rel="stylesheet" href="css/base/variaveis.css">
-    <link rel="stylesheet" href="css/base/reset.css">
-    <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/base/footer.css">
+  <link rel="stylesheet" href="css/base/variaveis.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/base/footer.css">
 
 </head>
 
@@ -33,7 +33,6 @@
           <a class="links" href="#">Home</a>
           <a class="links" href="#">O que é xadrez?</a>
           <a class="links" href="#">Sobre mim</a>
-          <a class="links" href="#">Quiz</a>
         </span>
         <span class="alinhar-btn-navbar">
           <button class="btn-topbar" onclick="window.location.href='cadastro.html'">Cadastrar</button>
@@ -51,102 +50,131 @@
           <p class="texto-hero">Mais que um jogo, um estilo de vida. Jogue xadrez clássico e moderno em uma plataforma
             impecável.</p>
           <span>
-            <button>SAIBA MAIS</button>
+            <button class="botao">SAIBA MAIS</button>
           </span>
         </span>
       </div>
     </section>
 
-    <section>
-      <div>
-
+    <section class="secao">
+      <span class="alinhar-texto-secao">
         <h2>Como funciona?</h2>
-        <span class="alinhar-moldura">
-          <span class="moldura">
-            <p>1</p>
-            <p>Treina o foco</p>
-            <p>Cada jogada pede atenção total, o que melhora a concentração no dia a dia.</p>
-          </span>
-          <span class="moldura">
-            <p>2</p>
-            <p>Ensina a planejar</p>
-            <p>Você aprende a pensar vários passos à frente e a prever consequências.</p>
-          </span>
-          <span class="moldura">
-            <p>3</p>
-            <p>Jogo rápido</p>
-            <p>Partidas rápidas e aulas curtas, no celular ou no computador.</p>
-          </span>
-        </span>
-      </div>
-    </section>
-
-
-    <section>
-      <div>
-        <h2>Conheça as peças</h2>
-        <p>Cada peça tem seu jeito de andar. Comece por aqui.</p>
-      </div>
-      <!-- gif das peças vindo de um lado pro outro, peças em verde com um subtitulo cada  -->
-      <div class="gif">
-      </div>
-    </section>
-
-
-    <section>
-      <span class="box-quiz">
-        <h4>Pronto para testar seus conhecimentos?</h4>
-        <button>FAÇA O QUIZ</button>
       </span>
+
+      <ol class="passos">
+        <li class="card">
+          <span class="passo-numero">1</span>
+          <h3>Resolva puzzles</h3>
+          <p>Encontre o melhor lance na posição apresentada.</p>
+        </li>
+        <li class="card">
+          <span class="passo-numero">2</span>
+          <h3>Desbloqueie o próximo</h3>
+          <p>Só avança quem resolve o puzzle atual.</p>
+        </li>
+        <li class="card">
+          <span class="passo-numero">3</span>
+          <h3>Compare seu progresso</h3>
+          <p>Veja quem está na mesma fase que você.</p>
+        </li>
+      </ol>
     </section>
 
-    <section class="faq-container">
-  <h2>Dúvidas Frequentes</h2>
+    <!-- SESSAO TRILHA -->
+    <section class="secao">
+      <span class="alinhar-texto-secao">
+        <h2 id="titulo-trilha">Sua trilha</h2>
+        <p class="secao-descricao">Cada puzzle destrava o seguinte. Do básico ao avançado.</p>
+      </span>
+      <div class="card-trilha">
+        <ol class="trilha-lista">
+          <li><span class="peca">&#9817;&#xFE0E;</span><span>Peão</span></li>
+          <li><span class="peca">&#9812;&#xFE0E;</span><span>O Rei</span></li>
+          <li><span class="peca">&#9815;&#xFE0E;</span><span>Bispo</span></li>
+          <li><span class="peca">&#9816;&#xFE0E;</span><span>Cavalo</span></li>
+          <li><span class="peca">&#9814;&#xFE0E;</span><span>Torre</span></li>
+          <li><span class="peca">&#9813;&#xFE0E;</span><span>Dama</span></li>
+          <li><span class="peca peca--tabuleiro"></span><span>Estratégias</span></li>
+        </ol>
+      </div>
+    </section>
 
-  <details>
-    <summary>Preciso saber jogar para começar?</summary>
-    <p>Não. O Xeque-Mate começa pelo tabuleiro e pelo nome de cada peça.</p>
-  </details>
-  
-  <details>
-    <summary>Posso jogar no celular?</summary>
-    <p>Sim. O site funciona em qualquer navegador moderno, com o progresso salvo na sua conta.</p>
-  </details>
+    <!-- CHAMADA PARA AÇÃO -->
+    <section class="secao">
+      <div class="cta">
+        <h2 id="titulo-cta">Pronto para o primeiro puzzle?</h2>
+        <a class="botao" href="./cadastro.html">Começar</a>
+      </div>
+    </section>
 
-  <details>
-    <summary>Como funciona o quiz?</summary>
-    <p>São perguntas rápidas sobre as peças e as regras, com explicação imediata de cada resposta.</p>
-  </details>
-</section>
+    <!-- FAQ  : DÚVIDAS FREQUENTES -->
+    <section class="secao">
+      <span class="alinhar-texto-secao">
+        <h2 id="titulo-faq">Dúvidas frequentes</h2>
+      </span>
+      <div class="faq">
+        <details class="faq-item">
+          <summary>Site destinado a quem?</summary>
+          <p>A qualquer pessoa que queira aprender xadrez, de iniciantes a jogadores que querem treinar táticas.</p>
+        </details>
 
-  <details>
-    <summary>O Xeque-Mate é gratuito?</summary>
-    <p>Sim. As lições básicas, o quiz e as partidas de treino são gratuitos. <a href="#">[DETALHES DE PLANOS]</a></p>
-  </details>
-  
-  <details>
-    <summary>Quanto tempo leva para aprender?</summary>
-    <p>Em cerca de uma semana de lições curtas você já consegue jogar uma partida completa.</p>
-  </details>
+        <details class="faq-item">
+          <summary>Posso acessar pelo celular?</summary>
+          <p>Sim. O site se adapta a telas pequenas, então você pode resolver os puzzles pelo navegador do celular.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Preciso pagar para jogar?</summary>
+          <p>Não. Basta fazer o cadastro e começar pelo primeiro puzzle da trilha.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Como desbloqueio o próximo puzzle?</summary>
+          <p>Resolvendo o puzzle atual. Cada acerto libera o seguinte na trilha.</p>
+        </details>
+      </div>
+
+    </section>
 
   </main>
-  <footer>
-    <div class="footer-container">
 
-      <div class="footer-brand">
-        <img class="logo-footer" src="img/logo-horse.png" alt="Logo Xeque-Mate">
-        <h2 class="footer-logo">Xeque-Mate</h2>
-        <p class="footer-copy">&copy; 2026 Xeque-Mate. Todos os direitos reservados.</p>
+  <!-- FOOTER -->
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <a class="rodape-logo" href="./index.html">
+        <img src="./assets/imgs/logo-horse.png" alt="Logo">
+        <span>Xeque-Mate</span>
+      </a>
+
+      <div class="rodape-info">
+        <ul class="rodape-links">
+          <li><a href="./index.html">Início rápido</a></li>
+          <li><a href="./sobre.html">Sobre mim</a></li>
+          <li><a href="./termos.html">Termos de uso</a></li>
+          <li><a href="./privacidade.html">Política de privacidade</a></li>
+          <li><a href="./contato.html">Contato</a></li>
+        </ul>
+        </nav>
+        <ul class="rodape-links">
+          <li>Siga-nos:</li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="#">YouTube</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+        </nav>
+
+        <span class="rodape-legal">
+          CNPJ: 00.000.000/0001-00 | Razão social: Xequemate serviços digitais Ltda. |
+          Endereço: Av. Paulista, 1000, Bloco A – São Paulo/SP – CEP: 01310-100 |
+          © 2026 XequeMate. Todos os direitos reservados. Feito com
+          <span>❤</span> por Brian Joel Duran Villca.
+        </span>
       </div>
-
-      <div class="footer-links">
-        <a href="#" class="footer-link">Termos de Uso</a>
-        <a href="#" class="footer-link">Política de Privacidade</a>
-        <a href="#" class="footer-link">Contato</a>
-      </div>
-
     </div>
   </footer>
+
 </body>
 
 </html>
