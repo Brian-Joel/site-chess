@@ -8,9 +8,6 @@ function avancar() {
     etapa++;
     atualizar();
   }
-  else {
-    alert("Cadastro enviado com sucesso para a trilha Xeque-Mate!");
-  }
 }
 
 // funcção do botao voltar
@@ -18,18 +15,6 @@ function voltar() {
   if (etapa > 1) {
     etapa--;
     atualizar();
-  }
-  else {
-
-    const resposta = confirm('Deseja realmente sair do cadastro?');
-
-    if (resposta) {
-      console.log('usuario clicou em SIM');
-      window.location.href = './index.html';
-    }
-    else {
-      console.log('usuario clicou em NÃO');
-    }
   }
 }
 
@@ -47,13 +32,15 @@ function atualizar() {
     }
   }
 
-  // Controla as cores do circulo de etapas
+  // Controla as cores do circulo de etapas e texto
   for (let i = 1; i <= totalEtapas; i++) {
     const circulo = document.getElementById(`etapa-${i}`);
     const linha = document.getElementById(`linha-${i - 1}`);
+    const texto = document.getElementById(`texto-${i}`)
 
     if (i <= etapa) {
       circulo.style.borderColor = '#00cc33';
+      texto.style.color = '#00cc33';
 
       if (linha) {
         linha.style.backgroundColor = '#00cc33';
@@ -64,6 +51,7 @@ function atualizar() {
 
       if (linha) {
         linha.style.backgroundColor = '#505050';
+        texto.style.color = '#505050';
       }
     }
   }
@@ -82,7 +70,7 @@ function atualizar() {
   else {
     btnVoltar.style.display = "block";
   }
-  
+
 }
 
 

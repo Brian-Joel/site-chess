@@ -102,7 +102,7 @@ input {
   color: var(--cor-texto-t1);
 }
 
-/* BOTOES  */
+/* BOTOES  LOGIN / CADASTRO / VOLTAR */
 .botoes-container {
   display: flex;
   justify-content: space-between;
@@ -165,7 +165,6 @@ input {
   height: 70px;
   width: 70px;
   border: #505050 solid 3px;
-  overflow: hidden;
 }
 
 .circulo img {
@@ -205,7 +204,6 @@ input {
   display: flex;
   flex-direction: column;
 }
-
 
 /* OUTROS ELEMENTOS DE SUPORTE */
 .loading-div {
