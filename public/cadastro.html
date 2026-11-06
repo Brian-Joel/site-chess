@@ -86,11 +86,11 @@
               <!-- TELA 1 - CADASTRO USUARIO E LOGIN -->
               <div id="conteudo-etapa-1" class="etapa-formulario ativo">
                 <div class="campo">
-                  <span>Nome:</span>
+                  <span>Insira seu nome de Usúario:</span>
                   <input id="nome_input" type="text" placeholder="Seu nome" />
                 </div>
                 <div class="campo">
-                  <span>E-mail:</span>
+                  <span>Insira seu melhor E-mail:</span>
                   <input id="email_input" type="text" placeholder="usuario@provedor.com" />
                 </div>
               </div>
@@ -98,7 +98,7 @@
               <!-- TELA 2 - CADASTRAR SENHA -->
               <div id="conteudo-etapa-2" class="etapa-formulario">
                 <div class="campo">
-                  <span>Senha:</span>
+                  <span>Insira sua Senha:</span>
                   <input id="senha_input" type="password" placeholder="********" oninput="validar()" />
                 </div>
                 <div class="campo">
@@ -117,16 +117,16 @@
 
               <!-- TELA 3 - ESCOLHA DAS FOTOS DE PERFIL -->
               <div id="conteudo-etapa-3" class="etapa-formulario">
-                <p class="titulo-etapa3">Escolha uma foto de perfil</p>
 
+                <p class="titulo-avatar">Escolha uma foto de perfil</p>
                 <div class="avatares">
                   <!-- Foto dos avatares -->
-                  <div class="avatar-item"><img src="avatar-cavalo.png" alt="Cavalo"></div>
-                  <div class="avatar-item"><img src="avatar-peao.png" alt="Peão"></div>
-                  <div class="avatar-item"><img src="avatar-torre.png" alt="Torre"></div>
-                  <div class="avatar-item"><img src="avatar-rainha.png" alt="Rainha"></div>
-                  <div class="avatar-item"><img src="avatar-rei.png" alt="Rei"></div>
-                  <div class="avatar-item"><img src="avatar-bispo.png" alt="Bispo"></div>
+                  <div class="avatar-item"><img src="./assets/perfil/cavalo_lowpoly.svg" alt="Cavalo"></div>
+                  <div class="avatar-item"><img src="./assets/perfil/peao_pixelart.svg" alt="Peão"></div>
+                  <div class="avatar-item"><img src="./assets/perfil/torre_neon.svg" alt="Torre"></div>
+                  <div class="avatar-item"><img src="./assets/perfil/dama_kawaii.svg" alt="Rainha"></div>
+                  <div class="avatar-item"><img src="./assets/perfil/rei_dourado.svg" alt="Rei"></div>
+                  <div class="avatar-item"><img src="./assets/perfil/bispo_nanquim.svg" alt="Bispo"></div>
                 </div>
               </div>
 
@@ -156,9 +156,9 @@
   // Array para armazenar empresas cadastradas para validação de código de ativação 
   let listaUsuario = [];
   let statusValidacao = false;
-  
+
   function validar() {
-    
+
     let validacao = 0;
     let senha = senha_input.value;
 

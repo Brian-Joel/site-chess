@@ -207,6 +207,25 @@ input {
 }
 
 
+/* fotos de perfis padrões  */
+.avatares {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-left: 30px;
+}
+
+.titulo-avatar {
+  align-self: center;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.avatar-item img {
+  width: 85%;
+  height: 85%;
+}
+
+
 /* CONTROLE DE VISIBILIDADE - TELA CADASTRO  */
 
 /* formulario fica invisivel  - bloco cadastro*/
@@ -283,4 +302,10 @@ input::placeholder {
   opacity: 0.6;
   font-size: 14px;
   text-align: center;
+}
+
+.avatar-item img:hover {
+  cursor: pointer;
+  border: solid 5px rgba(231, 231, 231, 0);
+  filter: brightness(1.5);
 }
