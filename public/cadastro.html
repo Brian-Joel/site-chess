@@ -73,12 +73,12 @@
                 </div>
                 <div class="linha-etapa" id="linha-1"></div>
                 <div class="etapa">
-                  <span id="etapa-2" class="circulo"><img src="./assets/imgs/peao.png" alt="Cavalo"></span>
+                  <span id="etapa-2" class="circulo"><img src="./assets/imgs/cavalo.png" alt="Cavalo"></span>
                   <span id="texto-2" class="texto-etapa">Meio-Jogo</span>
                 </div>
                 <div class="linha-etapa" id="linha-2"></div>
                 <div class="etapa">
-                  <span id="etapa-3" class="circulo"><img src="./assets/imgs/peao.png" alt="Rei"></span>
+                  <span id="etapa-3" class="circulo"><img src="./assets/imgs/rei.png" alt="Rei"></span>
                   <span id="texto-3" class="texto-etapa">Final</span>
                 </div>
               </div>
@@ -99,19 +99,18 @@
               <div id="conteudo-etapa-2" class="etapa-formulario">
                 <div class="campo">
                   <span>Senha:</span>
-                  <input id="senha_input" type="password" placeholder="******" />
+                  <input id="senha_input" type="password" placeholder="********" oninput="validar()" />
                 </div>
                 <div class="campo">
                   <span>Confirmação da Senha:</span>
-                  <input id="confirmacao_senha_input" type="password" placeholder="******" />
+                  <input id="confirmacao_senha_input" type="password" placeholder="********" />
                 </div>
-                <p class="senha-status">🔒 Senha Forte</p>
                 <div class="requisitos">
-                  <p>Requisitos Mínimos:</p>
+                  <p id="senha_status" class="senha-status">❌ Senha Fraca</p>
                   <ul>
-                    <li>Pelo menos 8 caracteres</li>
-                    <li>Pelo menos 1 letra maiúscula</li>
-                    <li>Pelo menos 1 número</li>
+                    <li id="reqCaractere">Pelo menos 8 caracteres</li>
+                    <li id="reqCaixa">Pelo menos 1 letra maiúscula e 1 minúscula</li>
+                    <li id="reqNumero">Pelo menos 1 número</li>
                   </ul>
                 </div>
               </div>
@@ -156,6 +155,56 @@
 
   // Array para armazenar empresas cadastradas para validação de código de ativação 
   let listaUsuario = [];
+  let statusValidacao = false;
+  
+  function validar() {
+    
+    let validacao = 0;
+    let senha = senha_input.value;
+
+    if (senha.length >= 8) {
+      validacao++;
+      reqCaractere.style.color = "green";
+    }
+    else {
+      reqCaractere.style.color = "white";
+
+    }
+
+    if (senha != senha.toUpperCase() && senha != senha.toLowerCase()) {
+      validacao++;
+      reqCaixa.style.color = "green";
+    }
+    else {
+      reqCaixa.style.color = "white";
+    }
+
+    if (senha.includes('0') || senha.includes('1') || senha.includes('2') || senha.includes('3') || senha.includes('4') || senha.includes('5') || senha.includes('6') || senha.includes('7') || senha.includes('8') || senha.includes('9')) {
+      validacao++;
+      reqNumero.style.color = "green";
+    }
+    else {
+      reqNumero.style.color = "white";
+    }
+
+    if (validacao == 3) {
+      senha_status.innerHTML = "🔒 Senha Forte";
+      senha_status.style.color = "green";
+      statusValidacao = true;
+    } else if (validacao == 2) {
+      senha_status.innerHTML = "⚠️ Senha Média";
+      senha_status.style.color = "orange";
+      statusValidacao = false;
+    } else {
+      senha_status.innerHTML = "❌ Senha Fraca";
+      senha_status.style.color = "red";
+      statusValidacao = false;
+    }
+
+
+  }
+
+
 
   function cadastrar() {
     // aguardar();
@@ -196,7 +245,17 @@
         finalizarAguardar();
         return false;
       }
-      avancar();
+
+      if (statusValidacao) {
+        avancar();
+      }
+      else {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(ERRO: Verique se todos os requisitos foram cumpridos!)";
+        setTimeout(sumirMensagem, 5000);
+        finalizarAguardar();
+        return false;
+      }
     }
 
 
