@@ -12,9 +12,10 @@ USE xequeMate;
 
 CREATE TABLE usuario (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50)
+	nome VARCHAR(50) UNIQUE NOT NULL,
+	email VARCHAR(50) UNIQUE NOT NULL,
+	senha VARCHAR(50) NOT NULL,
+    foto VARCHAR(255) NOT NULL
 );
 
 -- em desenvolvimento
@@ -38,4 +39,4 @@ CREATE TABLE quiz (
 	data_hora DATETIME
 );
 
-SELECT*FROM usuario;
+SELECT*FROM xequeMate.usuario;
