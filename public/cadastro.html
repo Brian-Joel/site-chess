@@ -121,12 +121,18 @@
                 <p class="titulo-avatar">Escolha uma foto de perfil</p>
                 <div class="avatares">
                   <!-- Foto dos avatares -->
-                  <div class="avatar-item"><img src="./assets/perfil/cavalo_lowpoly.svg" alt="Cavalo"></div>
-                  <div class="avatar-item"><img src="./assets/perfil/peao_pixelart.svg" alt="Peão"></div>
-                  <div class="avatar-item"><img src="./assets/perfil/torre_neon.svg" alt="Torre"></div>
-                  <div class="avatar-item"><img src="./assets/perfil/dama_kawaii.svg" alt="Rainha"></div>
-                  <div class="avatar-item"><img src="./assets/perfil/rei_dourado.svg" alt="Rei"></div>
-                  <div class="avatar-item"><img src="./assets/perfil/bispo_nanquim.svg" alt="Bispo"></div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img
+                      src="./assets/perfil/cavalo_lowpoly.svg" alt="Cavalo"></div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img src="./assets/perfil/peao_pixelart.svg"
+                      alt="Peão"></div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img src="./assets/perfil/torre_neon.svg"
+                      alt="Torre"></div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img src="./assets/perfil/dama_kawaii.svg"
+                      alt="Rainha"></div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img src="./assets/perfil/rei_dourado.svg"
+                      alt="Rei"></div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img src="./assets/perfil/bispo_nanquim.svg"
+                      alt="Bispo"></div>
                 </div>
               </div>
 
@@ -156,6 +162,7 @@
   // Array para armazenar empresas cadastradas para validação de código de ativação 
   let listaUsuario = [];
   let statusValidacao = false;
+  var fotoVar = "";
 
   function validar() {
 
@@ -200,14 +207,28 @@
       senha_status.style.color = "red";
       statusValidacao = false;
     }
-
-
   }
 
 
+  function selecionarAvatar(elementoHtml) {
+    const avatares = document.querySelectorAll('.avatar-item');
+
+    for (let i = 0; i < avatares.length; i++) {
+      avatares[i].classList.remove('selecionado');
+    }
+
+    elementoHtml.classList.add('selecionado');
+
+    const elementoAtual = elementoHtml.querySelector('img');
+    const descricao = elementoAtual.getAttribute('alt');
+    const imagem = elementoAtual.getAttribute('src');
+
+    fotoVar = imagem;
+    console.log(`Foto selecionada: ${descricao}`)
+  }
+
 
   function cadastrar() {
-    // aguardar();
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
@@ -217,7 +238,7 @@
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
-    // ETAPA 1: valida nome e email e só avança
+    // VALIDAÇÃO POR ETAPAS
     if (etapa == 1) {
       if (nomeVar == "" || emailVar == "") {
         cardErro.style.display = "block";
@@ -226,6 +247,25 @@
         finalizarAguardar();
         return false;
       }
+
+      // Verificação simples e direta
+      for (let i = 0; i < listaUsuario.length; i++) {
+        if (listaUsuario[i].nome == nomeVar) {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML = "(Este nome de usuário já existe!)";
+          setTimeout(sumirMensagem, 5000);
+          finalizarAguardar();
+          return false;
+        }
+        else if (listaUsuario[i].email == emailVar) {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML = "(Este e-mail já existe!)";
+          setTimeout(sumirMensagem, 5000);
+          finalizarAguardar();
+          return false;
+        }
+      }
+
       avancar();
       return false;
     }
@@ -245,9 +285,9 @@
         finalizarAguardar();
         return false;
       }
-
-      if (statusValidacao) {
+      else if (statusValidacao) {
         avancar();
+        return false;
       }
       else {
         cardErro.style.display = "block";
@@ -258,88 +298,87 @@
       }
     }
 
+    if (etapa == 3) {
 
-    // Validação passou: vai para a última etapa
+      if (fotoVar == "") {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(ERRO: Escolha uma foto de perfil!)";
+        setTimeout(sumirMensagem, 5000);
+        return false;
+      }
+      else {
+        aguardar();
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            nomeServer: nomeVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar,
+            fotoServer: fotoVar
+            // idUsuarioVincular: idUsuario
+          }),
+        })
+          .then(function (resposta) {
+            console.log("resposta: ", resposta);
 
+            if (resposta.ok) {
+              cardErro.style.display = "block";
 
-    // // Verificando se o código de ativação é de alguma usuario cadastrada
-    // for (let i = 0; i < listaUsuario.length; i++) {
-    //   if (listaUsuario[i] != nomeVar) {
-    //     idUsuarioVincular = listaUsuario[i].id
-    //     console.log("Nome de usuario válido.");
-    //     break;
-    //   } else {
-    //     cardErro.style.display = "block";
-    //     mensagem_erro.innerHTML = "(Mensagem de erro para usuario inválido)";
-    //     finalizarAguardar();
-    //   }
-    // }
+              mensagem_erro.innerHTML =
+                "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
-    // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar
-        // idUsuarioVincular: idUsuario
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+              setTimeout(() => {
+                window.location = "login.html";
+              }, "2000");
 
-        if (resposta.ok) {
-          cardErro.style.display = "block";
+              limparFormulario();
+              finalizarAguardar();
+            } else {
+              throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+          })
+          .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+          });
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
-
-          limparFormulario();
-          finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
-      });
-
-    return false;
+        return false;
+      }
+    }
   }
 
+  // funcao de sumir a mensagem 
   function sumirMensagem() {
     cardErro.style.display = "none";
   }
 
-  // // Listando empresas cadastradas 
-  // function listar() {
-  //   fetch("/empresas/listar", {
-  //     method: "GET",
-  //   })
-  //     .then(function (resposta) {
-  //       resposta.json().then((empresas) => {
-  //         empresas.forEach((usuario) => {
-  //           listaUsuario.push(usuario);
+  // Listando usuários já cadastrados no banco
+  function listar() {
+    fetch("/usuarios/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((usuarios) => {
+          usuarios.forEach((usuario) => {
+            listaUsuario.push(usuario);
 
-  //           console.log("listaEmpresasCadastradas")
-  //           console.log(listaUsuario[0].codigo_ativacao)
-  //         });
-  //       });
-  //     })
-  //     .catch(function (resposta) {
-  //       console.log(`#ERRO: ${resposta}`);
-  //     });
-  // }
+            console.log("listaUsuariosCadastrados");
+            // Ajuste aqui a propriedade do usuário que faz sentido para o seu projeto de xadrez, se necessário:
+
+            console.log(usuario.id); // Exemplo usando 'id' ou outro campo que venha do seu banco
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
 
 </script>
 

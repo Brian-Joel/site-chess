@@ -76,7 +76,19 @@ function cadastrar(req, res) {
     }
 }
 
+function listar(req, res) {
+    usuarioModel.listar()
+        .then(function (resultado) {
+            res.status(200).json(resultado);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    listar
 }
