@@ -19,40 +19,32 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), atualizarFeed()" style="background-color: #161618;">
+<!-- <body onload="validarSessao(), atualizarFeed()" style="background-color: #161618;"> -->
+    <body>
 
-    <div class="janela">
-
-
-        <div class="header-left">
-
-            <h1>AquaTech</h1>
-
+    <header class="navegador">
+        <nav class="lateral-bar">
+            <span class="alinhar-topbar">
+                <img class="logo" src="../assets/imgs/logo-horse.png" alt="Logotipo Xeque-Mate">
+                <p class="logo-titulo">Xeque-Mate</p>
+            </span>
             <div class="hello">
+                <img src="../assets/perfil/peao_pixelart.svg" alt="foto de perfil">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
+            <a href="./index.html"><span class="links">Home</span></a>
+            <a href="#"><span class="links">História</span></a>
+            <a href="#"><span class="links">Sobre mim</span></a>
+            <a href="#"><span class="links">Quiz</span></a>
+            <a href="#"><span class="links">Forúm</span></a>
+            <span class="alinhar-btn-navbar">
+                <button class="btn-topbar" onclick="limparSessao()">Sair</button>
 
-            <div class="btn-nav-white">
-                <a href="cards.html">
-                    <h3>Aquários e Terrários</h3>
-                </a>
-            </div>
+            </span>
+        </nav>
+    </header>
+    <main>
 
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav">
-                <h3>Mural de Avisos</h3>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
-        </div>
 
         <div class="dash-right">
 
@@ -89,17 +81,18 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
 
 
 
+    </main>
 
 </body>
 
 </html>
 
 <script>
-    
+
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     function limparFormulario() {

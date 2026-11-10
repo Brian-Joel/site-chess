@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AquaTech | Página Inicial</title>
 
-    
+
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
     <script src="../js/sessao.js"></script>
@@ -25,76 +25,71 @@
     <div class="janela">
 
 
-        <div class="header-left">
+        <header class="navegador">
+            <nav class="lateral-bar">
+                <span class="alinhar-topbar">
+                    <img class="logo" src="../assets/imgs/logo-horse.png" alt="Logotipo Xeque-Mate">
+                    <p class="logo-titulo">Xeque-Mate</p>
+                </span>
+                <div class="hello">
+                    <img src="../assets/perfil/peao_pixelart.svg" alt="foto de perfil">
+                    <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+                </div>
+                <a href="./index.html"><span class="links">Home</span></a>
+                <a href="#"><span class="links">História</span></a>
+                <a href="#"><span class="links">Sobre mim</span></a>
+                <a href="#"><span class="links">Quiz</span></a>
+                <a href="#"><span class="links">Forúm</span></a>
+                <span class="alinhar-btn-navbar">
+                    <button class="btn-topbar" onclick="limparSessao()">Sair</button>
 
-            <h1>AquaTech</h1>
+                </span>
+            </nav>
+        </header>
+        <main>
 
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-            </div>
 
-            <div class="btn-nav-white">
-                <a href="cards.html">
-                    <h3>Aquários e Terrários</h3>
-                </a>
-            </div>
+            <div class="dash-right">
 
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
-        </div>
-
-        <div class="dash-right">
-
-            <div class="avisos">
-                <div class="container">
-                    <h1>Editar um aviso</h1>
-                    <div class="div-form">
-                        <label>
-                            ID:
+                <div class="avisos">
+                    <div class="container">
+                        <h1>Editar um aviso</h1>
+                        <div class="div-form">
+                            <label>
+                                ID:
+                                <br>
+                                <input id="input_id" maxlength="100" type="text" style="color: rgb(196, 196, 196)"
+                                    disabled>
+                            </label>
+                            <label>
+                                Autor:
+                                <br>
+                                <input id="input_nome" maxlength="100" type="text" style="color: rgb(196, 196, 196)"
+                                    disabled>
+                            </label>
+                            <label>
+                                Título:
+                                <br>
+                                <input id="input_titulo" maxlength="100" type="text" style="color: rgb(196, 196, 196)"
+                                    disabled>
+                            </label>
                             <br>
-                            <input id="input_id" maxlength="100" type="text" style="color: rgb(196, 196, 196)" disabled>
-                        </label>
-                        <label>
-                            Autor:
+                            <label>
+                                Descrição (máximo de 250 caracteres):
+                                <br>
+                                <textarea id="textarea_descricao" maxlength="250" rows="5"></textarea>
+                            </label>
                             <br>
-                            <input id="input_nome" maxlength="100" type="text" style="color: rgb(196, 196, 196)"
-                                disabled>
-                        </label>
-                        <label>
-                            Título:
-                            <br>
-                            <input id="input_titulo" maxlength="100" type="text" style="color: rgb(196, 196, 196)"
-                                disabled>
-                        </label>
-                        <br>
-                        <label>
-                            Descrição (máximo de 250 caracteres):
-                            <br>
-                            <textarea id="textarea_descricao" maxlength="250" rows="5"></textarea>
-                        </label>
-                        <br>
-                        <button onclick="editar()">Editar</button>
+                            <button onclick="editar()">Editar</button>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
     </div>
+    </main>
 </body>
+
 
 </html>
 
