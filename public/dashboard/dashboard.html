@@ -53,8 +53,10 @@
         <div class="dash">
             <div class="dash-layout">
                 <div class="titulo-dashboard">
-                    <h2>Estatísticas</h2>
-                    <p>Veja seu desempenho no quizzes:</p>
+                    <span>
+                        <h2>Estatísticas</h2>
+                        <p>Veja seu desempenho nos quizzes:</p>
+                    </span>
                 </div>
                 <div class="conjunto-kpi">
                     <div class="card-kpi">
@@ -84,10 +86,10 @@
                 </div>
                 <div class="graficos-layout">
                     <div class="grafico-1">
-
+                        <canvas id="grafico_1"></canvas>
                     </div>
                     <div class="grafico-2">
-
+                        <canvas id="grafico_2"></canvas>
                     </div>
                 </div>
             </div>
@@ -107,7 +109,132 @@
 </html>
 
 <script>
+    // 1. Dados que vão vir do seu Banco de Dados (ex: MySQL)
+    // Quando você conectar ao BD, basta alimentar essas duas variáveis com o resultado da sua query
+    const labels = ['TUX99', 'ROOT', 'CHESSMASTER', 'WINDOWS-XP'];
+    const valores = [99, 80, 70, 66];
 
+    // 2. Estrutura de dados (Barras empilhadas)
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Pontos totais',
+                backgroundColor: '#00b822',
+                data: valores,
+                barThickness: 6,
+                borderRadius: 4
+            },
+            {
+                label: 'Fundo Cinza',
+                backgroundColor: '#444444',
+                data: valores.map(v => 100 - v),
+                barThickness: 6,
+                borderRadius: 4
+            }
+        ]
+    };
+
+    // 3. Configurações corrigidas
+    const config = {
+        type: 'bar',
+        data,
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            // AJUSTE CRUCIAL: Abre espaço na direita para os textos não cobrirem a barra
+            layout: {
+                padding: {
+                    right: 45
+                }
+            },
+            plugins: {
+                legend: false,
+                tooltip: false
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                    display: false,
+                    max: 100
+                },
+                y: {
+                    stacked: true,
+                    display: false
+                }
+            }
+        },
+        plugins: [{
+            id: 'textosCustomizados',
+            afterDatasetsDraw(chart) {
+                const { ctx, chartArea } = chart;
+                ctx.save();
+                ctx.fillStyle = '#ffffff';
+                ctx.textBaseline = 'middle';
+
+                valores.forEach((val, i) => {
+                    const yPos = chart.getDatasetMeta(0).data[i].y;
+
+                    // Nome do usuário (Acima da barra verde)
+                    ctx.font = '600 13px sans-serif';
+                    ctx.textAlign = 'left';
+                    ctx.fillText(labels[i], chartArea.left, yPos - 16);
+
+                    // Porcentagem (No espaço extra na direita, fora da barra)
+                    ctx.font = '500 12px sans-serif';
+                    ctx.textAlign = 'left'; // Mudado para left para alinhar na coluna extra
+                    ctx.fillText(val + ' pts', chartArea.right + 7, yPos); // chartArea.right + 10 joga o texto para a direita da barra
+                });
+                ctx.restore();
+            }
+        }]
+    };
+
+    // 4. Renderiza o gráfico finalizado
+    const grafico_2 = new Chart(
+        document.getElementById('grafico_2'),
+        config
+    );
+</script>
+
+<script>
+
+    // vetor que add as metricas do eixo X
+    // grafico 1
+    const etiqueta = [
+        'Defensivo',
+        'Posicional',
+        'Analista',
+        'Agressivo'
+    ];
+
+    // vetores, receber as metricas do eixo X e colocar titulo, além estilizar a cor do grafico e quais dados serão mostrados
+    // grafico 1
+    const dado = {
+        labels: etiqueta,
+        datasets: [{
+            label: 'Estilo de jogo',
+            backgroundColor: '#00b822',
+            data: [4, 2, 2, 2],
+        }]
+
+    };
+
+    // mudança do tipo e recebimento dos dados
+    // grafico 1
+    const config_bar = {
+        type: 'bar',
+        data: dado,
+
+    };
+
+    // mostrar grafico de temperatura em linha
+    // grafico 1
+    const grafico_1 = new Chart(
+        document.getElementById('grafico_1'),
+        config_bar
+    );
 </script>
 
 
@@ -228,7 +355,7 @@
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
 
 
-        // GRAFICO ANTIGO
+    // GRAFICO ANTIGO
     // function plotarGrafico(resposta, idAquario) {
 
     //     console.log('iniciando plotagem do gráfico...');

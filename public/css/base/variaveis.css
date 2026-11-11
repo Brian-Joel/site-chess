@@ -1,6 +1,6 @@
 :root {
     --cor-btn-topbar: green;
-    --cor-btn-texto: white;
+    --cor-btn-texto: #ffffff;
     --cor-btn-topbar-hover: white;
     --cor-btn-texto-hover: black;
     --cor-principal: black;
@@ -8,6 +8,7 @@
 
 
     --cor-texto-t1: white;
+    --texto-kpi: #00b822;
 
     --cor-borda-card: #505050;
     --cor-fundo-card: #1A1A1A;
