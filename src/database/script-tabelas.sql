@@ -41,7 +41,7 @@ CREATE TABLE quiz (
     id INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(100) NOT NULL,
     descricao VARCHAR(255),
-    dificuldade ENUM('facil', 'medio', 'dificil') NOT NULL
+    dificuldade VARCHAR(7) CONSTRAINT chDificuldade CHECK (dificuldade IN('facil', 'medio', 'dificil')) NOT NULL
 );
 
 -- 3. Tabela de Perguntas (Com categorias para os gráficos e pesos de pontuação)

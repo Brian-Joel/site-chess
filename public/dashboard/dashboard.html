@@ -51,6 +51,46 @@
     <main>
 
         <div class="dash">
+            <div class="dash-layout">
+                <div class="titulo-dashboard">
+                    <h2>Estatísticas</h2>
+                    <p>Veja seu desempenho no quizzes:</p>
+                </div>
+                <div class="conjunto-kpi">
+                    <div class="card-kpi">
+
+                        <h4>Sua peça favorita</h4>
+                        <p>CAVALO</p>
+                    </div>
+                    <div class="card-kpi">
+                        <h4>Quizzes feitos</h4>
+                        <p>1/5</p>
+                    </div>
+                    <div class="card-kpi">
+
+
+                        <h4>Aproveitamento geral
+                            nos quizzes</h4>
+                        <p>70%</p>
+                    </div>
+                    <div class="card-kpi">
+                        <h4>Nota média</h4>
+                        <p>6,6</p>
+                    </div>
+                </div>
+                <div class="titulo-grafico">
+                    <h2>Pontos por estilo de jogo:</h2>
+                    <h2>Você comparando a outros jogadores:</h2>
+                </div>
+                <div class="graficos-layout">
+                    <div class="grafico-1">
+
+                    </div>
+                    <div class="grafico-2">
+
+                    </div>
+                </div>
+            </div>
             <div id="alerta">
             </div>
 
@@ -67,6 +107,12 @@
 </html>
 
 <script>
+
+</script>
+
+
+<script>
+    // pega o nome do usuario da sessão storage
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     let proximaAtualizacao;
@@ -180,59 +226,62 @@
     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta, idAquario) {
 
-        console.log('iniciando plotagem do gráfico...');
 
-        // Criando estrutura para plotar gráfico - labels
-        let labels = [];
+        // GRAFICO ANTIGO
+    // function plotarGrafico(resposta, idAquario) {
 
-        // Criando estrutura para plotar gráfico - dados
-        let dados = {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Temperatura',
-                    data: [],
-                    fill: false,
-                    borderColor: 'rgb(199, 52, 52)',
-                    tension: 0.1
-                }]
-        };
+    //     console.log('iniciando plotagem do gráfico...');
 
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
+    //     // Criando estrutura para plotar gráfico - labels
+    //     let labels = [];
 
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-        for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.temperatura);
-        }
+    //     // Criando estrutura para plotar gráfico - dados
+    //     let dados = {
+    //         labels: labels,
+    //         datasets: [
+    //             {
+    //                 label: 'Temperatura',
+    //                 data: [],
+    //                 fill: false,
+    //                 borderColor: 'rgb(199, 52, 52)',
+    //                 tension: 0.1
+    //             }]
+    //     };
 
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
+    //     console.log('----------------------------------------------')
+    //     console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    //     console.log(resposta)
 
-        // Criando estrutura para plotar gráfico - config
-        const config = {
-            type: 'line',
-            data: dados,
-        };
+    //     // Inserindo valores recebidos em estrutura para plotar o gráfico
+    //     for (i = 0; i < resposta.length; i++) {
+    //         var registro = resposta[i];
+    //         labels.push(registro.momento_grafico);
+    //         dados.datasets[0].data.push(registro.temperatura);
+    //     }
 
-        // Adicionando gráfico criado em div na tela
-        let myChart = new Chart(
-            document.getElementById(`myChartCanvas${idAquario}`),
-            config
-        );
+    //     console.log('----------------------------------------------')
+    //     console.log('O gráfico será plotado com os respectivos valores:')
+    //     console.log('Labels:')
+    //     console.log(labels)
+    //     console.log('Dados:')
+    //     console.log(dados.datasets)
+    //     console.log('----------------------------------------------')
 
-        setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-    }
+    //     // Criando estrutura para plotar gráfico - config
+    //     const config = {
+    //         type: 'line',
+    //         data: dados,
+    //     };
+
+    //     // Adicionando gráfico criado em div na tela
+    //     let myChart = new Chart(
+    //         document.getElementById(`myChartCanvas${idAquario}`),
+    //         config
+    //     );
+
+    //     setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+    // }
 
 
     // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
