@@ -53,6 +53,9 @@ function iniciarQuiz() {
 
     preencherHTMLcomQuestaoAtual(0)
 
+    // Cria o gráfico de progresso após o DOM estar pronto
+    new Chart(document.getElementById('barra_progressao'), config)
+
     btnSubmeter.disabled = false
     btnProx.disabled = true
     // btnConcluir.disabled = true
@@ -230,15 +233,11 @@ const data = {
             label: 'Pontos totais',
             backgroundColor: '#00b822',
             data: valores,
-            barThickness: 6,
-            borderRadius: 4
         },
         {
             label: 'Fundo Cinza',
             backgroundColor: '#444444',
             data: valores.map(v => 100 - v),
-            barThickness: 6,
-            borderRadius: 4
         }
     ]
 };
@@ -252,11 +251,6 @@ const config = {
         responsive: true,
         maintainAspectRatio: false,
         // AJUSTE CRUCIAL: Abre espaço na direita para os textos não cobrirem a barra
-        layout: {
-            padding: {
-                right: 45
-            }
-        },
         plugins: {
             legend: false,
             tooltip: false
@@ -273,34 +267,10 @@ const config = {
             }
         }
     },
-    plugins: [{
-        id: 'textosCustomizados',
-        afterDatasetsDraw(chart) {
-            const { ctx, chartArea } = chart;
-            ctx.save();
-            ctx.fillStyle = '#ffffff';
-            ctx.textBaseline = 'middle';
-
-            valores.forEach((val, i) => {
-                const yPos = chart.getDatasetMeta(0).data[i].y;
-
-                // Nome do usuário (Acima da barra verde)
-                ctx.font = '600 13px sans-serif';
-                ctx.textAlign = 'left';
-                ctx.fillText(labels[i], chartArea.left, yPos - 16);
-
-                // Porcentagem (No espaço extra na direita, fora da barra)
-                ctx.font = '500 12px sans-serif';
-                ctx.textAlign = 'left'; // Mudado para left para alinhar na coluna extra
-                ctx.fillText(val + ' pts', chartArea.right + 7, yPos); // chartArea.right + 10 joga o texto para a direita da barra
-            });
-            ctx.restore();
-        }
-    }]
 };
 
 // 4. Renderiza o gráfico finalizado
 const grafico_2 = new Chart(
-    document.getElementById('barra_progresso'),
+    document.getElementById('barra_progressao'),
     config
 );
