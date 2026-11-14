@@ -1,4 +1,26 @@
+function listar() {
+    fetch("/usuarios/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((usuarios) => {
+          usuarios.forEach((usuario) => {
+            listaUsuario.push(usuario);
 
+            console.log("listaUsuariosCadastrados");
+            // Ajuste aqui a propriedade do usuário que faz sentido para o seu projeto de xadrez, se necessário:
+
+            console.log(usuario.id); // Exemplo usando 'id' ou outro campo que venha do seu banco
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+
+  
 const listaDeQuestoes = [
 
     {
