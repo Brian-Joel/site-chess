@@ -8,9 +8,11 @@
     <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
 
     <script src="../js/sessao.js"></script>
+    <script src="../js/loading.js"></script>
     <script src="./../js/alerta.js"></script>
 
     <link rel="stylesheet" href="../css/base/variaveis.css">
+    <link rel="stylesheet" href="../css/base/loading.css">
     <link rel="stylesheet" href="../css/dashboards.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -26,6 +28,16 @@
 </head>
 
 <body onload=" atualizarFeed()">
+
+    <!-- gif de carregamento  -->
+    <div id="loading-screen">
+        <h1>Estamos personalizando o seu perfil</h1>
+        <img src="../assets/chess.gif" alt="Tabuleiro" class="chess-board" />
+        <div class="progress-bar-container">
+            <div id="progress-fill"><span id="numero">0%</span></div>
+        </div>
+    </div>
+
     <header class="navegador">
         <nav class="lateral-bar">
             <span class="alinhar-topbar">
