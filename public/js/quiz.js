@@ -19,8 +19,18 @@
 // VARIÁVEIS GLOBAIS
 
 let listaDeQuestoes = [];
+let respostasSelecionadas = [];
 let quantidadeDeQuestoes = 0;
+let numeroDaQuestaoAtual = 0;
 
+// ESCONDER ELEMENTOS AO CARREGAR A PÁGINA
+
+function onloadEsconder() {
+
+    document.getElementById("pontuacao").style.display = "none";
+    document.getElementById("jogo").style.display = "none";
+    document.getElementById("pontuacaoDuranteJogo").style.display = "none";
+}
 
 
 // BUSCAR QUESTÕES NO BANCO DE DADOS
@@ -76,18 +86,6 @@ function buscarQuestoes() {
 };
 
 
-// ESCONDER ELEMENTOS AO CARREGAR A PÁGINA
-
-function onloadEsconder() {
-
-    document.getElementById("pontuacao").style.display = "none";
-    document.getElementById("jogo").style.display = "none";
-    document.querySelector(".placar-resultado").style.display = "none";
-
-}
-
-
-
 // INICIAR QUIZ
 
 
@@ -99,7 +97,7 @@ async function iniciarQuiz() {
 
     document.getElementById("btnIniciarQuiz").style.display = "none";
     document.getElementById("jogo").style.display = "block";
-
+    document.getElementById("btnVoltar").disabled = true;
     document.getElementById("btnProx").disabled = false;
 
     preencherHTMLcomQuestaoAtual(0);
@@ -158,82 +156,75 @@ function preencherHTMLcomQuestaoAtual(indice) {
 
         // Restaura a resposta anterior, se existir
         if (respostaAnterior &&
-            Number(respostaAnterior.idAlternativa) === Number(alternativa.idAlternativa)) {
+            Number(respostaAnterior.idAlternativa) == Number(alternativa.idAlternativa)) {
             radio.checked = true;
         }
     });
 }
 
 
-
-
-// HABILITAR OU DESABILITAR ALTERNATIVAS
-
-function habilitarAlternativas(estado) {
-
-    const options = document.getElementsByName("option");
-
-    options.forEach(function (option) {
-
-        option.disabled = !estado;
-
-    });
-
-}
-
-
 // AVANÇAR QUESTÃO
-
 function avancar() {
 
-    // Tenta guardar a resposta atual
-    if (!salvarRespostaAtual()) {
-        return;
-    }
+    // Verifica se a resposta atual foi salva
+    if (salvarRespostaAtual()) {
 
-    if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
+        // Verifica se ainda existem perguntas
+        if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
 
-        numeroDaQuestaoAtual++;
+            // Avança para a próxima pergunta
+            numeroDaQuestaoAtual++;
 
-        preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
 
-        document.getElementById("btnVoltar").disabled = false;
+            // Habilita o botão Voltar
+            document.getElementById("btnVoltar").disabled = false;
+
+        } else {
+
+            // Se for a última pergunta, finaliza o quiz
+            finalizarJogo();
+        }
 
     } else {
 
-        finalizarJogo();
+        // Se não houver resposta, permanece na pergunta atual
+        return;
     }
 }
 
 
-// VOLTAR QUESTÃ0
+
+// VOLTAR QUESTÃO
 function voltar() {
 
-    // Verifica se existe alguma alternativa selecionada
-    const alternativaSelecionada = document.querySelector(
-        'input[name="option"]:checked'
-    );
+    const alternativas = document.getElementsByName("option");
 
-    // Salva a resposta somente se houver uma seleção
-    if (alternativaSelecionada) {
-        respostasSelecionadas[numeroDaQuestaoAtual] = {
-            idPergunta: listaDeQuestoes[numeroDaQuestaoAtual].idPergunta,
-            idAlternativa: Number(alternativaSelecionada.value)
-        };
+    // Verifica se alguma alternativa está selecionada
+    for (let i = 0; i < alternativas.length; i++) {
+
+        if (alternativas[i].checked) {
+
+            respostasSelecionadas[numeroDaQuestaoAtual] = {
+                idPergunta: listaDeQuestoes[numeroDaQuestaoAtual].idPergunta,
+                idAlternativa: Number(alternativas[i].value)
+            };
+
+        }
     }
 
+    // Verifica se existe uma pergunta anterior
     if (numeroDaQuestaoAtual > 0) {
 
         numeroDaQuestaoAtual--;
 
         preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
 
-        document.getElementById("btnVoltar").disabled =
-            numeroDaQuestaoAtual === 0;
-
+        if (numeroDaQuestaoAtual === 0) {
+            document.getElementById("btnVoltar").disabled = true;
+        }
     }
 }
-
 
 // FINALIZAR QUIZ
 
@@ -304,6 +295,7 @@ function salvarRespostaAtual() {
 
         if (option.checked) {
             alternativaSelecionada = option;
+            console.log(`Usuário escolheu a alternativa ${option.value}`);
         }
 
     });
@@ -342,7 +334,7 @@ function submeter() {
 
     });
 
-    if (alternativaSelecionada === null) {
+    if (alternativaSelecionada == null) {
 
         alert("Escolha uma alternativa antes de continuar.");
         return;
@@ -358,5 +350,20 @@ function submeter() {
     document.getElementById("btnProx").disabled = false;
 
     habilitarAlternativas(false);
+
+}
+
+
+// HABILITAR OU DESABILITAR ALTERNATIVAS
+
+function habilitarAlternativas(estado) {
+
+    const options = document.getElementsByName("option");
+
+    options.forEach(function (option) {
+
+        option.disabled = !estado;
+
+    });
 
 }

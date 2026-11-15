@@ -209,51 +209,73 @@ INSERT INTO alternativa (id, fkPergunta, texto, estilo, correta) VALUES
 
 SELECT*FROM xequeMate.usuario;
 
-CREATE VIEW vw_resultado_estilo AS
-SELECT 
-    u.id AS idUsuario,
-    u.nome AS nomeUsuario,
-    t.id AS idTentativa,
-    t.data_hora AS dataTentativa,
-    a.estilo AS estilo,
-    COUNT(ru.id) AS totalVotos
-FROM tentativa t
-JOIN usuario u ON t.fkUsuario = u.id
-JOIN resposta_usuario ru ON ru.fkTentativa = t.id
-JOIN alternativa a ON ru.fkAlternativa = a.id
-GROUP BY u.id, u.nome, t.id, t.data_hora, a.estilo;
 
-CREATE VIEW vw_dashboard_estilos AS
-SELECT 
-    nivel AS estiloPredominante,
-    COUNT(id) AS totalTentativas
-FROM tentativa
-WHERE nivel IS NOT NULL
-GROUP BY nivel;
-
-
-
+-- quiz estilo
 CREATE VIEW vw_quiz_estilo AS
 SELECT 
-    q.id AS idQuiz,
-    q.titulo AS tituloQuiz,
-    p.id AS idPergunta,
-    p.enunciado AS pergunta,
-    p.categoria,
-    a.id AS idAlternativa,
-    a.texto AS alternativa,
-    a.estilo
+q.id AS idQuiz,
+q.titulo AS tituloQuiz,
+p.id AS idPergunta,
+p.enunciado AS pergunta,
+p.categoria,
+a.id AS idAlternativa,
+a.texto AS alternativa,
+a.estilo
 FROM quiz q
 JOIN pergunta p ON p.fkQuiz = q.id
 JOIN alternativa a ON a.fkPergunta = p.id;
 
-
-SELECT * FROM vw_resultado_estilo;
-
-
-
 SELECT * FROM vw_quiz_estilo;
 
+-- create view para votos alternativos
+CREATE VIEW vw_votos_alternativas AS
+SELECT
+p.id AS idPergunta,
+p.enunciado AS pergunta,
+p.categoria,
+a.id AS idAlternativa,
+a.texto AS alternativa,
+a.estilo,
+COUNT(ru.id) AS quantidadeVotos FROM pergunta p
+JOIN alternativa a ON a.fkPergunta = p.id
+LEFT JOIN resposta_usuario ru ON ru.fkAlternativa = a.id
+WHERE p.fkQuiz = 1 
+GROUP BY p.id, p.enunciado, p.categoria, a.id, a.texto, a.estilo;
+
+-- select
+SELECT*FROM vw_votos_alternativas;
+
+-- create view para total de resposta
+CREATE VIEW vw_total_respostas AS 
+SELECT
+fkPergunta AS idPergunta,
+COUNT(*) AS totalRespostas
+FROM resposta_usuario
+GROUP BY fkPergunta;
+
+-- select
+SELECT * FROM vw_total_respostas;
+
+
+-- create view para quiz
+CREATE VIEW vw_estatisticas_quiz AS
+SELECT
+v.idPergunta,
+v.pergunta,
+v.categoria,
+v.idAlternativa,
+v.alternativa,
+v.estilo,
+v.quantidadeVotos,
+t.totalRespostas,
+ROUND(v.quantidadeVotos * 100.0 / t.totalRespostas,2) AS percentual
+FROM vw_votos_alternativas v
+JOIN vw_total_respostas t
+ON t.idPergunta = v.idPergunta;
+
+-- select
+SELECT * FROM vw_estatisticas_quiz;
 
 
 
+SELECT * FROM vw_estatisticas_quiz ORDER BY idPergunta, idAlternativa;
