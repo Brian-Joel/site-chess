@@ -1,298 +1,362 @@
-function listar() {
-    fetch("/usuarios/listar", {
-      method: "GET",
+// TESTE DE JSON 
+
+// [
+//     {
+//         "idPergunta": 1,
+//         "pergunta": "Qual seu estilo de abertura?",
+//         "idAlternativa": 1,
+//         "alternativa": "Jogo agressivamente"
+//     },
+//     {
+//         "idPergunta": 1,
+//         "pergunta": "Qual seu estilo de abertura?",
+//         "idAlternativa": 2,
+//         "alternativa": "Jogo defensivamente"
+//     }
+// ]
+
+
+// VARIÁVEIS GLOBAIS
+
+let listaDeQuestoes = [];
+let quantidadeDeQuestoes = 0;
+
+
+
+// BUSCAR QUESTÕES NO BANCO DE DADOS
+
+function buscarQuestoes() {
+
+    // fetch: requisita dados que está no endpoint quiz/listar
+    return fetch("/quiz/listar", {
+        method: "GET" // utiliza o metodo get
     })
-      .then(function (resposta) {
-        resposta.json().then((usuarios) => {
-          usuarios.forEach((usuario) => {
-            listaUsuario.push(usuario);
+        .then((resposta) => { //pega os dados e manda pra resposta transformado em JSON
+            return resposta.json();
+        })
+        .then((dados) => {
+            const questoesOrganizadas = {};
 
-            console.log("listaUsuariosCadastrados");
-            // Ajuste aqui a propriedade do usuário que faz sentido para o seu projeto de xadrez, se necessário:
+            // forEach so pecebe uma linha por vez
+            dados.forEach((linha) => {
+                const id = linha.idPergunta; // pega as os dados das respostas, isto é, pega o formato em JSON e manda pro organizar
 
-            console.log(usuario.id); // Exemplo usando 'id' ou outro campo que venha do seu banco
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
+                if (questoesOrganizadas[id]) {
+                    // A pergunta já existe: adiciona outra alternativa
+                    questoesOrganizadas[id].alternativas.push({
+                        idAlternativa: linha.idAlternativa, //add o id
+                        texto: linha.alternativa  // add a alternativa
+                    });
+
+                } else {
+                    // A pergunta ainda não existe: cria ela
+                    questoesOrganizadas[id] = {
+                        idPergunta: linha.idPergunta,
+                        pergunta: linha.pergunta,
+                        categoria: linha.categoria,
+                        alternativas: [
+                            {
+                                idAlternativa: linha.idAlternativa,
+                                texto: linha.alternativa
+                            }
+                        ]
+                    };
+                }
+            })
+
+            listaDeQuestoes = Object.values(questoesOrganizadas);
+
+            quantidadeDeQuestoes = listaDeQuestoes.length;
+
+            console.log("Questões carregadas:", listaDeQuestoes);
+
+            return listaDeQuestoes;
+
+        })
+};
 
 
-  
-const listaDeQuestoes = [
-
-    {
-        pergunta: "Qual mês tem 30 dias?",
-        alternativaA: "Janeiro",
-        alternativaB: "Dezembro",
-        alternativaC: "Junho",
-        alternativaD: "Agosto",
-        alternativaCorreta: "alternativaC"
-    },
-
-    {
-        pergunta: "Quantas horas tem em um dia?",
-        alternativaA: "30 horas",
-        alternativaB: "38 horas",
-        alternativaC: "48 horas",
-        alternativaD: "24 horas",
-        alternativaCorreta: "alternativaD"
-    },
-
-    {
-        pergunta: "Qual destes números é ímpar?",
-        alternativaA: "Dez",
-        alternativaB: "Doze",
-        alternativaC: "Oito",
-        alternativaD: "Onze",
-        alternativaCorreta: "alternativaD"
-    }
-
-]
-
-// variáveis globais    
-let numeroDaQuestaoAtual = 0
-let pontuacaoFinal = 0
-let tentativaIncorreta = 0
-let certas = 0
-let erradas = 0
-let quantidadeDeQuestoes = listaDeQuestoes.length
-// let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
+// ESCONDER ELEMENTOS AO CARREGAR A PÁGINA
 
 function onloadEsconder() {
-    document.getElementById('pontuacao').style.display = "none"
-    document.getElementById('jogo').style.display = "none"
+
+    document.getElementById("pontuacao").style.display = "none";
+    document.getElementById("jogo").style.display = "none";
+    document.querySelector(".placar-resultado").style.display = "none";
+
 }
 
-function iniciarQuiz() {
-    document.getElementById('pontuacao').style.display = "flex"
-    document.getElementById('jogo').style.display = "flex"
-    document.getElementById('btnIniciarQuiz').style.display = "none"
 
-    document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
 
-    preencherHTMLcomQuestaoAtual(0)
+// INICIAR QUIZ
 
-    // Cria o gráfico de progresso após o DOM estar pronto
-    new Chart(document.getElementById('barra_progressao'), config)
 
-    btnSubmeter.disabled = false
-    btnProx.disabled = true
-    // btnConcluir.disabled = true
-    btnTentarNovamente.disabled = true
+async function iniciarQuiz() {
+    await buscarQuestoes();
+
+    numeroDaQuestaoAtual = 0;
+    respostasSelecionadas = [];
+
+    document.getElementById("btnIniciarQuiz").style.display = "none";
+    document.getElementById("jogo").style.display = "block";
+
+    document.getElementById("btnProx").disabled = false;
+
+    preencherHTMLcomQuestaoAtual(0);
 }
 
-function preencherHTMLcomQuestaoAtual(index) {
-    habilitarAlternativas(true)
-    const questaoAtual = listaDeQuestoes[index]
-    numeroDaQuestaoAtual = index
-    console.log("questaoAtual")
-    console.log(questaoAtual)
-    document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
-    document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
-    document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
-    document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
-    document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
-    document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
-}
+// EXIBIR QUESTÃO ATUAL
 
-function submeter() {
-    const options = document.getElementsByName("option"); // recupera alternativas no html
 
-    let hasChecked = false
-    for (let i = 0; i < options.length; i++) {
-        if (options[i].checked) {
-            hasChecked = true
-            break
+function preencherHTMLcomQuestaoAtual(indice) {
+
+    // Recupera a questão atual
+    const questaoAtual = listaDeQuestoes[indice];
+
+    console.log("Índice:", indice, "Questão:", questaoAtual);
+    console.log("Alternativas:", questaoAtual.alternativas);
+
+    // Limpa as alternativas da questão anterior
+    desmarcarRadioButtons();
+    habilitarAlternativas(true);
+    limparCoresBackgroundOpcoes();
+
+    // Exibe o número da questão
+    document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = indice + 1;
+
+    // Exibe o enunciado
+    document.getElementById("spanEnunciado").innerHTML = questaoAtual.pergunta;
+
+    const camposAlternativas = [
+        "labelOpcaoUm",
+        "labelOpcaoDois",
+        "labelOpcaoTres",
+        "labelOpcaoQuatro"
+    ];
+
+    const radios = [
+        "primeiraOpcao",
+        "segundaOpcao",
+        "terceiraOpcao",
+        "quartaOpcao"
+    ];
+
+    // Recupera as alternativas
+    const alternativas = questaoAtual.alternativas;
+
+    // Recupera a resposta anteriormente selecionada
+    const respostaAnterior = respostasSelecionadas[indice];
+
+    // Preenche cada alternativa
+    alternativas.forEach((alternativa, posicao) => {
+
+        document.getElementById(camposAlternativas[posicao]).innerHTML = alternativa.texto;
+
+        const radio = document.getElementById(radios[posicao]);
+
+        radio.value = alternativa.idAlternativa;
+
+        // Restaura a resposta anterior, se existir
+        if (respostaAnterior &&
+            Number(respostaAnterior.idAlternativa) === Number(alternativa.idAlternativa)) {
+            radio.checked = true;
         }
-    }
-
-    if (!hasChecked) {
-        alert("Não há alternativas escolhidas. Escolha uma opção.")
-    } else {
-        btnSubmeter.disabled = true
-        btnProx.disabled = false
-
-        habilitarAlternativas(false)
-
-        checarResposta()
-    }
+    });
 }
 
-function habilitarAlternativas(trueOrFalse) {
-    let opcaoEscolhida = trueOrFalse ? false : true
 
-    primeiraOpcao.disabled = opcaoEscolhida
-    segundaOpcao.disabled = opcaoEscolhida
-    terceiraOpcao.disabled = opcaoEscolhida
-    quartaOpcao.disabled = opcaoEscolhida
+
+
+// HABILITAR OU DESABILITAR ALTERNATIVAS
+
+function habilitarAlternativas(estado) {
+
+    const options = document.getElementsByName("option");
+
+    options.forEach(function (option) {
+
+        option.disabled = !estado;
+
+    });
 
 }
+
+
+// AVANÇAR QUESTÃO
 
 function avancar() {
-    btnProx.disabled = true
-    btnSubmeter.disabled = false
 
-    desmarcarRadioButtons()
+    // Tenta guardar a resposta atual
+    if (!salvarRespostaAtual()) {
+        return;
+    }
 
     if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
-        preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
-    } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) {
-        alert("Atenção... a próxima é a ultima questão!")
-        preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+
+        numeroDaQuestaoAtual++;
+
+        preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
+
+        document.getElementById("btnVoltar").disabled = false;
+
     } else {
-        finalizarJogo()
-    }
-    limparCoresBackgroundOpcoes()
-}
 
-function tentarNovamente() {
-    // atualiza a página
-    window.location.reload()
-}
-
-function checarResposta() {
-    const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
-    const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
-
-    const options = document.getElementsByName("option"); // recupera alternativas no html
-
-    let alternativaCorreta = null // variável para armazenar a alternativa correta
-
-    options.forEach((option) => {
-        if (option.value === respostaQuestaoAtual) {
-            console.log("alternativaCorreta está no componente: " + alternativaCorreta)
-            alternativaCorreta = option.labels[0].id
-        }
-    })
-
-    // verifica se resposta assinalada é correta
-    options.forEach((option) => {
-        if (option.checked === true && option.value === respostaQuestaoAtual) {
-            document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-            pontuacaoFinal++
-            certas++
-            document.getElementById("spanCertas").innerHTML = certas
-            numeroDaQuestaoAtual++
-        } else if (option.checked && option.value !== respostaQuestaoAtual) {
-            const wrongLabelId = option.labels[0].id
-
-            document.getElementById(wrongLabelId).classList.add("text-danger-with-bg")
-            document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-            tentativaIncorreta++
-            erradas++
-            document.getElementById("spanErradas").innerHTML = erradas
-            numeroDaQuestaoAtual++
-        }
-    })
-}
-
-function limparCoresBackgroundOpcoes() {
-    const options = document.getElementsByName("option");
-    options.forEach((option) => {
-        document.getElementById(option.labels[0].id).classList.remove("text-danger-with-bg")
-        document.getElementById(option.labels[0].id).classList.remove("text-success-with-bg")
-    })
-}
-
-function desmarcarRadioButtons() {
-    const options = document.getElementsByName("option");
-    for (let i = 0; i < options.length; i++) {
-        options[i].checked = false;
+        finalizarJogo();
     }
 }
+
+
+// VOLTAR QUESTÃ0
+function voltar() {
+
+    // Verifica se existe alguma alternativa selecionada
+    const alternativaSelecionada = document.querySelector(
+        'input[name="option"]:checked'
+    );
+
+    // Salva a resposta somente se houver uma seleção
+    if (alternativaSelecionada) {
+        respostasSelecionadas[numeroDaQuestaoAtual] = {
+            idPergunta: listaDeQuestoes[numeroDaQuestaoAtual].idPergunta,
+            idAlternativa: Number(alternativaSelecionada.value)
+        };
+    }
+
+    if (numeroDaQuestaoAtual > 0) {
+
+        numeroDaQuestaoAtual--;
+
+        preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
+
+        document.getElementById("btnVoltar").disabled =
+            numeroDaQuestaoAtual === 0;
+
+    }
+}
+
+
+// FINALIZAR QUIZ
 
 function finalizarJogo() {
-    let textoParaMensagemFinal = null
-    let classComCoresParaMensagemFinal = null
-    const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
 
-    if (porcentagemFinalDeAcertos <= 0.3) {
-        textoParaMensagemFinal = "Parece que você não estudou..."
-        classComCoresParaMensagemFinal = "text-danger-with-bg"
-    }
-    else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
-        textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
-        classComCoresParaMensagemFinal = "text-warning-with-bg"
-    }
-    else if (porcentagemFinalDeAcertos >= 0.9) {
-        textoParaMensagemFinal = "Uau, parabéns!"
-        classComCoresParaMensagemFinal = "text-success-with-bg"
-    }
+    document.getElementById("jogo").style.display = "none";
 
-    textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
+    document.getElementById("pontuacao").style.display = "none";
 
+    document.querySelector(".placar-resultado").style.display = "block";
 
-    document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-    document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
-    document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
+    document.getElementById("btnTentarNovamente").disabled = false;
 
-    document.getElementById('jogo').classList.add("text-new-gray")
+    console.log("Respostas selecionadas:", respostasSelecionadas);
 
-    btnProx.disabled = true
-    btnSubmeter.disabled = true
-    // btnConcluir.disabled = true
-    btnTentarNovamente.disabled = false
+    document.getElementById("resultado_final").innerText =
+        "Respostas registradas!";
 
 }
 
 
 
-//GRAFICO
+// LIMPAR ALTERNATIVAS
 
-// 1. Dados que vão vir do seu Banco de Dados (ex: MySQL)
-// Quando você conectar ao BD, basta alimentar essas duas variáveis com o resultado da sua query
-const labels = ['Progresso:'];
-const valores = [10];
+function desmarcarRadioButtons() {
 
-// 2. Estrutura de dados (Barras empilhadas)
-const data = {
-    labels: labels,
-    datasets: [
-        {
-            label: 'Pontos totais',
-            backgroundColor: '#00b822',
-            data: valores,
-        },
-        {
-            label: 'Fundo Cinza',
-            backgroundColor: '#444444',
-            data: valores.map(v => 100 - v),
+    const options = document.getElementsByName("option");
+
+    options.forEach(function (option) {
+
+        option.checked = false;
+
+    });
+
+}
+
+
+function limparCoresBackgroundOpcoes() {
+
+    const opcoes = document.querySelectorAll(".cartao-opcao");
+
+    opcoes.forEach(function (opcao) {
+
+        opcao.classList.remove("text-danger-with-bg");
+
+        opcao.classList.remove("text-success-with-bg");
+    });
+
+}
+
+
+// TENTAR NOVAMENTE
+
+function tentarNovamente() {
+
+    window.location.reload();
+
+}
+
+// tenta salvar resposta atual
+function salvarRespostaAtual() {
+
+    const options = document.getElementsByName("option");
+
+    let alternativaSelecionada = null;
+
+    options.forEach((option) => {
+
+        if (option.checked) {
+            alternativaSelecionada = option;
         }
-    ]
-};
 
-// 3. Configurações corrigidas
-const config = {
-    type: 'bar',
-    data,
-    options: {
-        indexAxis: 'y',
-        responsive: true,
-        maintainAspectRatio: false,
-        // AJUSTE CRUCIAL: Abre espaço na direita para os textos não cobrirem a barra
-        plugins: {
-            legend: false,
-            tooltip: false
-        },
-        scales: {
-            x: {
-                stacked: true,
-                display: false,
-                max: 100
-            },
-            y: {
-                stacked: true,
-                display: false
-            }
+    });
+
+
+    if (alternativaSelecionada == null) {
+        alert("Escolha uma alternativa antes de continuar.");
+        return false;
+    }
+
+    respostasSelecionadas[numeroDaQuestaoAtual] = {
+
+        idPergunta: listaDeQuestoes[numeroDaQuestaoAtual].idPergunta,
+
+        idAlternativa: Number(alternativaSelecionada.value)
+
+    };
+
+    return true;
+}
+
+
+
+// CONFIRMAR RESPOSTA
+function submeter() {
+
+    const options = document.getElementsByName("option");
+
+    let alternativaSelecionada = null;
+
+    options.forEach(function (option) {
+
+        if (option.checked) {
+            alternativaSelecionada = option;
         }
-    },
-};
 
-// 4. Renderiza o gráfico finalizado
-const grafico_2 = new Chart(
-    document.getElementById('barra_progressao'),
-    config
-);
+    });
+
+    if (alternativaSelecionada === null) {
+
+        alert("Escolha uma alternativa antes de continuar.");
+        return;
+    }
+
+    respostasSelecionadas[numeroDaQuestaoAtual] = {
+        idPergunta: listaDeQuestoes[numeroDaQuestaoAtual].idPergunta,
+        idAlternativa: Number(alternativaSelecionada.value)
+    };
+
+    document.getElementById("btnSubmeter").disabled = true;
+
+    document.getElementById("btnProx").disabled = false;
+
+    habilitarAlternativas(false);
+
+}

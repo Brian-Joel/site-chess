@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/base/navbar.css">
     <link rel="stylesheet" href="../css/quiz.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../js/quiz.js"></script>
+    <script src="../js/quiz.js" defer></script>
 </head>
 
 <body onload="onloadEsconder()">
@@ -40,7 +40,7 @@
             <button class="btn_comecar" id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
 
             <div id="pontuacao" class="placar-pontuacao">
-                <div id="pontuacaoDuranteJogo" class="bloco-info">
+                <div id="resultadoQuiz" class="bloco-info">
                 </div>
                 <div id="infoQuestao" class="bloco-info">
                     <span>Pergunta: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes">
@@ -52,7 +52,7 @@
 
             <div id="jogo" class="caixa-jogo">
                 <div id="perguntaDaQuestaoAtual" class="titulo-pergunta">
-                    <span id="spanQuestaoExibida"></span>
+                    <span id="spanEnunciado"></span>
                 </div>
 
                 <div id="opcoes" class="lista-opcoes">
@@ -79,105 +79,111 @@
                 </div>
 
                 <div id="botoes" class="grupo-botoes">
-                    <button onclick="submeter()" id="btnSubmeter">Voltar</button>
-                    <button onclick="avancar()" id="btnProx" disabled>Continuar</button>
+                    <button onclick="voltar()" id="btnVoltar" disabled>Voltar</button>
+                    <button onclick="avancar()" id="btnProx">Continuar</button>
                 </div>
             </div>
-        </div>
 
-        <div class="placar-resultado">
-            <div id="pontuacaoDuranteJogo" class="bloco-info">
-                <h2>Resultado do quiz:</h2>
-                <h2 class="nivel">Seu nível:<span id="resultado_final"></span></h2>
+            <div class="placar-resultado">
+                <div id="pontuacaoDuranteJogo" class="bloco-info">
+                    <h2>Resultado do quiz:</h2>
+                    <h2 class="nivel">Seu nível:<span id="resultado_final"></span></h2>
 
-                <div class="container-resultado">
-                    <ul>
-                        <h2>Suas repostas:</h2>
-                        <li>
-                            <div class="card">
-                                <span>1</span>
-                                <div>
-                                    <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                    <small><small class="percentual" id="percentual_selecionado">45%</small> das pessoas
-                                        escolheram essa resposta</small>
+                    <div class="container-resultado">
+                        <ul>
+                            <h2>Suas repostas:</h2>
+                            <li>
+                                <div class="card">
+                                    <span>1</span>
+                                    <div>
+                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
+                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
+                                            pessoas
+                                            escolheram essa resposta</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="card">
-                                <span>1</span>
-                                <div>
-                                    <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                    <small><small class="percentual" id="percentual_selecionado">45%</small> das pessoas
-                                        escolheram essa resposta</small>
+                            </li>
+                            <li>
+                                <div class="card">
+                                    <span>1</span>
+                                    <div>
+                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
+                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
+                                            pessoas
+                                            escolheram essa resposta</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="card">
-                                <span>1</span>
-                                <div>
-                                    <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                    <small><small class="percentual" id="percentual_selecionado">45%</small> das pessoas
-                                        escolheram essa resposta</small>
+                            </li>
+                            <li>
+                                <div class="card">
+                                    <span>1</span>
+                                    <div>
+                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
+                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
+                                            pessoas
+                                            escolheram essa resposta</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="card">
-                                <span>1</span>
-                                <div>
-                                    <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                    <small><small class="percentual" id="percentual_selecionado">45%</small> das pessoas
-                                        escolheram essa resposta</small>
+                            </li>
+                            <li>
+                                <div class="card">
+                                    <span>1</span>
+                                    <div>
+                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
+                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
+                                            pessoas
+                                            escolheram essa resposta</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="card">
-                                <span>1</span>
-                                <div>
-                                    <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                    <small><small class="percentual" id="percentual_selecionado">45%</small> das pessoas
-                                        escolheram essa resposta</small>
+                            </li>
+                            <li>
+                                <div class="card">
+                                    <span>1</span>
+                                    <div>
+                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
+                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
+                                            pessoas
+                                            escolheram essa resposta</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="card">
-                                <span>1</span>
-                                <div>
-                                    <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                    <small><small class="percentual" id="percentual_selecionado">45%</small> das pessoas
-                                        escolheram essa resposta</small>
+                            </li>
+                            <li>
+                                <div class="card">
+                                    <span>1</span>
+                                    <div>
+                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
+                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
+                                            pessoas
+                                            escolheram essa resposta</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="card">
-                                <span>1</span>
-                                <div>
-                                    <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                    <small><small class="percentual" id="percentual_selecionado">45%</small> das pessoas
-                                        escolheram essa resposta</small>
+                            </li>
+                            <li>
+                                <div class="card">
+                                    <span>1</span>
+                                    <div>
+                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
+                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
+                                            pessoas
+                                            escolheram essa resposta</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
 
-                    </ul>
+                        </ul>
+                    </div>
+
                 </div>
-
+                <span class="alinhar-botao-quiz">
+                    <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+                    <button onclick="verEstatisticas()" id="btnEstatisticas" disabled>Ver Estatísticas</button>
+                </span>
             </div>
-            <span class="alinhar-botao-quiz">
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
-                <button onclick="verEstatisticas()" id="btnEstatisticas" disabled>Ver Estatísticas</button>
-            </span>
-        </div>
-        <!-- <div id="pontuacaoFinalJogo" class="bloco-info">
+            <!-- <div id="pontuacaoFinalJogo" class="bloco-info">
             <span id="pontuacaoFinal">Pontuação Final: <span id="spanPontuacaoFinal">***</span></span>
             <span id="msgFinal">***</span>
         </div> -->
-        <!-- <span>Quantidade de acertos: <span id="spanCertas"></span></span>
+            <!-- <span>Quantidade de acertos: <span id="spanCertas"></span></span>
         <span">Quantidade de erros: <span id="spanErradas"></span></span> -->
     </main>
 </body>
