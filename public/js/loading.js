@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // tempo de 1s
                 setTimeout(() => {
                     carregamento.style.display = 'none';
-                }, 10000);
+                }, 100);
             }
         }, 25 * i);
     }

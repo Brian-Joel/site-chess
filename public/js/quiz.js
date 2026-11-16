@@ -1,21 +1,3 @@
-// TESTE DE JSON 
-
-// [
-//     {
-//         "idPergunta": 1,
-//         "pergunta": "Qual seu estilo de abertura?",
-//         "idAlternativa": 1,
-//         "alternativa": "Jogo agressivamente"
-//     },
-//     {
-//         "idPergunta": 1,
-//         "pergunta": "Qual seu estilo de abertura?",
-//         "idAlternativa": 2,
-//         "alternativa": "Jogo defensivamente"
-//     }
-// ]
-
-
 // VARIÁVEIS GLOBAIS
 
 let listaDeQuestoes = [];
@@ -316,43 +298,6 @@ function salvarRespostaAtual() {
 
     return true;
 }
-
-
-
-// CONFIRMAR RESPOSTA
-function submeter() {
-
-    const options = document.getElementsByName("option");
-
-    let alternativaSelecionada = null;
-
-    options.forEach(function (option) {
-
-        if (option.checked) {
-            alternativaSelecionada = option;
-        }
-
-    });
-
-    if (alternativaSelecionada == null) {
-
-        alert("Escolha uma alternativa antes de continuar.");
-        return;
-    }
-
-    respostasSelecionadas[numeroDaQuestaoAtual] = {
-        idPergunta: listaDeQuestoes[numeroDaQuestaoAtual].idPergunta,
-        idAlternativa: Number(alternativaSelecionada.value)
-    };
-
-    document.getElementById("btnSubmeter").disabled = true;
-
-    document.getElementById("btnProx").disabled = false;
-
-    habilitarAlternativas(false);
-
-}
-
 
 // HABILITAR OU DESABILITAR ALTERNATIVAS
 

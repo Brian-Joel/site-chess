@@ -5,33 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz - XequeMate</title>
+    <link rel="shortcut icon" href="../assets/icon/iconKnight.ico" type="image/x-icon">
+
     <link rel="stylesheet" href="../css/base/variaveis.css">
-    <link rel="stylesheet" href="../css/base/navbar.css">
+    <link rel="stylesheet" href="../css/base/navbar-lateral.css">
     <link rel="stylesheet" href="../css/quiz.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/quiz.js" defer></script>
 </head>
 
 <body onload="onloadEsconder()">
-    <header>
-        <nav class="navegador">
-            <div class="topbar">
-                <span class="alinhar-topbar">
-                    <img class="logo" src="../../public/assets/imgs/logo-horse.png" alt="Logotipo Xeque-Mate">
-                    <p class="logo-titulo">Xeque-Mate</p>
-                </span>
-                <span class="alinhar-texto-navbar">
-                    <a class="links" href="../../public/index.html">Home</a>
-                    <a class="links" href="#">O que é xadrez?</a>
-                    <a class="links" href="#">Sobre mim</a>
-                </span>
-                <span class="alinhar-btn-navbar">
-                    <button class="btn-topbar" disabled hidden
-                        onclick="window.location.href='cadastro.html'">Cadastrar</button>
-                    <button class="btn-topbar" disabled hidden
-                        onclick="window.location.href='login.html'">Entrar</button>
-                </span>
+    <header class="navegador">
+        <nav class="lateral-bar">
+            <span class="alinhar-topbar">
+                <img class="logo" src="../assets/imgs/logo-horse.png" alt="Logotipo Xeque-Mate">
+                <p class="logo-titulo">Xeque-Mate</p>
+            </span>
+            <div class="hello">
+                <img src="../assets/perfil/peao_pixelart.svg" alt="foto de perfil">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
+            <a href="#"><span class="links">Perfil</span></a>
+            <a href="./dashboard.html"><span class="links">Dashboard</span></a>
+            <a href="./quiz.html"><span class="links">Quiz</span></a>
+            <a href="#"><span class="links">Forúm</span></a>
+            <span class="alinhar-btn-navbar">
+                <button class="btn-topbar" onclick="limparSessao()">Sair</button>
+            </span>
         </nav>
     </header>
 
@@ -103,73 +103,6 @@
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="card">
-                                    <span>1</span>
-                                    <div>
-                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
-                                            pessoas
-                                            escolheram essa resposta</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <span>1</span>
-                                    <div>
-                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
-                                            pessoas
-                                            escolheram essa resposta</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <span>1</span>
-                                    <div>
-                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
-                                            pessoas
-                                            escolheram essa resposta</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <span>1</span>
-                                    <div>
-                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
-                                            pessoas
-                                            escolheram essa resposta</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <span>1</span>
-                                    <div>
-                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
-                                            pessoas
-                                            escolheram essa resposta</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="card">
-                                    <span>1</span>
-                                    <div>
-                                        <p id="alternativa">Nunca joguei xadrez na vida</p>
-                                        <small><small class="percentual" id="percentual_selecionado">45%</small> das
-                                            pessoas
-                                            escolheram essa resposta</small>
-                                    </div>
-                                </div>
-                            </li>
-
                         </ul>
                     </div>
 
