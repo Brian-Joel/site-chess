@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -11,10 +11,9 @@
 
     <script src="./js/sessao.js"></script>
 
-
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&display=swap"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet" href="css/base/variaveis.css">
@@ -22,12 +21,11 @@
     <link rel="stylesheet" href="css/base/navbar.css" />
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/base/footer.css">
-
 </head>
 
 <body>
 
-    <!--Header-->
+    <!-- HEADER -->
     <header>
         <nav class="navegador">
             <div class="topbar">
@@ -38,7 +36,7 @@
                 <span class="alinhar-texto-navbar">
                     <a class="links" href="./index.html">Home</a>
                     <a class="links" href="#">O que é xadrez?</a>
-                    <a class="links" href="#">Sobre mim</a>
+                    <a class="links" href="#">Atualizações</a>
                 </span>
                 <span class="alinhar-btn-navbar">
                     <button class="btn-topbar" onclick="window.location.href='cadastro.html'">Cadastrar</button>
@@ -50,124 +48,134 @@
     <main>
         <section class="sessao">
 
+            <!-- IMAGEM LATERAL: o texto fica DENTRO da imagem, ancorado no rodapé dela -->
             <div class="alinhar-imagem">
-                <span class="imagem-login">
-                    <p>texto bom</p>
-                </span>
+                <div class="imagem-login" role="img" aria-label="Tabuleiro de xadrez com peças douradas e pretas">
+                    <div class="imagem-texto">
+                        <h2 class="imagem-titulo">Retome de onde parou.</h2>
+                        <p class="imagem-subtitulo">Entre para carregar seu puzzle atual. Novo por aqui? Comece pelo puzzle nº 1.</p>
+                    </div>
+                </div>
             </div>
 
+            <!-- FORMULÁRIO -->
             <div class="login">
                 <div class="alerta_erro">
                     <div class="card_erro" id="cardErro">
                         <span id="mensagem_erro"></span>
                     </div>
                 </div>
+
                 <div class="container">
                     <div class="card card-login">
-                        <span class="linha">
+                        <div class="linha">
                             <h2>Login</h2>
-                        </span>
+                        </div>
+
                         <div class="formulario">
                             <div class="campo">
-                                <span>E-mail:</span>
-                                <input id="email_input" type="text" placeholder="usuario@provedor.com">
+                                <label for="email_input">E-mail:</label>
+                                <input id="email_input" type="email" placeholder="usuario@provedor.com">
                             </div>
+
                             <div class="campo">
-                                <span>Senha:</span>
+                                <label for="senha_input">Senha:</label>
                                 <input id="senha_input" type="password" placeholder="******">
                                 <button class="botao btn-login" onclick="entrar()">Entrar</button>
 
-
                                 <div id="div_aguardar" class="loading-div">
-                                    <img src="./assets/circle-loading.gif" id="loading-gif">
+                                    <img src="./assets/circle-loading.gif" id="loading-gif" alt="Carregando">
                                 </div>
 
                                 <div id="div_erros_login"></div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
         </section>
     </main>
 
+    <!-- SCRIPT (agora dentro do body, antes de fechar) -->
+    <script>
+
+
+        function entrar() {
+            aguardar();
+
+            var emailVar = email_input.value;
+            var senhaVar = senha_input.value;
+
+            if (emailVar == "") {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "ERRO: O campo email não estar vazio!";
+                finalizarAguardar();
+                return false;
+            }
+            else if (senhaVar == "") {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "ERRO: O campo senha não estar vazio!";
+                finalizarAguardar();
+                return false;
+            }
+            else {
+                setInterval(sumirMensagem, 5000)
+            }
+
+            console.log("FORM LOGIN: ", emailVar);
+            console.log("FORM SENHA: ", senhaVar);
+
+            fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        sessionStorage.EMAIL_USUARIO = json.email;
+                        sessionStorage.NOME_USUARIO = json.nome;
+                        sessionStorage.ID_USUARIO = json.id;
+
+                        setTimeout(function () {
+                            window.location = "./dashboard/dashboard.html";
+                        }, 1000); // apenas para exibir o loading
+
+                    });
+
+                } else {
+
+                    console.log("Houve um erro ao tentar realizar o login!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                        finalizarAguardar(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+
+            return false;
+        }
+
+        function sumirMensagem() {
+            cardErro.style.display = "none"
+        }
+
+    </script>
 </body>
 
 </html>
-
-<script>
-
-
-    function entrar() {
-        aguardar();
-
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
-
-        if (emailVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "ERRO: O campo email não estar vazio!";
-            finalizarAguardar();
-            return false;
-        }
-        else if (senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "ERRO: O campo senha não estar vazio!";
-            finalizarAguardar();
-            return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
-        }
-
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
-
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-
-                    setTimeout(function () {
-                        window.location = "./dashboard/dashboard.html";
-                    }, 1000); // apenas para exibir o loading
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
-    }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
-
-</script>

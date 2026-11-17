@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Xeque-Mate | O que é xadrez?</title>
+  <link rel="shortcut icon" href="assets/icon/iconKnight.ico" type="image/x-icon">
+
+  <script src="./js/sessao.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base/variaveis.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/navbar.css" />
+  <link rel="stylesheet" href="css/base/footer.css" />
+  <link rel="stylesheet" href="css/sobre.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav class="navegador">
+      <div class="topbar">
+        <span class="alinhar-topbar">
+          <img class="logo" src="./assets/imgs/logo-horse.png" alt="Logotipo Xeque-Mate">
+          <p class="logo-titulo">Xeque-Mate</p>
+        </span>
+        <span class="alinhar-texto-navbar">
+          <a class="links" href="./index.html">Home</a>
+          <a class="links" href="#">O que é xadrez?</a>
+          <a class="links" href="#">Atualizações</a>
+        </span>
+        <span class="alinhar-btn-navbar">
+          <button class="btn-topbar" onclick="window.location.href='cadastro.html'">Cadastrar</button>
+          <button class="btn-topbar" onclick="window.location.href='login.html'">Entrar</button>
+        </span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pagina-xadrez">
+
+    <!-- HERO: texto dentro da imagem, com sombreado atrás -->
+    <section class="hero-xadrez">
+      <div class="hero-texto">
+        <div class="container-xadrez">
+          <h1 class="hero-titulo">O que é xadrez?</h1>
+          <p class="hero-subtitulo">Um jogo de estratégia para dois jogadores. Não depende de sorte: ganha quem pensa melhor.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- O BÁSICO -->
+    <section class="bloco">
+      <div class="container-xadrez">
+        <h2 class="bloco-titulo">O básico em um minuto</h2>
+        <p class="bloco-intro texto-suave">O xadrez existe há cerca de 1.500 anos e hoje é jogado no mundo todo, em
+          tabuleiros de madeira e em celulares.</p>
+
+        <div class="basico">
+          <div class="tabuleiro" role="img" aria-label="Tabuleiro de xadrez com 64 casas"></div>
+
+          <ul class="fatos">
+            <li class="fato">
+              <strong>Um tabuleiro com 64 casas</strong>
+              <span class="texto-suave">São 8 fileiras por 8 colunas, com casas claras e escuras alternadas.</span>
+            </li>
+            <li class="fato">
+              <strong>16 peças para cada jogador</strong>
+              <span class="texto-suave">Um joga com as brancas e o outro com as pretas. Cada peça se move de um jeito.</span>
+            </li>
+            <li class="fato">
+              <strong>Um objetivo só: o xeque-mate</strong>
+              <span class="texto-suave">Vence quem encurrala o rei do adversário, sem que ele consiga escapar.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- AS PEÇAS -->
+    <section class="bloco">
+      <div class="container-xadrez">
+        <h2 class="bloco-titulo">Conheça as peças</h2>
+        <p class="bloco-intro texto-suave">Cada peça tem o seu jeito de andar. Comece por aqui.</p>
+
+        <div class="pecas-grid">
+          <article class="peca-card">
+            <img src="./assets/imgs/peao.png" alt="Peão">
+            <h3>Peão</h3>
+            <p class="texto-suave">Anda para a frente, uma casa por vez (duas no primeiro lance), e captura na diagonal.</p>
+          </article>
+
+          <article class="peca-card">
+            <img src="./assets/imgs/cavalo.png" alt="Cavalo">
+            <h3>Cavalo</h3>
+            <p class="texto-suave">Anda em "L" e é a única peça que pula sobre as outras.</p>
+          </article>
+
+          <article class="peca-card">
+            <img src="./assets/imgs/bispo.png" alt="Bispo">
+            <h3>Bispo</h3>
+            <p class="texto-suave">Anda nas diagonais, quantas casas quiser.</p>
+          </article>
+
+          <article class="peca-card">
+            <img src="./assets/imgs/torre.png" alt="Torre">
+            <h3>Torre</h3>
+            <p class="texto-suave">Anda em linha reta, na horizontal ou na vertical, quantas casas quiser.</p>
+          </article>
+
+          <article class="peca-card">
+            <img src="./assets/imgs/dama.png" alt="Dama">
+            <h3>Dama</h3>
+            <p class="texto-suave">A peça mais forte: junta os movimentos da torre e do bispo.</p>
+          </article>
+
+          <article class="peca-card">
+            <img src="./assets/imgs/rei.png" alt="Rei">
+            <h3>Rei</h3>
+            <p class="texto-suave">Anda uma casa em qualquer direção. Se ele cair, a partida termina.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO UMA PARTIDA FUNCIONA -->
+    <section class="bloco">
+      <div class="container-xadrez">
+        <h2 class="bloco-titulo">Como uma partida funciona</h2>
+
+        <ol class="passos">
+          <li class="passo">
+            <div>
+              <h3>As brancas começam</h3>
+              <p class="texto-suave">Cada jogador move uma peça por vez, alternando a vez.</p>
+            </div>
+          </li>
+          <li class="passo">
+            <div>
+              <h3>Ataque e defenda</h3>
+              <p class="texto-suave">Se sua peça chega a uma casa ocupada por uma peça adversária, você a captura e ela
+                sai do tabuleiro.</p>
+            </div>
+          </li>
+          <li class="passo">
+            <div>
+              <h3>Ameace o rei</h3>
+              <p class="texto-suave">Quando o rei está ameaçado, é xeque, e o jogador precisa tirá-lo do perigo no
+                mesmo lance.</p>
+            </div>
+          </li>
+          <li class="passo">
+            <div>
+              <h3>Dê o xeque-mate</h3>
+              <p class="texto-suave">Se o rei está em xeque e não tem como escapar, a partida acaba e quem deu o
+                xeque-mate vence.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PALAVRAS PARA COMEÇAR -->
+    <section class="bloco">
+      <div class="container-xadrez">
+        <h2 class="bloco-titulo">Três palavras que você vai ouvir</h2>
+
+        <div class="palavras-grid">
+          <article class="palavra-card">
+            <h3>Xeque</h3>
+            <p class="texto-suave">O rei está sendo atacado e precisa sair do perigo.</p>
+          </article>
+          <article class="palavra-card">
+            <h3>Xeque-mate</h3>
+            <p class="texto-suave">O rei está em xeque e não tem como escapar. Fim de jogo.</p>
+          </article>
+          <article class="palavra-card">
+            <h3>Empate</h3>
+            <p class="texto-suave">Ninguém consegue vencer. Acontece, por exemplo, quando o jogador da vez não tem
+              nenhum lance possível e seu rei não está em xeque.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAMADA FINAL -->
+    <section class="bloco">
+      <div class="container-xadrez">
+        <div class="cta-final">
+          <h2 class="bloco-titulo">Pronto para o primeiro puzzle?</h2>
+          <p class="texto-suave">Não precisa saber nada de xadrez. A trilha ensina uma peça de cada vez.</p>
+          <div class="cta-botoes">
+            <a class="btn-principal" href="cadastro.html">Criar conta</a>
+            <a class="btn-secundario" href="login.html">Já tenho conta</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="rodape">
+    <div class="container-xadrez rodape-conteudo">
+      <div class="rodape-marca">
+        <img src="./assets/imgs/logo-horse.png" alt="Logotipo Xeque-Mate">
+        <p>© 2026 Xeque-Mate. Todos os direitos reservados.</p>
+      </div>
+      <nav class="rodape-links" aria-label="Links do rodapé">
+        <a href="#">Termos de Uso</a>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Contato</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+
+</html>

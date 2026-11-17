@@ -48,6 +48,7 @@ function validar() {
   }
 }
 
+
 // funcao de selecionar foto
 function selecionarAvatar(elementoHtml) {
   const avatares = document.querySelectorAll('.avatar-item');
@@ -91,6 +92,7 @@ function voltar() {
 
 // funcão responsavel por atualizar o bloco cadastro, cada vez que avança ou volte
 function atualizar() {
+
   // controla o que aparece na tela cadastro [INPUTS]
   for (let i = 1; i <= totalEtapas; i++) {
     const conteudoEtapa = document.getElementById(`conteudo-etapa-${i}`);
@@ -142,7 +144,6 @@ function atualizar() {
   }
 
 }
-
 
 // executa para mostrar a etapa 1 quando é inicializado o html
 atualizar();

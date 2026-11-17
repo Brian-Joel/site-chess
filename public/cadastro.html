@@ -1,31 +1,32 @@
-<!DOCTYPE html>
-<html lang="pt-br">
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+ 
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+ 
   <title>Xeque-Mate | Cadastro</title>
   <link rel="shortcut icon" href="assets/icon/iconKnight.ico" type="image/x-icon">
-
+ 
   <script src="./js/sessao.js"></script>
-
-
-  <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&display=swap"
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&display=swap"
     rel="stylesheet">
-
+ 
   <link rel="stylesheet" href="css/base/variaveis.css">
   <link rel="stylesheet" href="css/base/reset.css">
   <link rel="stylesheet" href="css/base/navbar.css" />
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/base/footer.css">
 </head>
-
+ 
 <body onload="listar()">
-  <!--header inicio-->
+ 
+  <!-- HEADER -->
   <header>
     <nav class="navegador">
       <div class="topbar">
@@ -36,7 +37,7 @@
         <span class="alinhar-texto-navbar">
           <a class="links" href="index.html">Home</a>
           <a class="links" href="#">O que é xadrez?</a>
-          <a class="links" href="#">Sobre mim</a>
+          <a class="links" href="#">Atualizações</a>
         </span>
         <span class="alinhar-btn-navbar">
           <button class="btn-topbar" onclick="window.location.href='login.html'">Entrar</button>
@@ -44,29 +45,36 @@
       </div>
     </nav>
   </header>
-  <!--header fim-->
+ 
   <main>
     <section class="sessao">
+      <!-- IMAGEM LATERAL: o texto fica DENTRO da imagem, ancorado no rodapé dela -->
       <div class="alinhar-imagem">
-        <span class="imagem-login">
-          <p>texto bom</p>
-        </span>
+        <div class="imagem-login" role="img">
+          <div class="imagem-texto">
+            <h2 class="imagem-titulo">Comece sua jornada.</h2>
+            <p class="imagem-subtitulo">Crie sua conta em segundos. Insira o nome de usuário e seu melhor e-mail!</p>
+          </div>
+        </div>
       </div>
-
+ 
+      <!-- FORMULÁRIO -->
       <div class="login">
         <div class="alerta_erro">
           <div class="card_erro" id="cardErro">
             <span id="mensagem_erro"></span>
           </div>
         </div>
+ 
         <div class="container">
           <div class="card card-cadastro">
-            <span class="linha">
+            <div class="linha">
               <h2>Cadastre-se</h2>
-            </span>
+            </div>
+ 
             <div class="formulario">
-
-              <!-- ETAPAS  -->
+ 
+              <!-- ETAPAS -->
               <div class="container-etapas">
                 <div class="etapa">
                   <span id="etapa-1" class="circulo"><img src="./assets/imgs/peao.png" alt="Peão"></span>
@@ -83,27 +91,27 @@
                   <span id="texto-3" class="texto-etapa">Final</span>
                 </div>
               </div>
-
-              <!-- TELA 1 - CADASTRO USUARIO E LOGIN -->
+ 
+              <!-- TELA 1 - NOME DE USUÁRIO E E-MAIL -->
               <div id="conteudo-etapa-1" class="etapa-formulario ativo">
                 <div class="campo">
-                  <span>Insira seu nome de Usúario:</span>
+                  <label for="nome_input">Insira seu nome de usuário:</label>
                   <input id="nome_input" type="text" placeholder="Seu nome" />
                 </div>
                 <div class="campo">
-                  <span>Insira seu melhor E-mail:</span>
-                  <input id="email_input" type="text" placeholder="usuario@provedor.com" />
+                  <label for="email_input">Insira seu melhor e-mail:</label>
+                  <input id="email_input" type="email" placeholder="usuario@provedor.com" />
                 </div>
               </div>
-
-              <!-- TELA 2 - CADASTRAR SENHA -->
+ 
+              <!-- TELA 2 - SENHA -->
               <div id="conteudo-etapa-2" class="etapa-formulario">
                 <div class="campo">
-                  <span>Insira sua Senha:</span>
+                  <label for="senha_input">Insira sua senha:</label>
                   <input id="senha_input" type="password" placeholder="********" oninput="validar()" />
                 </div>
                 <div class="campo">
-                  <span>Confirmação da Senha:</span>
+                  <label for="confirmacao_senha_input">Confirmação da senha:</label>
                   <input id="confirmacao_senha_input" type="password" placeholder="********" />
                 </div>
                 <div class="requisitos">
@@ -115,206 +123,214 @@
                   </ul>
                 </div>
               </div>
-
-              <!-- TELA 3 - ESCOLHA DAS FOTOS DE PERFIL -->
+ 
+              <!-- TELA 3 - FOTO DE PERFIL -->
               <div id="conteudo-etapa-3" class="etapa-formulario">
-
                 <p class="titulo-avatar">Escolha uma foto de perfil</p>
                 <div class="avatares">
-                  <!-- Foto dos avatares -->
-                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img
-                      src="./assets/perfil/cavalo_lowpoly.svg" alt="Cavalo"></div>
-                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img src="./assets/perfil/peao_pixelart.svg"
-                      alt="Peão"></div>
-                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img src="./assets/perfil/torre_neon.svg"
-                      alt="Torre"></div>
-                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img src="./assets/perfil/dama_kawaii.svg"
-                      alt="Rainha"></div>
-                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img src="./assets/perfil/rei_dourado.svg"
-                      alt="Rei"></div>
-                  <div class="avatar-item" onclick="selecionarAvatar(this)"><img src="./assets/perfil/bispo_nanquim.svg"
-                      alt="Bispo"></div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)">
+                    <img src="./assets/perfil/cavalo_lowpoly.svg" alt="Cavalo">
+                  </div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)">
+                    <img src="./assets/perfil/peao_pixelart.svg" alt="Peão">
+                  </div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)">
+                    <img src="./assets/perfil/torre_neon.svg" alt="Torre">
+                  </div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)">
+                    <img src="./assets/perfil/dama_kawaii.svg" alt="Rainha">
+                  </div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)">
+                    <img src="./assets/perfil/rei_dourado.svg" alt="Rei">
+                  </div>
+                  <div class="avatar-item" onclick="selecionarAvatar(this)">
+                    <img src="./assets/perfil/bispo_nanquim.svg" alt="Bispo">
+                  </div>
                 </div>
               </div>
-
-              <!-- botões para navegação -->
+ 
+              <!-- BOTÕES DE NAVEGAÇÃO -->
               <div class="botoes-container">
                 <button id="btnVoltar" class="botao btn-voltar" onclick="voltar()">Voltar</button>
                 <button id="botao" class="botao btn-cadastro" onclick="cadastrar()">Continuar</button>
               </div>
-
+ 
             </div>
+ 
             <div id="div_aguardar" class="loading-div">
-              <img src="./assets/circle-loading.gif" id="loading-gif" />
+              <img src="./assets/circle-loading.gif" id="loading-gif" alt="Carregando" />
             </div>
-
+ 
             <div id="div_erros_login"></div>
           </div>
         </div>
       </div>
+ 
     </section>
   </main>
-</body>
-
-</html>
-
-<script>
-
-  // Array para armazenar empresas cadastradas para validação de código de ativação 
-  let listaUsuario = [];
-
-  function cadastrar() {
-
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
-
-    var nomeVar = nome_input.value;
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
-    var confirmacaoSenhaVar = confirmacao_senha_input.value;
-
-    // VALIDAÇÃO POR ETAPAS
-    if (etapa == 1) {
-      if (nomeVar == "" || emailVar == "") {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(ERRO: Preencha o campo nome e email!)";
-        setTimeout(sumirMensagem, 5000);
-        finalizarAguardar();
-        return false;
-      }
-
-      // Verificação simples e direta
-      for (let i = 0; i < listaUsuario.length; i++) {
-        if (listaUsuario[i].nome == nomeVar) {
+ 
+  <!-- SCRIPTS (agora dentro do body, antes de fechar) -->
+  <script>
+ 
+    // Array para armazenar empresas cadastradas para validação de código de ativação 
+    let listaUsuario = [];
+ 
+    function cadastrar() {
+ 
+      //Recupere o valor da nova input pelo nome do id
+      // Agora vá para o método fetch logo abaixo
+ 
+      var nomeVar = nome_input.value;
+      var emailVar = email_input.value;
+      var senhaVar = senha_input.value;
+      var confirmacaoSenhaVar = confirmacao_senha_input.value;
+ 
+      // VALIDAÇÃO POR ETAPAS
+      if (etapa == 1) {
+        if (nomeVar == "" || emailVar == "") {
           cardErro.style.display = "block";
-          mensagem_erro.innerHTML = "(Este nome de usuário já existe!)";
+          mensagem_erro.innerHTML = "(ERRO: Preencha o campo nome e email!)";
           setTimeout(sumirMensagem, 5000);
           finalizarAguardar();
           return false;
         }
-        else if (listaUsuario[i].email == emailVar) {
-          cardErro.style.display = "block";
-          mensagem_erro.innerHTML = "(Este e-mail já existe!)";
-          setTimeout(sumirMensagem, 5000);
-          finalizarAguardar();
-          return false;
+ 
+        // Verificação simples e direta
+        for (let i = 0; i < listaUsuario.length; i++) {
+          if (listaUsuario[i].nome == nomeVar) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "(Este nome de usuário já existe!)";
+            setTimeout(sumirMensagem, 5000);
+            finalizarAguardar();
+            return false;
+          }
+          else if (listaUsuario[i].email == emailVar) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "(Este e-mail já existe!)";
+            setTimeout(sumirMensagem, 5000);
+            finalizarAguardar();
+            return false;
+          }
         }
-      }
-
-      avancar();
-      return false;
-    }
-
-    if (etapa == 2) {
-      if (senhaVar == "" || confirmacaoSenhaVar == "") {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(ERRO: Preencha os campos de senha!)";
-        setTimeout(sumirMensagem, 5000);
-        finalizarAguardar();
-        return false;
-      }
-      else if (senhaVar != confirmacaoSenhaVar) {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(ERRO: As senhas são diferentes!)";
-        setTimeout(sumirMensagem, 5000);
-        finalizarAguardar();
-        return false;
-      }
-      else if (statusValidacao) {
+ 
         avancar();
         return false;
       }
-      else {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(ERRO: Verique se todos os requisitos foram cumpridos!)";
-        setTimeout(sumirMensagem, 5000);
-        finalizarAguardar();
-        return false;
+ 
+      if (etapa == 2) {
+        if (senhaVar == "" || confirmacaoSenhaVar == "") {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML = "(ERRO: Preencha os campos de senha!)";
+          setTimeout(sumirMensagem, 5000);
+          finalizarAguardar();
+          return false;
+        }
+        else if (senhaVar != confirmacaoSenhaVar) {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML = "(ERRO: As senhas são diferentes!)";
+          setTimeout(sumirMensagem, 5000);
+          finalizarAguardar();
+          return false;
+        }
+        else if (statusValidacao) {
+          avancar();
+          return false;
+        }
+        else {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML = "(ERRO: Verique se todos os requisitos foram cumpridos!)";
+          setTimeout(sumirMensagem, 5000);
+          finalizarAguardar();
+          return false;
+        }
       }
-    }
-
-    if (etapa == 3) {
-
-      if (fotoVar == "") {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(ERRO: Escolha uma foto de perfil!)";
-        setTimeout(sumirMensagem, 5000);
-        return false;
-      }
-      else {
-        aguardar();
-        // Enviando o valor da nova input
-        fetch("/usuarios/cadastrar", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
-            nomeServer: nomeVar,
-            emailServer: emailVar,
-            senhaServer: senhaVar,
-            fotoServer: fotoVar
-            // idUsuarioVincular: idUsuario
-          }),
-        })
-          .then(function (resposta) {
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-              cardErro.style.display = "block";
-
-              mensagem_erro.innerHTML =
-                "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-              setTimeout(() => {
-                window.location = "login.html";
-              }, "2000");
-
-              limparFormulario();
-              finalizarAguardar();
-            } else {
-              throw "Houve um erro ao tentar realizar o cadastro!";
-            }
+ 
+      if (etapa == 3) {
+ 
+        if (fotoVar == "") {
+          cardErro.style.display = "block";
+          mensagem_erro.innerHTML = "(ERRO: Escolha uma foto de perfil!)";
+          setTimeout(sumirMensagem, 5000);
+          return false;
+        }
+        else {
+          aguardar();
+          // Enviando o valor da nova input
+          fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              // crie um atributo que recebe o valor recuperado aqui
+              // Agora vá para o arquivo routes/usuario.js
+              nomeServer: nomeVar,
+              emailServer: emailVar,
+              senhaServer: senhaVar,
+              fotoServer: fotoVar
+              // idUsuarioVincular: idUsuario
+            }),
           })
-          .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
-          });
-
-        return false;
+            .then(function (resposta) {
+              console.log("resposta: ", resposta);
+ 
+              if (resposta.ok) {
+                cardErro.style.display = "block";
+ 
+                mensagem_erro.innerHTML =
+                  "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+ 
+                setTimeout(() => {
+                  window.location = "login.html";
+                }, "2000");
+ 
+                limparFormulario();
+                finalizarAguardar();
+              } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+              }
+            })
+            .catch(function (resposta) {
+              console.log(`#ERRO: ${resposta}`);
+              finalizarAguardar();
+            });
+ 
+          return false;
+        }
       }
     }
-  }
-
-  // funcao de sumir a mensagem 
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
-
-  // Listando usuários já cadastrados no banco
-  function listar() {
-    fetch("/usuarios/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((usuarios) => {
-          usuarios.forEach((usuario) => {
-            listaUsuario.push(usuario);
-
-            console.log("listaUsuariosCadastrados");
-            // Ajuste aqui a propriedade do usuário que faz sentido para o seu projeto de xadrez, se necessário:
-
-            console.log(usuario.id); // Exemplo usando 'id' ou outro campo que venha do seu banco
-          });
-        });
+ 
+    // funcao de sumir a mensagem 
+    function sumirMensagem() {
+      cardErro.style.display = "none";
+    }
+ 
+    // Listando usuários já cadastrados no banco
+    function listar() {
+      fetch("/usuarios/listar", {
+        method: "GET",
       })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
-
-</script>
-
-<script src="./js/cadastro.js"></script>
+        .then(function (resposta) {
+          resposta.json().then((usuarios) => {
+            usuarios.forEach((usuario) => {
+              listaUsuario.push(usuario);
+ 
+              console.log("listaUsuariosCadastrados");
+              // Ajuste aqui a propriedade do usuário que faz sentido para o seu projeto de xadrez, se necessário:
+ 
+              console.log(usuario.id); // Exemplo usando 'id' ou outro campo que venha do seu banco
+            });
+          });
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+    }
+ 
+  </script>
+ 
+  <script src="./js/cadastro.js"></script>
+</body>
+ 
+</html>
+ 

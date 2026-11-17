@@ -24,18 +24,41 @@ main {
 
 .alinhar-imagem {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   flex: 1;
 }
 
 .imagem-login {
-  background-image: url('../assets/imgs/xadrez-pecas.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: url('../assets/imgs/xadrez-pecas.jpg') center / cover no-repeat;
 }
+
+/* o degradê escuro fica atrás das letras: o padding-top grande
+   cria a área onde o sombreado vai "sumindo" para cima */
+.imagem-texto {
+  padding: 120px 40px 32px;
+  color: var(--cor-texto-t1);
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.65) 45%,
+      rgba(0, 0, 0, 0) 100%);
+}
+
+.imagem-titulo {
+  margin: 0 20px 8px;
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.imagem-subtitulo {
+  margin-left: 20px;
+  max-width: 480px;
+  line-height: 1.4;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
 
 /* LOGIN / CADASTRO*/
 .login {
