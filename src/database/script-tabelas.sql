@@ -22,18 +22,9 @@ CREATE TABLE usuario (
 );
 
 -- em desenvolvimento
-CREATE TABLE comentario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-    curtida INT,
-    resposta INT,
-	fkUsuario INT,
-    fkComentarioPai INT,
-	FOREIGN KEY (fkUsuario) REFERENCES usuario(id),
-	FOREIGN KEY (fkComentarioPai) REFERENCES comentario(id)
-);
+CREATE TABLE puzzles (
+id INT PRIMARY KEY AUTO_INCREMENT,
+titulo,
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
--- tabela em desenvolvimento
+);
 
