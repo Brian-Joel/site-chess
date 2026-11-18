@@ -1,0 +1,38 @@
+.perfil {
+    padding: 40px 30px;
+    color: var(--cor-texto-t1);
+}
+
+.perfil h2 {
+    margin-bottom: 24px;
+    font-family: var(--fonte-titulo);
+}
+
+.perfil-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    max-width: 640px;
+    padding: 24px;
+    background-color: var(--cor-fundo-card);
+    border: 2px solid var(--cor-borda-card);
+    border-radius: 20px;
+}
+
+.perfil-card img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: contain;
+    background-color: var(--cor-principal);
+}
+
+.perfil-card h3 {
+    font-family: var(--fonte-titulo);
+    font-size: 1.4rem;
+}
+
+.perfil-card p {
+    margin-top: 4px;
+    color: var(--cor-texto-suave);
+}

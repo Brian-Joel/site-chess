@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xeque-Mate | Perfil</title>
+    <link rel="shortcut icon" href="../assets/icon/iconKnight.ico" type="image/x-icon">
+
+    <script src="../js/sessao.js"></script>
+    <script src="../js/perfil.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/base/variaveis.css">
+    <link rel="stylesheet" href="../css/base/navbar-lateral.css">
+    <link rel="stylesheet" href="../css/perfil.css">
+</head>
+
+<body onload="validarSessao(); carregarPerfil()">
+
+    <!-- Navbar -->
+    <header class="navegador">
+        <nav class="lateral-bar">
+            <span class="alinhar-topbar">
+                <img class="logo" src="../assets/imgs/logo-horse.png" alt="Logotipo Xeque-Mate">
+                <p class="logo-titulo">Xeque-Mate</p>
+            </span>
+
+            <div class="hello">
+                <img src="../assets/perfil/peao_pixelart.svg" alt="Foto de perfil">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+
+            <a href="../index.html"><span class="links">Home</span></a>
+            <a href="./dashboard.html"><span class="links">Dashboard</span></a>
+            <a href="./puzzle.html"><span class="links">Puzzles</span></a>
+            <a href="./perfil.html" aria-current="page"><span class="links">Perfil</span></a>
+            <a href="../sobre.html"><span class="links">Sobre</span></a>
+
+            <span class="alinhar-btn-navbar">
+                <button class="btn-topbar" onclick="limparSessao()">Sair</button>
+            </span>
+        </nav>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main>
+        <section class="perfil">
+            <h2>Meu perfil</h2>
+
+            <div class="perfil-card">
+                <img src="../assets/perfil/peao_pixelart.svg" alt="Foto de perfil">
+                <div>
+                    <h3 id="perfilNome">—</h3>
+                    <p id="perfilEmail">—</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

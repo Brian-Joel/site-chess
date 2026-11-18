@@ -1,8 +1,13 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
+    font-family: var(--fonte-texto);
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-t1);
     margin: 0;
+    padding: 0;
+}
+
+/* O espaçamento fica dentro do main para não abrir uma faixa ao lado da sidebar. */
+main {
     padding: 16px;
 }
 

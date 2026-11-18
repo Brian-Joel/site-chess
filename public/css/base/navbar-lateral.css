@@ -15,6 +15,16 @@ body {
 
 body {
     overflow-y: auto;
+    font-family: var(--fonte-texto);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--fonte-titulo);
 }
 
 /* CONTEÚDO PRINCIPAL */
@@ -51,6 +61,7 @@ main {
 
 .logo-titulo {
     color: var(--cor-texto-t1);
+    font-family: var(--fonte-titulo);
     font-weight: bold;
     font-size: 1.25rem;
 }
@@ -80,22 +91,32 @@ a {
 .hello h3 {
     margin-top: 10px;
     color: var(--cor-texto-t1);
+    font-family: var(--fonte-titulo);
 }
 
 .links {
+    width: 100%;
+    font-family: var(--fonte-titulo);
     font-size: 16px;
     display: flex;
     flex-direction: column;
     padding: 20px;
+    border: 1px solid transparent;
     font-weight: 700;
-    transition: color 0.5s ease;
+    transition: color 0.5s ease, border-color 0.5s ease;
     text-align: left;
 }
 
 .links:hover {
-    border: 1px solid var(--cor-texto-animacao);
+    border-color: var(--cor-texto-animacao);
     color: var(--cor-texto-animacao);
-    padding: 19px;
+}
+
+/* Mantém o item da página atual destacado sem deslocar os demais. */
+a[aria-current="page"] .links,
+.links.ativo {
+    border-color: var(--cor-texto-animacao);
+    color: var(--cor-texto-animacao);
 }
 
 .alinhar-btn-navbar {
@@ -111,6 +132,7 @@ a {
     padding: 0.75rem 1rem;
     border-radius: 20px;
     color: var(--cor-btn-topbar-hover);
+    font-family: var(--fonte-titulo);
     font-weight: 600;
     cursor: pointer;
 }

@@ -22,6 +22,19 @@
   margin: 10px 30px 30px;
 }
 
+.titulo-dashboard h2,
+.titulo-grafico h2 {
+  font-family: var(--fonte-titulo);
+}
+
+/* AVISO ENQUANTO OS DADOS DO BANCO NÃO CHEGAM */
+.aviso-dados {
+  margin: 20px 30px 0;
+  color: var(--cor-texto-suave);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 /* INDICADORES (KPIs) */
 
 .conjunto-kpi {
@@ -46,6 +59,7 @@
 }
 
 .card-kpi h4 {
+  font-family: var(--fonte-titulo);
   font-size: 20px;
   text-align: left;
 }
@@ -53,6 +67,7 @@
 .card-kpi p {
   margin-top: auto;
   bottom: 0;
+  font-family: var(--fonte-titulo);
   font-size: 40px;
   color: var(--texto-kpi);
   font-weight: 700;
@@ -80,6 +95,7 @@
 
 .grafico-1,
 .grafico-2 {
+  position: relative;
   flex: 1;
   min-width: 0;
   height: 400px;
@@ -87,6 +103,17 @@
   background-color: var(--cor-fundo-card);
   border: solid 2px var(--cor-borda-card);
   border-radius: 20px;
+}
+
+.grafico-vazio {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cor-texto-suave);
+  font-size: 0.95rem;
+  text-align: center;
 }
 
 canvas {

@@ -6,12 +6,22 @@
     --cor-principal: black;
     --cor-texto-animacao: greenyellow;
 
-
     --cor-texto-t1: white;
-    --texto-kpi: #00b822;
+
+    --cor-verde: #00b822;
+    --cor-verde-hover: #009a1c;
+    --cor-verde-escuro: #0a5a12;
+    --cor-verde-medio: #0b7a1a;
+    --cor-cinza-escuro: #262626;
+    --cor-cinza-medio: #444444;
+    --cor-texto-suave: #bdbdbd;
+    --texto-kpi: var(--cor-verde);
 
     --cor-borda-card: #505050;
     --cor-fundo-card: #1A1A1A;
 
     --cor-input: #000000;
+
+    --fonte-titulo: "Montserrat", sans-serif;
+    --fonte-texto: "Inter", sans-serif;
 }
