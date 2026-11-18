@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>O caminho do rei</title>
+    <link rel="stylesheet" href="../css/base/variaveis.css">
+    <link rel="stylesheet" href="../css/base/navbar-lateral.css">
+    <link rel="stylesheet" href="./puzzle.css">
+    <script src="./puzzle.js" defer></script>
+</head>
+<!-- Navbar -->
+    <header class="navegador">
+        <nav class="lateral-bar">
+            <span class="alinhar-topbar">
+                <img class="logo" src="../assets/imgs/logo-horse.png" alt="Logotipo Xeque-Mate">
+                <p class="logo-titulo">Xeque-Mate</p>
+            </span>
+
+            <div class="hello">
+                <img src="../assets/perfil/peao_pixelart.svg" alt="Foto de perfil">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+
+            <a href="#"><span class="links">Perfil</span></a>
+            <a href="#"><span class="links">Dashboard</span></a>
+            <a href="./puzzle.html"><span class="links">Puzzles</span></a>
+
+            <span class="alinhar-btn-navbar">
+                <button class="btn-topbar" onclick="limparSessao()">Sair</button>
+            </span>
+        </nav>
+    </header>
+<body>
+    <div id="progresso"></div>
+
+    <div id="principal">
+        <div id="moldura">
+            <div class="numeros">
+                <div>8</div>
+                <div>7</div>
+                <div>6</div>
+                <div>5</div>
+                <div>4</div>
+                <div>3</div>
+                <div>2</div>
+                <div>1</div>
+            </div>
+            <div id="tabuleiro"></div>
+            <div></div>
+            <div class="letras">
+                <div>A</div>
+                <div>B</div>
+                <div>C</div>
+                <div>D</div>
+                <div>E</div>
+                <div>F</div>
+                <div>G</div>
+                <div>H</div>
+            </div>
+        </div>
+
+        <div id="cartao">
+            <h2 id="titulo"></h2>
+            <p id="objetivo"></p>
+            <div id="lance" class="caixa"></div>
+            <div id="mensagem"></div>
+            <div id="botoes">
+                <button id="btnDica">Dica</button>
+                <button id="btnProximo" disabled>Próximo puzzle</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
