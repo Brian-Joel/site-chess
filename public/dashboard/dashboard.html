@@ -50,11 +50,11 @@
             </span>
 
             <div class="hello">
-                <img src="../assets/perfil/peao_pixelart.svg" alt="Foto de perfil">
+                <img id="b_foto" alt="Foto de perfil">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-            <a href="#"><span class="links">Perfil</span></a>
+            <a href="./perfil.html"><span class="links">Perfil</span></a>
             <a href="#"><span class="links">Dashboard</span></a>
             <a href="./puzzle.html"><span class="links">Puzzles</span></a>
 
@@ -128,522 +128,15 @@
 </html>
 
 <script>
-    // =====================================================
-    // 1) DADOS FIXOS DO JOGO
-    // =====================================================
+    const foto = sessionStorage.FOTO_USUARIO;
 
-    // IDs correspondentes às tabelas do banco xequeMate_mvp.
+    b_foto.src = foto
+        ? "../assets/perfil/" + foto
+        : "../assets/perfil/peao_pixelart.svg";
 
-    const licoes = [
-        { id: 1, nome: "Peão" },
-        { id: 2, nome: "Torre" },
-        { id: 3, nome: "Bispo" },
-        { id: 4, nome: "Cavalo" },
-        { id: 5, nome: "Dama" },
-        { id: 6, nome: "Rei" }
-    ];
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-    // Distribuição conforme os INSERTS da tabela puzzles.
-    const puzzlesDoJogo = [
-        { id: 1, licao: 1 },
-        { id: 2, licao: 2 },
-        { id: 3, licao: 3 },
-        { id: 4, licao: 4 },
-        { id: 5, licao: 1 },
-        { id: 6, licao: 2 },
-        { id: 7, licao: 2 },
-        { id: 8, licao: 5 },
-        { id: 9, licao: 4 },
-        { id: 10, licao: 5 }
-    ];
-
-
-    // =====================================================
-    // 2) BUSCAR RESULTADOS NA API
-    // =====================================================
-
-    async function buscarResultados() {
-
-        try {
-
-            const idUsuario = sessionStorage.ID_USUARIO;
-
-            if (!idUsuario) {
-                throw new Error("Usuário não identificado na sessão.");
-            }
-
-            const resposta = await fetch(
-                `/resultados/dashboard/${idUsuario}`,
-                { cache: "no-store" }
-            );
-
-            if (!resposta.ok) {
-                throw new Error("Não foi possível buscar os resultados.");
-            }
-
-            const dados = await resposta.json();
-
-            return dados;
-
-        } catch (erro) {
-
-            console.error("Erro ao buscar resultados:", erro);
-
-            document.getElementById("avisoDados").textContent =
-                "Não foi possível carregar suas estatísticas.";
-
-            return null;
-        }
-    }
-
-
-    // =====================================================
-    // 3) CALCULAR INDICADORES
-    // =====================================================
-
-    function calcularIndicadores(resultados) {
-
-        const info = {
-            feitos: 0,
-            erros: 0,
-            somaEstrelas: 0,
-            mediaGeral: 0,
-            porLicao: []
-        };
-
-        // Inicializa os dados de cada lição.
-        for (let i = 0; i < licoes.length; i++) {
-
-            info.porLicao.push({
-                id: licoes[i].id,
-                nome: licoes[i].nome,
-                total: 0,
-                feitos: 0,
-                somaEstrelas: 0
-            });
-
-        }
-
-        // Conta quantos puzzles existem em cada lição.
-        for (let i = 0; i < puzzlesDoJogo.length; i++) {
-
-            const puzzle = puzzlesDoJogo[i];
-            const linha = info.porLicao[puzzle.licao - 1];
-
-            linha.total++;
-
-        }
-
-        // Percorre os resultados recebidos do banco.
-        for (let i = 0; i < resultados.length; i++) {
-
-            const resultado = resultados[i];
-
-            const puzzle = puzzlesDoJogo.find(
-                item => item.id === Number(resultado.puzzle_id)
-            );
-
-            // Ignora resultados que não correspondem aos puzzles cadastrados.
-            if (!puzzle) {
-                continue;
-            }
-
-            const linha = info.porLicao[puzzle.licao - 1];
-
-            info.feitos++;
-            info.erros += Number(resultado.total_erros);
-
-            linha.feitos++;
-
-            linha.somaEstrelas += Number(resultado.melhores_estrelas);
-
-            info.somaEstrelas += Number(resultado.melhores_estrelas);
-
-        }
-
-        // Média geral de estrelas.
-        if (info.feitos > 0) {
-            info.mediaGeral = info.somaEstrelas / info.feitos;
-        }
-
-        return info;
-    }
-
-
-    // =====================================================
-    // 4) MÉDIA DE ESTRELAS POR LIÇÃO
-    // =====================================================
-
-    function mediaEstrelas(linha) {
-
-        if (linha.feitos === 0) {
-            return null;
-        }
-
-        return Math.round(
-            (linha.somaEstrelas / linha.feitos) * 10
-        ) / 10;
-
-    }
-
-
-    // =====================================================
-    // 5) IDENTIFICAR MELHOR PEÇA
-    // =====================================================
-
-    function acharMelhorPeca(info) {
-
-        let melhor = "—";
-        let maiorMedia = -1;
-
-        for (let i = 0; i < info.porLicao.length; i++) {
-
-            const linha = info.porLicao[i];
-
-            if (linha.feitos === 0) {
-                continue;
-            }
-
-            const media = mediaEstrelas(linha);
-
-            if (media > maiorMedia) {
-
-                maiorMedia = media;
-                melhor = linha.nome;
-
-            }
-
-        }
-
-        return melhor;
-
-    }
-
-
-    // =====================================================
-    // 6) PREENCHER KPIs
-    // =====================================================
-
-    function preencherKpis(info) {
-
-        document.getElementById("kpiMelhorPeca").textContent =
-            acharMelhorPeca(info).toUpperCase();
-
-        document.getElementById("kpiFeitos").textContent =
-            info.feitos + "/" + puzzlesDoJogo.length;
-
-        document.getElementById("kpiErros").textContent =
-            info.erros;
-
-        document.getElementById("kpiMediaEstrelas").textContent =
-            info.feitos > 0
-                ? info.mediaGeral.toFixed(1) + "/3"
-                : "—";
-
-    }
-
-
-    // =====================================================
-    // 7) EXECUÇÃO
-    // =====================================================
-
-    let indicadores;
-
-    async function iniciarDashboard() {
-
-        const resultados = await buscarResultados();
-
-        if (resultados === null) {
-            return;
-        }
-
-        indicadores = calcularIndicadores(resultados);
-
-        preencherKpis(indicadores);
-
-        // Sem resultados, apresenta mensagens nos gráficos.
-        if (indicadores.feitos === 0) {
-
-            document.getElementById("vazio1").textContent =
-                "Resolva puzzles para visualizar suas estrelas.";
-
-            document.getElementById("vazio2").textContent =
-                "Resolva puzzles para visualizar seu progresso.";
-
-        }
-
-        // Permite que os scripts dos gráficos sejam executados
-        // somente depois que os dados estiverem disponíveis.
-        renderizarGraficos();
-
-    }
-    iniciarDashboard();
-
-    const resultados = await buscarResultados();
-    if (resultados === null) {
-        return;
-    }
-
-    indicadores = calcularIndicadores(resultados);
-
-    preencherKpis(indicadores);
-
-    // Sem resultados, apresenta mensagens nos gráficos.
-    if (indicadores.feitos === 0) {
-
-        document.getElementById("vazio1").textContent =
-            "Resolva puzzles para visualizar suas estrelas.";
-
-        document.getElementById("vazio2").textContent =
-            "Resolva puzzles para visualizar seu progresso.";
-
-
-        // Permite que os scripts dos gráficos sejam executados
-        // somente depois que os dados estiverem disponíveis.
-        renderizarGraficos();
-    }
-
-    iniciarDashboard();
-</script>
-<script>
-
-
-    // =====================================================
-    // GRÁFICO 2: PROGRESSO POR LIÇÃO
-    // =====================================================
-
-    let grafico_2;
-
-    function criarGraficoProgresso() {
-
-        const labels = [];
-        const valores = [];
-        const textosDireita = [];
-
-        for (let i = 0; i < indicadores.porLicao.length; i++) {
-
-            const linha = indicadores.porLicao[i];
-
-            labels.push(linha.nome);
-
-            // Se não houver puzzles na lição, não calcula divisão.
-            if (linha.total === 0) {
-
-                valores.push(null);
-                textosDireita.push("—");
-
-            } else {
-
-                valores.push(
-                    Math.round(linha.feitos / linha.total * 100)
-                );
-
-                textosDireita.push(
-                    linha.feitos + "/" + linha.total
-                );
-
-            }
-
-        }
-
-        const data = {
-            labels: labels,
-
-            datasets: [
-                {
-                    label: "Concluído",
-                    backgroundColor: "#00b822",
-                    data: valores,
-                    barThickness: 6,
-                    borderRadius: 4
-                },
-                {
-                    label: "Fundo Cinza",
-                    backgroundColor: "#444444",
-                    data: valores.map(v => v === null ? null : 100 - v),
-                    barThickness: 6,
-                    borderRadius: 4
-                }
-            ]
-        };
-
-        const config = {
-            type: "bar",
-            data,
-
-            options: {
-                indexAxis: "y",
-                responsive: true,
-                maintainAspectRatio: false,
-
-                layout: {
-                    padding: {
-                        right: 45
-                    }
-                },
-
-                plugins: {
-                    legend: false,
-                    tooltip: false
-                },
-
-                scales: {
-                    x: {
-                        stacked: true,
-                        display: false,
-                        max: 100
-                    },
-
-                    y: {
-                        stacked: true,
-                        display: false
-                    }
-                }
-            },
-
-            plugins: [
-                {
-                    id: "textosCustomizados",
-
-                    afterDatasetsDraw(chart) {
-
-                        const { ctx, chartArea } = chart;
-
-                        ctx.save();
-                        ctx.fillStyle = "#ffffff";
-                        ctx.textBaseline = "middle";
-
-                        valores.forEach((val, i) => {
-
-                            const barra = chart.getDatasetMeta(0).data[i];
-
-                            const yPos = barra.y;
-
-                            ctx.font = "600 13px sans-serif";
-                            ctx.textAlign = "left";
-
-                            ctx.fillText(
-                                labels[i],
-                                chartArea.left,
-                                yPos - 16
-                            );
-
-                            ctx.font = "500 12px sans-serif";
-
-                            ctx.fillText(
-                                textosDireita[i],
-                                chartArea.right + 7,
-                                yPos
-                            );
-
-                        });
-
-                        ctx.restore();
-
-                    }
-                }
-            ]
-        };
-
-        grafico_2 = new Chart(
-            document.getElementById("grafico_2"),
-            config
-        );
-
-    }
-
-
-    // =====================================================
-    // GRÁFICO 1: ESTRELAS POR PEÇA
-    // =====================================================
-
-    let grafico_1;
-
-    function criarGraficoEstrelas() {
-
-        const etiquetas = [];
-        const mediasEstrelas = [];
-
-        for (let i = 0; i < indicadores.porLicao.length; i++) {
-
-            const linha = indicadores.porLicao[i];
-
-            etiquetas.push(linha.nome);
-
-            mediasEstrelas.push(
-                mediaEstrelas(linha)
-            );
-
-        }
-
-        const dado = {
-            labels: etiquetas,
-
-            datasets: [
-                {
-                    label: "Média de estrelas",
-                    backgroundColor: "#00b822",
-                    data: mediasEstrelas
-                }
-            ]
-        };
-
-        const config = {
-            type: "bar",
-            data: dado,
-
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-
-                scales: {
-                    y: {
-                        min: 0,
-                        max: 3,
-
-                        ticks: {
-                            stepSize: 1
-                        }
-                    }
-                }
-            }
-        };
-
-        grafico_1 = new Chart(
-            document.getElementById("grafico_1"),
-            config
-        );
-
-    }
-
-    // =====================================================
-    // RENDERIZAR OS DOIS GRÁFICOS
-    // =====================================================
-
-    function renderizarGraficos() {
-
-        criarGraficoProgresso();
-        criarGraficoEstrelas();
-
-    }
-</script>
-
-
-<script>
-    // pega o nome do usuario da sessão storage
-    // (o "if" evita escrever "undefined" quando ninguém fez login)
-    if (sessionStorage.NOME_USUARIO) {
-        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    }
-
-    // -----------------------------------------------------
-    // CÓDIGO ANTIGO DO PROJETO DOS AQUÁRIOS (temperatura em tempo real).
-    // Está desativado porque esta página não tem os elementos que ele usa
-    // (btnAquario, graficos) e a chamada abaixo dava erro no console.
-    // Pode ser apagado quando você quiser.
-    // -----------------------------------------------------
-    /*
-        let proximaAtualizacao;
+    let proximaAtualizacao;
 
     window.onload = exibirAquariosDoUsuario();
 
@@ -754,62 +247,59 @@
     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    function plotarGrafico(resposta, idAquario) {
 
+        console.log('iniciando plotagem do gráfico...');
 
-    // GRAFICO ANTIGO
-    // function plotarGrafico(resposta, idAquario) {
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
 
-    //     console.log('iniciando plotagem do gráfico...');
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Temperatura',
+                    data: [],
+                    fill: false,
+                    borderColor: 'rgb(199, 52, 52)',
+                    tension: 0.1
+                }]
+        };
 
-    //     // Criando estrutura para plotar gráfico - labels
-    //     let labels = [];
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
 
-    //     // Criando estrutura para plotar gráfico - dados
-    //     let dados = {
-    //         labels: labels,
-    //         datasets: [
-    //             {
-    //                 label: 'Temperatura',
-    //                 data: [],
-    //                 fill: false,
-    //                 borderColor: 'rgb(199, 52, 52)',
-    //                 tension: 0.1
-    //             }]
-    //     };
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.momento_grafico);
+            dados.datasets[0].data.push(registro.temperatura);
+        }
 
-    //     console.log('----------------------------------------------')
-    //     console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-    //     console.log(resposta)
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
 
-    //     // Inserindo valores recebidos em estrutura para plotar o gráfico
-    //     for (i = 0; i < resposta.length; i++) {
-    //         var registro = resposta[i];
-    //         labels.push(registro.momento_grafico);
-    //         dados.datasets[0].data.push(registro.temperatura);
-    //     }
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: dados,
+        };
 
-    //     console.log('----------------------------------------------')
-    //     console.log('O gráfico será plotado com os respectivos valores:')
-    //     console.log('Labels:')
-    //     console.log(labels)
-    //     console.log('Dados:')
-    //     console.log(dados.datasets)
-    //     console.log('----------------------------------------------')
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(`myChartCanvas${idAquario}`),
+            config
+        );
 
-    //     // Criando estrutura para plotar gráfico - config
-    //     const config = {
-    //         type: 'line',
-    //         data: dados,
-    //     };
-
-    //     // Adicionando gráfico criado em div na tela
-    //     let myChart = new Chart(
-    //         document.getElementById(`myChartCanvas${idAquario}`),
-    //         config
-    //     );
-
-    //     setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-    // }
+        setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+    }
 
 
     // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
@@ -868,6 +358,5 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
 
-    }
-    */
+    };
 </script>

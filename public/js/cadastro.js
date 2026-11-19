@@ -63,8 +63,7 @@ function selecionarAvatar(elementoHtml) {
   const descricao = elementoAtual.getAttribute('alt');
   const imagem = elementoAtual.getAttribute('src');
 
-  fotoVar = imagem;
-  console.log(`Foto selecionada: ${descricao}`)
+  fotoVar = imagem.split('/').pop(); 
 }
 
 

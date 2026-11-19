@@ -2,9 +2,11 @@
 function carregarPerfil() {
     const nome = sessionStorage.NOME_USUARIO;
     const email = sessionStorage.EMAIL_USUARIO;
+    const foto = sessionStorage.FOTO_USUARIO;
 
     const nomePerfil = document.getElementById("perfilNome");
     const emailPerfil = document.getElementById("perfilEmail");
+    const fotoPerfil = document.getElementById("perfilFoto");
 
     if (nomePerfil) {
         nomePerfil.textContent = nome || "Usuário";
@@ -12,5 +14,11 @@ function carregarPerfil() {
 
     if (emailPerfil) {
         emailPerfil.textContent = email || "E-mail não informado";
+    }
+
+    if (foto) {
+        fotoPerfil.src = foto
+            ? "../assets/perfil/" + foto
+            : "../assets/perfil/peao_pixelart.svg";
     }
 }
