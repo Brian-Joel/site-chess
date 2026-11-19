@@ -66,50 +66,55 @@
 
     <!-- Conteúdo principal -->
     <main>
-        <div class="dash">  
+        <div class="dash">
             <div class="dash-layout">
 
                 <div class="titulo-dashboard">
                     <h2>Estatísticas</h2>
-                    <p>Veja seu desempenho nos quizzes:</p>
+                    <p>Veja seu desempenho nos puzzles:</p>
                 </div>
+
+                <!-- Aviso: aparece só quando a página está mostrando dados de exemplo -->
+                <p class="aviso-dados" id="avisoDados"></p>
 
                 <div class="conjunto-kpi">
 
                     <div class="card-kpi">
-                        <h4>Sua peça favorita</h4>
-                        <p>CAVALO</p>
+                        <h4>Melhor peça</h4>
+                        <p id="kpiMelhorPeca">—</p>
                     </div>
 
                     <div class="card-kpi">
-                        <h4>Puzzles Feitos<h4>
-                        <p>1/5</p>
+                        <h4>Puzzles feitos</h4>
+                        <p id="kpiFeitos">0/10</p>
                     </div>
 
                     <div class="card-kpi">
-                        <h4>Tempo médio de resposta</h4>
-                        <p>15s</p>
+                        <h4>Total de erros</h4>
+                        <p id="kpiErros">0</p>
                     </div>
 
                     <div class="card-kpi">
-                        <h4>Pontos feitos</h4>
-                        <p>10</p>
+                        <h4>Média de estrelas</h4>
+                        <p id="kpiMediaEstrelas">—</p>
                     </div>
 
                 </div>
 
                 <div class="titulo-grafico">
-                    <h2>Pontos por estilo de jogo:</h2>
-                    <h2>Você comparado a outros jogadores:</h2>
+                    <h2>Estrelas por peça:</h2>
+                    <h2>Progresso por lição:</h2>
                 </div>
 
                 <div class="graficos-layout">
                     <div class="grafico-1">
                         <canvas id="grafico_1"></canvas>
+                        <div class="grafico-vazio" id="vazio1"></div>
                     </div>
 
                     <div class="grafico-2">
                         <canvas id="grafico_2"></canvas>
+                        <div class="grafico-vazio" id="vazio2"></div>
                     </div>
                 </div>
 
@@ -123,140 +128,522 @@
 </html>
 
 <script>
-    // 1. Dados que vão vir do seu Banco de Dados (ex: MySQL)
-    // Quando você conectar ao BD, basta alimentar essas duas variáveis com o resultado da sua query
-    const labels = ['TUX99', 'ROOT', 'CHESSMASTER', 'WINDOWS-XP'];
-    const valores = [99, 80, 70, 66];
+    // =====================================================
+    // 1) DADOS FIXOS DO JOGO
+    // =====================================================
 
-    // 2. Estrutura de dados (Barras empilhadas)
-    const data = {
-        labels: labels,
-        datasets: [
-            {
-                label: 'Pontos totais',
-                backgroundColor: '#00b822',
-                data: valores,
-                barThickness: 6,
-                borderRadius: 4
-            },
-            {
-                label: 'Fundo Cinza',
-                backgroundColor: '#444444',
-                data: valores.map(v => 100 - v),
-                barThickness: 6,
-                borderRadius: 4
-            }
-        ]
-    };
+    // IDs correspondentes às tabelas do banco xequeMate_mvp.
 
-    // 3. Configurações corrigidas
-    const config = {
-        type: 'bar',
-        data,
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            // AJUSTE CRUCIAL: Abre espaço na direita para os textos não cobrirem a barra
-            layout: {
-                padding: {
-                    right: 45
-                }
-            },
-            plugins: {
-                legend: false,
-                tooltip: false
-            },
-            scales: {
-                x: {
-                    stacked: true,
-                    display: false,
-                    max: 100
-                },
-                y: {
-                    stacked: true,
-                    display: false
-                }
-            }
-        },
-        plugins: [{
-            id: 'textosCustomizados',
-            afterDatasetsDraw(chart) {
-                const { ctx, chartArea } = chart;
-                ctx.save();
-                ctx.fillStyle = '#ffffff';
-                ctx.textBaseline = 'middle';
-
-                valores.forEach((val, i) => {
-                    const yPos = chart.getDatasetMeta(0).data[i].y;
-
-                    // Nome do usuário (Acima da barra verde)
-                    ctx.font = '600 13px sans-serif';
-                    ctx.textAlign = 'left';
-                    ctx.fillText(labels[i], chartArea.left, yPos - 16);
-
-                    // Porcentagem (No espaço extra na direita, fora da barra)
-                    ctx.font = '500 12px sans-serif';
-                    ctx.textAlign = 'left'; // Mudado para left para alinhar na coluna extra
-                    ctx.fillText(val + ' pts', chartArea.right + 7, yPos); // chartArea.right + 10 joga o texto para a direita da barra
-                });
-                ctx.restore();
-            }
-        }]
-    };
-
-    // 4. Renderiza o gráfico finalizado
-    const grafico_2 = new Chart(
-        document.getElementById('grafico_2'),
-        config
-    );
-</script>
-
-<script>
-
-    // vetor que add as metricas do eixo X
-    // grafico 1
-    const etiqueta = [
-        'Defensivo',
-        'Posicional',
-        'Analista',
-        'Agressivo'
+    const licoes = [
+        { id: 1, nome: "Peão" },
+        { id: 2, nome: "Torre" },
+        { id: 3, nome: "Bispo" },
+        { id: 4, nome: "Cavalo" },
+        { id: 5, nome: "Dama" },
+        { id: 6, nome: "Rei" }
     ];
 
-    // vetores, receber as metricas do eixo X e colocar titulo, além estilizar a cor do grafico e quais dados serão mostrados
-    // grafico 1
-    const dado = {
-        labels: etiqueta,
-        datasets: [{
-            label: 'Estilo de jogo',
-            backgroundColor: '#00b822',
-            data: [4, 2, 2, 2],
-        }]
+    // Distribuição conforme os INSERTS da tabela puzzles.
+    const puzzlesDoJogo = [
+        { id: 1, licao: 1 },
+        { id: 2, licao: 2 },
+        { id: 3, licao: 3 },
+        { id: 4, licao: 4 },
+        { id: 5, licao: 1 },
+        { id: 6, licao: 2 },
+        { id: 7, licao: 2 },
+        { id: 8, licao: 5 },
+        { id: 9, licao: 4 },
+        { id: 10, licao: 5 }
+    ];
 
-    };
 
-    // mudança do tipo e recebimento dos dados
-    // grafico 1
-    const config_bar = {
-        type: 'bar',
-        data: dado,
+    // =====================================================
+    // 2) BUSCAR RESULTADOS NA API
+    // =====================================================
 
-    };
+    async function buscarResultados() {
 
-    // mostrar grafico de temperatura em linha
-    // grafico 1
-    const grafico_1 = new Chart(
-        document.getElementById('grafico_1'),
-        config_bar
-    );
+        try {
+
+            const idUsuario = sessionStorage.ID_USUARIO;
+
+            if (!idUsuario) {
+                throw new Error("Usuário não identificado na sessão.");
+            }
+
+            const resposta = await fetch(
+                `/resultados/dashboard/${idUsuario}`,
+                { cache: "no-store" }
+            );
+
+            if (!resposta.ok) {
+                throw new Error("Não foi possível buscar os resultados.");
+            }
+
+            const dados = await resposta.json();
+
+            return dados;
+
+        } catch (erro) {
+
+            console.error("Erro ao buscar resultados:", erro);
+
+            document.getElementById("avisoDados").textContent =
+                "Não foi possível carregar suas estatísticas.";
+
+            return null;
+        }
+    }
+
+
+    // =====================================================
+    // 3) CALCULAR INDICADORES
+    // =====================================================
+
+    function calcularIndicadores(resultados) {
+
+        const info = {
+            feitos: 0,
+            erros: 0,
+            somaEstrelas: 0,
+            mediaGeral: 0,
+            porLicao: []
+        };
+
+        // Inicializa os dados de cada lição.
+        for (let i = 0; i < licoes.length; i++) {
+
+            info.porLicao.push({
+                id: licoes[i].id,
+                nome: licoes[i].nome,
+                total: 0,
+                feitos: 0,
+                somaEstrelas: 0
+            });
+
+        }
+
+        // Conta quantos puzzles existem em cada lição.
+        for (let i = 0; i < puzzlesDoJogo.length; i++) {
+
+            const puzzle = puzzlesDoJogo[i];
+            const linha = info.porLicao[puzzle.licao - 1];
+
+            linha.total++;
+
+        }
+
+        // Percorre os resultados recebidos do banco.
+        for (let i = 0; i < resultados.length; i++) {
+
+            const resultado = resultados[i];
+
+            const puzzle = puzzlesDoJogo.find(
+                item => item.id === Number(resultado.puzzle_id)
+            );
+
+            // Ignora resultados que não correspondem aos puzzles cadastrados.
+            if (!puzzle) {
+                continue;
+            }
+
+            const linha = info.porLicao[puzzle.licao - 1];
+
+            info.feitos++;
+            info.erros += Number(resultado.total_erros);
+
+            linha.feitos++;
+
+            linha.somaEstrelas += Number(resultado.melhores_estrelas);
+
+            info.somaEstrelas += Number(resultado.melhores_estrelas);
+
+        }
+
+        // Média geral de estrelas.
+        if (info.feitos > 0) {
+            info.mediaGeral = info.somaEstrelas / info.feitos;
+        }
+
+        return info;
+    }
+
+
+    // =====================================================
+    // 4) MÉDIA DE ESTRELAS POR LIÇÃO
+    // =====================================================
+
+    function mediaEstrelas(linha) {
+
+        if (linha.feitos === 0) {
+            return null;
+        }
+
+        return Math.round(
+            (linha.somaEstrelas / linha.feitos) * 10
+        ) / 10;
+
+    }
+
+
+    // =====================================================
+    // 5) IDENTIFICAR MELHOR PEÇA
+    // =====================================================
+
+    function acharMelhorPeca(info) {
+
+        let melhor = "—";
+        let maiorMedia = -1;
+
+        for (let i = 0; i < info.porLicao.length; i++) {
+
+            const linha = info.porLicao[i];
+
+            if (linha.feitos === 0) {
+                continue;
+            }
+
+            const media = mediaEstrelas(linha);
+
+            if (media > maiorMedia) {
+
+                maiorMedia = media;
+                melhor = linha.nome;
+
+            }
+
+        }
+
+        return melhor;
+
+    }
+
+
+    // =====================================================
+    // 6) PREENCHER KPIs
+    // =====================================================
+
+    function preencherKpis(info) {
+
+        document.getElementById("kpiMelhorPeca").textContent =
+            acharMelhorPeca(info).toUpperCase();
+
+        document.getElementById("kpiFeitos").textContent =
+            info.feitos + "/" + puzzlesDoJogo.length;
+
+        document.getElementById("kpiErros").textContent =
+            info.erros;
+
+        document.getElementById("kpiMediaEstrelas").textContent =
+            info.feitos > 0
+                ? info.mediaGeral.toFixed(1) + "/3"
+                : "—";
+
+    }
+
+
+    // =====================================================
+    // 7) EXECUÇÃO
+    // =====================================================
+
+    let indicadores;
+
+    async function iniciarDashboard() {
+
+        const resultados = await buscarResultados();
+
+        if (resultados === null) {
+            return;
+        }
+
+        indicadores = calcularIndicadores(resultados);
+
+        preencherKpis(indicadores);
+
+        // Sem resultados, apresenta mensagens nos gráficos.
+        if (indicadores.feitos === 0) {
+
+            document.getElementById("vazio1").textContent =
+                "Resolva puzzles para visualizar suas estrelas.";
+
+            document.getElementById("vazio2").textContent =
+                "Resolva puzzles para visualizar seu progresso.";
+
+        }
+
+        // Permite que os scripts dos gráficos sejam executados
+        // somente depois que os dados estiverem disponíveis.
+        renderizarGraficos();
+
+    }
+    iniciarDashboard();
+
+    const resultados = await buscarResultados();
+    if (resultados === null) {
+        return;
+    }
+
+    indicadores = calcularIndicadores(resultados);
+
+    preencherKpis(indicadores);
+
+    // Sem resultados, apresenta mensagens nos gráficos.
+    if (indicadores.feitos === 0) {
+
+        document.getElementById("vazio1").textContent =
+            "Resolva puzzles para visualizar suas estrelas.";
+
+        document.getElementById("vazio2").textContent =
+            "Resolva puzzles para visualizar seu progresso.";
+
+
+        // Permite que os scripts dos gráficos sejam executados
+        // somente depois que os dados estiverem disponíveis.
+        renderizarGraficos();
+    }
+
+    iniciarDashboard();
+</script>
+<script>
+
+
+    // =====================================================
+    // GRÁFICO 2: PROGRESSO POR LIÇÃO
+    // =====================================================
+
+    let grafico_2;
+
+    function criarGraficoProgresso() {
+
+        const labels = [];
+        const valores = [];
+        const textosDireita = [];
+
+        for (let i = 0; i < indicadores.porLicao.length; i++) {
+
+            const linha = indicadores.porLicao[i];
+
+            labels.push(linha.nome);
+
+            // Se não houver puzzles na lição, não calcula divisão.
+            if (linha.total === 0) {
+
+                valores.push(null);
+                textosDireita.push("—");
+
+            } else {
+
+                valores.push(
+                    Math.round(linha.feitos / linha.total * 100)
+                );
+
+                textosDireita.push(
+                    linha.feitos + "/" + linha.total
+                );
+
+            }
+
+        }
+
+        const data = {
+            labels: labels,
+
+            datasets: [
+                {
+                    label: "Concluído",
+                    backgroundColor: "#00b822",
+                    data: valores,
+                    barThickness: 6,
+                    borderRadius: 4
+                },
+                {
+                    label: "Fundo Cinza",
+                    backgroundColor: "#444444",
+                    data: valores.map(v => v === null ? null : 100 - v),
+                    barThickness: 6,
+                    borderRadius: 4
+                }
+            ]
+        };
+
+        const config = {
+            type: "bar",
+            data,
+
+            options: {
+                indexAxis: "y",
+                responsive: true,
+                maintainAspectRatio: false,
+
+                layout: {
+                    padding: {
+                        right: 45
+                    }
+                },
+
+                plugins: {
+                    legend: false,
+                    tooltip: false
+                },
+
+                scales: {
+                    x: {
+                        stacked: true,
+                        display: false,
+                        max: 100
+                    },
+
+                    y: {
+                        stacked: true,
+                        display: false
+                    }
+                }
+            },
+
+            plugins: [
+                {
+                    id: "textosCustomizados",
+
+                    afterDatasetsDraw(chart) {
+
+                        const { ctx, chartArea } = chart;
+
+                        ctx.save();
+                        ctx.fillStyle = "#ffffff";
+                        ctx.textBaseline = "middle";
+
+                        valores.forEach((val, i) => {
+
+                            const barra = chart.getDatasetMeta(0).data[i];
+
+                            const yPos = barra.y;
+
+                            ctx.font = "600 13px sans-serif";
+                            ctx.textAlign = "left";
+
+                            ctx.fillText(
+                                labels[i],
+                                chartArea.left,
+                                yPos - 16
+                            );
+
+                            ctx.font = "500 12px sans-serif";
+
+                            ctx.fillText(
+                                textosDireita[i],
+                                chartArea.right + 7,
+                                yPos
+                            );
+
+                        });
+
+                        ctx.restore();
+
+                    }
+                }
+            ]
+        };
+
+        grafico_2 = new Chart(
+            document.getElementById("grafico_2"),
+            config
+        );
+
+    }
+
+
+    // =====================================================
+    // GRÁFICO 1: ESTRELAS POR PEÇA
+    // =====================================================
+
+    let grafico_1;
+
+    function criarGraficoEstrelas() {
+
+        const etiquetas = [];
+        const mediasEstrelas = [];
+
+        for (let i = 0; i < indicadores.porLicao.length; i++) {
+
+            const linha = indicadores.porLicao[i];
+
+            etiquetas.push(linha.nome);
+
+            mediasEstrelas.push(
+                mediaEstrelas(linha)
+            );
+
+        }
+
+        const dado = {
+            labels: etiquetas,
+
+            datasets: [
+                {
+                    label: "Média de estrelas",
+                    backgroundColor: "#00b822",
+                    data: mediasEstrelas
+                }
+            ]
+        };
+
+        const config = {
+            type: "bar",
+            data: dado,
+
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 3,
+
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        };
+
+        grafico_1 = new Chart(
+            document.getElementById("grafico_1"),
+            config
+        );
+
+    }
+
+    // =====================================================
+    // RENDERIZAR OS DOIS GRÁFICOS
+    // =====================================================
+
+    function renderizarGraficos() {
+
+        criarGraficoProgresso();
+        criarGraficoEstrelas();
+
+    }
 </script>
 
 
 <script>
     // pega o nome do usuario da sessão storage
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    // (o "if" evita escrever "undefined" quando ninguém fez login)
+    if (sessionStorage.NOME_USUARIO) {
+        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    }
 
-    let proximaAtualizacao;
+    // -----------------------------------------------------
+    // CÓDIGO ANTIGO DO PROJETO DOS AQUÁRIOS (temperatura em tempo real).
+    // Está desativado porque esta página não tem os elementos que ele usa
+    // (btnAquario, graficos) e a chamada abaixo dava erro no console.
+    // Pode ser apagado quando você quiser.
+    // -----------------------------------------------------
+    /*
+        let proximaAtualizacao;
 
     window.onload = exibirAquariosDoUsuario();
 
@@ -482,4 +869,5 @@
             });
 
     }
+    */
 </script>
