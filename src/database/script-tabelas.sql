@@ -26,3 +26,14 @@ CREATE TABLE usuario (
     senha VARCHAR(255) NOT NULL,
     foto TEXT
 );
+
+CREATE TABLE quiz_personalidade (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fk_usuario INT NOT NULL,
+    qtd_perfil_a INT NOT NULL DEFAULT 0,
+    qtd_perfil_b INT NOT NULL DEFAULT 0,
+    qtd_perfil_c INT NOT NULL DEFAULT 0,
+    dt_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_quiz_usuario FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+        ON DELETE CASCADE
+);
