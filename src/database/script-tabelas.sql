@@ -70,3 +70,8 @@ FROM quiz_personalidade
 GROUP BY perfil_predominante
 ORDER BY total DESC;
 
+SELECT * FROM vw_historico;
+SELECT * FROM vw_panorama_comunidade;
+SELECT * FROM quiz_personalidade;
+SELECT id, nome FROM usuario;
+SELECT * FROM vw_historico;

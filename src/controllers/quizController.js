@@ -1,3 +1,5 @@
+var quizModel = require("../models/quizModel");
+
 function registrar(req, res) {
     var idUsuario = req.body.idUsuarioServer;
     var qtdA = req.body.qtdAServer;
