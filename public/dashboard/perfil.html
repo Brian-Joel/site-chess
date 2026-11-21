@@ -21,7 +21,9 @@
     <link rel="stylesheet" href="../css/perfil.css">
 </head>
 
-<body onload="validarSessao(); carregarPerfil()">
+<!-- <body onload="validarSessao(); carregarPerfil()"> -->
+
+<body>
 
     <!-- Navbar -->
     <header class="navegador">
@@ -49,17 +51,70 @@
     <!-- Conteúdo principal -->
     <main>
         <section class="perfil">
-            <h2>Meu perfil</h2>
-
             <div class="perfil-card">
-                <img id="perfilFoto" alt="Foto de perfil">
-                <div>
-                    <h3 id="perfilNome">—</h3>
-                    <p id="perfilEmail">—</p>
+                <!-- Cabeçalho do Card -->
+                <div class="perfil-header">
+                    <h2>Editar perfil</h2>
+                    <p>Atualize suas informações de conta.</p>
+                </div>
+
+                <!-- Corpo em 2 Colunas -->
+                <div class="perfil-corpo">
+                    <!-- Coluna Esquerda: Foto e Status -->
+                    <div class="perfil-esquerda">
+                        <div class="foto-wrapper">
+                            <img id="perfilFoto" src="../assets/perfil/peao_pixelart.svg" alt="Foto de perfil">
+                            <button type="button" class="btn-trocar-foto" title="Alterar foto">
+                                <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                                    <path d="m15 5 4 4" />
+                                </svg>
+                            </button>
+
+                        </div>
+                        <h3 id="perfilNome">@EU_BRIAN7511</h3>
+                        <span class="badge-estilo">Ofensivo</span>
+                    </div>
+
+                    <!-- Coluna Direita: Campos de Edição -->
+                    <form class="perfil-form" id="formPerfil">
+                        <div class="campo-grupo">
+                            <label for="ipt_nome">Nome de usuário:</label>
+                            <input type="text" id="ipt_nome" name="nome" placeholder="Seu nome de usuário">
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="ipt_email">E-mail:</label>
+                            <input type="email" id="ipt_email" name="email" placeholder="seu@email.com">
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="ipt_senha">Alterar Senha</label>
+                            <div class="input-senha-box">
+                                <input type="password" id="ipt_senha" name="senha" placeholder="•••••" >
+                                <button type="button" class="btn-habilitar-senha" onclick="habilitarSenha()">
+                                    Alterar senha
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Rodapé do Card -->
+                <div class="perfil-footer">
+                    <button type="button" class="btn-excluir" onclick="excluirConta()">Excluir conta</button>
+
+                    <div class="botoes-direita">
+                        <button type="button" class="btn-cancelar" onclick="cancelarEdicao()">Cancelar</button>
+                        <button type="button" class="btn-salvar" onclick="salvarAlteracoes()">Salvar alterações</button>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
+
 </body>
 
 </html>
@@ -71,5 +126,8 @@
         : "../assets/perfil/peao_pixelart.svg";
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+
+
 
 </script>

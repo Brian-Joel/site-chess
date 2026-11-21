@@ -1,31 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
- 
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- 
+
   <title>Xeque-Mate | Cadastro</title>
   <link rel="shortcut icon" href="assets/icon/iconKnight.ico" type="image/x-icon">
- 
+
   <script src="./js/sessao.js"></script>
- 
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@400;700&display=swap"
     rel="stylesheet">
- 
+
   <link rel="stylesheet" href="css/base/variaveis.css">
   <link rel="stylesheet" href="css/base/reset.css">
   <link rel="stylesheet" href="css/base/navbar.css" />
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/base/footer.css">
 </head>
- 
+
 <body onload="listar()">
- 
+
   <!-- HEADER -->
   <header>
     <nav class="navegador">
@@ -45,7 +44,7 @@
       </div>
     </nav>
   </header>
- 
+
   <main>
     <section class="sessao">
       <!-- IMAGEM LATERAL: o texto fica DENTRO da imagem, ancorado no rodapé dela -->
@@ -57,7 +56,7 @@
           </div>
         </div>
       </div>
- 
+
       <!-- FORMULÁRIO -->
       <div class="login">
         <div class="alerta_erro">
@@ -65,15 +64,15 @@
             <span id="mensagem_erro"></span>
           </div>
         </div>
- 
+
         <div class="container">
           <div class="card card-cadastro">
             <div class="linha">
               <h2>Cadastre-se</h2>
             </div>
- 
+
             <div class="formulario">
- 
+
               <!-- ETAPAS -->
               <div class="container-etapas">
                 <div class="etapa">
@@ -91,7 +90,7 @@
                   <span id="texto-3" class="texto-etapa">Final</span>
                 </div>
               </div>
- 
+
               <!-- TELA 1 - NOME DE USUÁRIO E E-MAIL -->
               <div id="conteudo-etapa-1" class="etapa-formulario ativo">
                 <div class="campo">
@@ -103,7 +102,7 @@
                   <input id="email_input" type="email" placeholder="usuario@provedor.com" />
                 </div>
               </div>
- 
+
               <!-- TELA 2 - SENHA -->
               <div id="conteudo-etapa-2" class="etapa-formulario">
                 <div class="campo">
@@ -123,7 +122,7 @@
                   </ul>
                 </div>
               </div>
- 
+
               <!-- TELA 3 - FOTO DE PERFIL -->
               <div id="conteudo-etapa-3" class="etapa-formulario">
                 <p class="titulo-avatar">Escolha uma foto de perfil</p>
@@ -148,43 +147,42 @@
                   </div>
                 </div>
               </div>
- 
+
               <!-- BOTÕES DE NAVEGAÇÃO -->
               <div class="botoes-container">
                 <button id="btnVoltar" class="botao btn-voltar" onclick="voltar()">Voltar</button>
                 <button id="botao" class="botao btn-cadastro" onclick="cadastrar()">Continuar</button>
               </div>
- 
+
             </div>
- 
+
             <div id="div_aguardar" class="loading-div">
               <img src="./assets/circle-loading.gif" id="loading-gif" alt="Carregando" />
             </div>
- 
+
             <div id="div_erros_login"></div>
           </div>
         </div>
       </div>
- 
+
     </section>
   </main>
- 
-  <!-- SCRIPTS (agora dentro do body, antes de fechar) -->
+
   <script>
- 
-    // Array para armazenar empresas cadastradas para validação de código de ativação 
+
+    // Array para armazenar usuarios cadastradas para validação de código de ativação 
     let listaUsuario = [];
- 
+
     function cadastrar() {
- 
+
       //Recupere o valor da nova input pelo nome do id
       // Agora vá para o método fetch logo abaixo
- 
+
       var nomeVar = nome_input.value;
       var emailVar = email_input.value;
       var senhaVar = senha_input.value;
       var confirmacaoSenhaVar = confirmacao_senha_input.value;
- 
+
       // VALIDAÇÃO POR ETAPAS
       if (etapa == 1) {
         if (nomeVar == "" || emailVar == "") {
@@ -194,7 +192,7 @@
           finalizarAguardar();
           return false;
         }
- 
+
         // Verificação simples e direta
         for (let i = 0; i < listaUsuario.length; i++) {
           if (listaUsuario[i].nome == nomeVar) {
@@ -212,11 +210,11 @@
             return false;
           }
         }
- 
+
         avancar();
         return false;
       }
- 
+
       if (etapa == 2) {
         if (senhaVar == "" || confirmacaoSenhaVar == "") {
           cardErro.style.display = "block";
@@ -244,9 +242,9 @@
           return false;
         }
       }
- 
+
       if (etapa == 3) {
- 
+
         if (fotoVar == "") {
           cardErro.style.display = "block";
           mensagem_erro.innerHTML = "(ERRO: Escolha uma foto de perfil!)";
@@ -273,17 +271,17 @@
           })
             .then(function (resposta) {
               console.log("resposta: ", resposta);
- 
+
               if (resposta.ok) {
                 cardErro.style.display = "block";
- 
+
                 mensagem_erro.innerHTML =
                   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
- 
+
                 setTimeout(() => {
                   window.location = "login.html";
                 }, "2000");
- 
+
                 limparFormulario();
                 finalizarAguardar();
               } else {
@@ -297,17 +295,17 @@
               setTimeout(sumirMensagem, 5000);
               finalizarAguardar();
             });
- 
+
           return false;
         }
       }
     }
- 
+
     // funcao de sumir a mensagem 
     function sumirMensagem() {
       cardErro.style.display = "none";
     }
- 
+
     // Listando usuários já cadastrados no banco
     function listar() {
       fetch("/usuarios/listar", {
@@ -317,10 +315,10 @@
           resposta.json().then((usuarios) => {
             usuarios.forEach((usuario) => {
               listaUsuario.push(usuario);
- 
+
               console.log("listaUsuariosCadastrados");
               // Ajuste aqui a propriedade do usuário que faz sentido para o seu projeto de xadrez, se necessário:
- 
+
               console.log(usuario.id); // Exemplo usando 'id' ou outro campo que venha do seu banco
             });
           });
@@ -329,11 +327,10 @@
           console.log(`#ERRO: ${resposta}`);
         });
     }
- 
+
   </script>
- 
+
   <script src="./js/cadastro.js"></script>
 </body>
- 
+
 </html>
- 
