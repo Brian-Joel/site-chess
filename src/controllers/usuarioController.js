@@ -90,8 +90,125 @@ function listar(req, res) {
         });
 }
 
+function buscar(req, res) {
+    var id = req.params.id;
+
+    if (id == undefined) {
+        res.status(400).send("Seu id está undefined!");
+    } else {
+
+        usuarioModel.buscar(id).then(
+            function (resultadoBuscar) {
+                console.log(`\nResultados encontrados: ${resultadoBuscar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoBuscar)}`);
+
+                if (resultadoBuscar.length == 1) {
+                    res.json({
+                        id: resultadoBuscar[0].id,
+                        email: resultadoBuscar[0].email,
+                        nome: resultadoBuscar[0].nome,
+                        foto: resultadoBuscar[0].foto
+                    });
+                } else if (resultadoBuscar.length == 0) {
+                    res.status(404).send("Usuário não encontrado");
+                } else {
+                    res.status(500).send("Mais de um usuário com o mesmo id!");
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao buscar o usuário! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+    }
+}
+
+
+function atualizarNome(req, res) {
+    var id = req.params.id;
+    var nome = req.body.nome;
+
+    if (nome == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    } else {
+        usuarioModel.atualizarNome(id, nome).then(
+            function (resultadoNome) {
+                res.sendStatus(200);
+                console.log('Nome alterado com sucesso!');
+            }).catch(
+                function (erro) {
+                    console.log(erro);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+}
+
+function atualizarEmail(req, res) {
+    var id = req.params.id;
+    var email = req.body.email;
+
+    if (email == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else {
+        usuarioModel.atualizarEmail(id, email).then(
+            function (resultadoEmail) {
+                res.sendStatus(200);
+                console.log('Email alterado com sucesso!');
+            }).catch(
+                function (erro) {
+                    console.log(erro);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+}
+
+
+function atualizarSenha(req, res) {
+    var id = req.params.id;
+    var senha = req.body.senha;
+
+    if (senha == undefined) {
+        res.status(400).send("Sua senha está undefined!");
+    } else {
+        usuarioModel.atualizarSenha(id, senha).then(
+            function (resultadoSenha) {
+                res.sendStatus(200);
+                console.log('Senha alterada com sucesso!');
+            }).catch(
+                function (erro) {
+                    console.log(erro);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+}
+
+function excluir(req, res) {
+    var id = req.params.id;
+
+    usuarioModel.excluir(id).then(function (resultadoExcluir) {
+        res.sendStatus(200);
+        console.log('Usuário excluído com sucesso!');
+    }).catch(
+        function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        }
+    )
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    listar
+    listar,
+    buscar,
+    atualizarNome,
+    atualizarEmail,
+    atualizarSenha,
+    excluir
 }
