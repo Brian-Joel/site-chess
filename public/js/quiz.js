@@ -1,213 +1,194 @@
 const listaDeQuestoes = [
 
-        {
-            pergunta: "Qual mês tem 30 dias?",
-            alternativaA: "Janeiro",
-            alternativaB: "Dezembro",
-            alternativaC: "Junho",
-            alternativaD: "Agosto",
-            alternativaCorreta: "alternativaC"
-        },
+    {
+        pergunta: "Em um fim de semana livre, você prefere:",
+        alternativaA: "Estudar algo novo sozinho",
+        alternativaB: "Sair com os amigos",
+        alternativaC: "Descansar e relaxar",
+        alternativaD: "Praticar um hobby criativo",
+        perfilA: "A", perfilB: "B", perfilC: "C", perfilD: "D"      
+    },
 
-        {
-            pergunta: "Quantas horas tem em um dia?",
-            alternativaA: "30 horas",
-            alternativaB: "38 horas",
-            alternativaC: "48 horas",
-            alternativaD: "24 horas",
-            alternativaCorreta: "alternativaD"
-        },
+    {
+        pergunta: "Diante de um problema difícil, você:",
+        alternativaA: "Analisa todos os detalhes",
+        alternativaB: "Pede ajuda a alguém",
+        alternativaC: "Tenta algo diferente",
+        alternativaD: "Respira e planeja com calma",
+        perfilA: "B", perfilB: "C", perfilC: "D", perfilD: "A"
+    },
 
-        {
-            pergunta: "Qual destes números é ímpar?",
-            alternativaA: "Dez",
-            alternativaB: "Doze",
-            alternativaC: "Oito",
-            alternativaD: "Onze",
-            alternativaCorreta: "alternativaD"
-        }
-
-    ]
-
-    // variáveis globais    
-    let numeroDaQuestaoAtual = 0
-    let pontuacaoFinal = 0
-    let tentativaIncorreta = 0
-    let certas = 0
-    let erradas = 0
-    let quantidadeDeQuestoes = listaDeQuestoes.length
-    // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
-
-    function onloadEsconder() {
-        document.getElementById('pontuacao').style.display = "none"
-        document.getElementById('jogo').style.display = "none"
+    {
+        pergunta: "Qual frase mais combina com você?",
+        alternativaA: "Quero ver o mundo",
+        alternativaB: "Valorizo minha paz",
+        alternativaC: "Gosto de aprender sempre",
+        alternativaD: "Amo estar com pessoas",
+        perfilA: "D", perfilB: "C", perfilC: "A", perfilD: "B"
     }
 
-    function iniciarQuiz() {
-        document.getElementById('pontuacao').style.display = "flex"
-        document.getElementById('jogo').style.display = "flex"
-        document.getElementById('btnIniciarQuiz').style.display = "none"
+]
 
-        document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
+// variáveis globais
+let numeroDaQuestaoAtual = 0
+let qtdA = 0 
+let qtdB = 0
+let qtdC = 0
+let qtdD = 0
+let quantidadeDeQuestoes = listaDeQuestoes.length
 
-        preencherHTMLcomQuestaoAtual(0)
+function onloadEsconder() {
+    document.getElementById('pontuacao').style.display = "none"
+    document.getElementById('jogo').style.display = "none"
+}
 
-        btnSubmeter.disabled = false
-        btnProx.disabled = true
-        // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = true
-    }
+function iniciarQuiz() {
+    document.getElementById('pontuacao').style.display = "flex"
+    document.getElementById('jogo').style.display = "flex"
+    document.getElementById('btnIniciarQuiz').style.display = "none"
 
-    function preencherHTMLcomQuestaoAtual(index) {
-        habilitarAlternativas(true)
-        const questaoAtual = listaDeQuestoes[index]
-        numeroDaQuestaoAtual = index
-        console.log("questaoAtual")
-        console.log(questaoAtual)
-        document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
-        document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
-        document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
-        document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
-        document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
-        document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
-    }
+    document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
 
-    function submeter() {
-        const options = document.getElementsByName("option"); // recupera alternativas no html
+    preencherHTMLcomQuestaoAtual(0)
 
-        let hasChecked = false
-        for (let i = 0; i < options.length; i++) {
-            if (options[i].checked) {
-                hasChecked = true
-                break
-            }
-        }
+    btnSubmeter.disabled = false
+    btnProx.disabled = true
+    btnTentarNovamente.disabled = true
+}
 
-        if (!hasChecked) {
-            alert("Não há alternativas escolhidas. Escolha uma opção.")
-        } else {
-            btnSubmeter.disabled = true
-            btnProx.disabled = false
+function preencherHTMLcomQuestaoAtual(index) {
+    habilitarAlternativas(true)
+    const questaoAtual = listaDeQuestoes[index]
+    numeroDaQuestaoAtual = index
+    console.log("questaoAtual")
+    console.log(questaoAtual)
+    document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
+    document.getElementById("spanEnunciado").innerHTML = questaoAtual.pergunta;       // id do seu front atual
+    document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
+    document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
+    document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
+    document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
+}
 
-            habilitarAlternativas(false)
+function submeter() {
+    const options = document.getElementsByName("option"); // recupera alternativas no html
 
-            checarResposta()
+    let hasChecked = false
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].checked) {
+            hasChecked = true
+            break
         }
     }
 
-    function habilitarAlternativas(trueOrFalse) {
-        let opcaoEscolhida = trueOrFalse ? false : true
-
-        primeiraOpcao.disabled = opcaoEscolhida
-        segundaOpcao.disabled = opcaoEscolhida
-        terceiraOpcao.disabled = opcaoEscolhida
-        quartaOpcao.disabled = opcaoEscolhida
-
-    }
-
-    function avancar() {
-        btnProx.disabled = true
-        btnSubmeter.disabled = false
-
-        desmarcarRadioButtons()
-
-        if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
-            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
-        } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) {
-            alert("Atenção... a próxima é a ultima questão!")
-            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
-        } else {
-            finalizarJogo()
-        }
-        limparCoresBackgroundOpcoes()
-    }
-
-    function tentarNovamente() {
-        // atualiza a página
-        window.location.reload()
-    }
-
-    function checarResposta() {
-        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
-        const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
-
-        const options = document.getElementsByName("option"); // recupera alternativas no html
-
-        let alternativaCorreta = null // variável para armazenar a alternativa correta
-
-        options.forEach((option) => {
-            if (option.value === respostaQuestaoAtual) {
-                console.log("alternativaCorreta está no componente: " + alternativaCorreta)
-                alternativaCorreta = option.labels[0].id
-            }
-        })
-
-        // verifica se resposta assinalada é correta
-        options.forEach((option) => {
-            if (option.checked === true && option.value === respostaQuestaoAtual) {
-                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-                pontuacaoFinal++
-                certas++
-                document.getElementById("spanCertas").innerHTML = certas
-                numeroDaQuestaoAtual++
-            } else if (option.checked && option.value !== respostaQuestaoAtual) {
-                const wrongLabelId = option.labels[0].id
-
-                document.getElementById(wrongLabelId).classList.add("text-danger-with-bg")
-                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-                tentativaIncorreta++
-                erradas++
-                document.getElementById("spanErradas").innerHTML = erradas
-                numeroDaQuestaoAtual++
-            }
-        })
-    }
-
-    function limparCoresBackgroundOpcoes() {
-        const options = document.getElementsByName("option");
-        options.forEach((option) => {
-            document.getElementById(option.labels[0].id).classList.remove("text-danger-with-bg")
-            document.getElementById(option.labels[0].id).classList.remove("text-success-with-bg")
-        })
-    }
-
-    function desmarcarRadioButtons() {
-        const options = document.getElementsByName("option");
-        for (let i = 0; i < options.length; i++) {
-            options[i].checked = false;
-        }
-    }
-
-    function finalizarJogo() {
-        let textoParaMensagemFinal = null
-        let classComCoresParaMensagemFinal = null
-        const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
-
-        if (porcentagemFinalDeAcertos <= 0.3) {
-            textoParaMensagemFinal = "Parece que você não estudou..."
-            classComCoresParaMensagemFinal = "text-danger-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
-            textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
-            classComCoresParaMensagemFinal = "text-warning-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos >= 0.9) {
-            textoParaMensagemFinal = "Uau, parabéns!"
-            classComCoresParaMensagemFinal = "text-success-with-bg"
-        }
-
-        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)*100) + "% das questões."
-
-
-        document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal) 
-        document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
-
-        document.getElementById('jogo').classList.add("text-new-gray") 
-
-        btnProx.disabled = true
+    if (!hasChecked) {
+        alert("Não há alternativas escolhidas. Escolha uma opção.")
+    } else {
         btnSubmeter.disabled = true
-        // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = false
+        btnProx.disabled = false
 
+        habilitarAlternativas(false)
+
+        checarResposta()
     }
+}
+
+function habilitarAlternativas(trueOrFalse) {
+    let opcaoEscolhida = trueOrFalse ? false : true
+
+    primeiraOpcao.disabled = opcaoEscolhida
+    segundaOpcao.disabled = opcaoEscolhida
+    terceiraOpcao.disabled = opcaoEscolhida
+    quartaOpcao.disabled = opcaoEscolhida
+}
+
+function avancar() {
+    btnProx.disabled = true
+    btnSubmeter.disabled = false
+
+    desmarcarRadioButtons()
+
+    if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
+        preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+    } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) {
+        alert("Atenção... a próxima é a ultima questão!")
+        preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
+    } else {
+        finalizarJogo()
+    }
+}
+
+function tentarNovamente() {
+    // atualiza a página
+    window.location.reload()
+}
+
+function checarResposta() {                                               // ALTERADO
+    const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual
+
+    const options = document.getElementsByName("option"); // recupera alternativas no html
+
+    options.forEach((option) => {
+        if (option.checked === true) {
+            // "alternativaA" -> "perfilA" -> perfil dessa alternativa
+            const perfil = questaoAtual[option.value.replace("alternativa", "perfil")]
+
+            if (perfil == "A") {
+                qtdA++
+            } else if (perfil == "B") {
+                qtdB++
+            } else if (perfil == "C") {
+                qtdC++
+            } else if (perfil == "D") {
+                qtdD++
+            }
+
+            numeroDaQuestaoAtual++
+        }
+    })
+}
+
+
+
+function desmarcarRadioButtons() {
+    const options = document.getElementsByName("option");
+    for (let i = 0; i < options.length; i++) {
+        options[i].checked = false;
+    }
+}
+
+function finalizarJogo() {                                                // ALTERADO
+    btnProx.disabled = true
+    btnSubmeter.disabled = true
+
+    fetch("/quiz/registrar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            idUsuarioServer: sessionStorage.ID_USUARIO,
+            qtdAServer: qtdA,
+            qtdBServer: qtdB,
+            qtdCServer: qtdC,
+            qtdDServer: qtdD
+        })
+    }).then(function (resposta) {
+        if (resposta.status == 201) {
+            window.location = "./dashboard.html"
+        } else {
+            alert("Não foi possível salvar seu resultado.")
+            btnTentarNovamente.disabled = false
+        }
+    }).catch(function (erro) {
+        console.log(erro)
+        alert("Erro de conexão com o servidor.")
+        btnTentarNovamente.disabled = false
+    })
+}
+
+// function limparCoresBackgroundOpcoes() {
+//     const options = document.getElementsByName("option");
+//     options.forEach((option) => {
+//         document.getElementById(option.labels[0].id).classList.remove("text-danger-with-bg")
+//         document.getElementById(option.labels[0].id).classList.remove("text-success-with-bg")
+//     })
+// }
