@@ -230,5 +230,6 @@ module.exports = {
     atualizarNome,
     atualizarEmail,
     atualizarSenha,
+    atualizarFoto,
     excluir
 }

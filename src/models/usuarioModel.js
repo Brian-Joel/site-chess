@@ -61,7 +61,7 @@ function atualizarEmail(id, email) {
 }
 
 function atualizarSenha(id, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarSenha():",id, senha);
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarSenha():", id, senha);
 
     var instrucaoSql = `
         UPDATE usuario SET senha = '${senha}' WHERE id = '${id}';
@@ -100,5 +100,6 @@ module.exports = {
     atualizarNome,
     atualizarEmail,
     atualizarSenha,
+    atualizarFoto,
     excluir
 }

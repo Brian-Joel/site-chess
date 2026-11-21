@@ -21,9 +21,7 @@
     <link rel="stylesheet" href="../css/perfil.css">
 </head>
 
-<!-- <body onload="validarSessao(); carregarPerfil()"> -->
-
-<body>
+<body onload="validarSessao(); carregarPerfil()">
 
     <!-- Navbar -->
     <header class="navegador">
@@ -78,7 +76,37 @@
             <button type="button" class="btn-salvar" onclick="alterarSenha()">Atualizar senha</button>
         </div>
     </dialog>
+    <dialog id="modalFoto">
+        <h3>Escolha uma foto de perfil</h3>
 
+        <div class="avatares">
+            <div class="avatar-item" onclick="selecionarAvatar(this)">
+                <img src="../assets/perfil/cavalo_lowpoly.svg" alt="Cavalo">
+            </div>
+            <div class="avatar-item" onclick="selecionarAvatar(this)">
+                <img src="../assets/perfil/peao_pixelart.svg" alt="Peão">
+            </div>
+            <div class="avatar-item" onclick="selecionarAvatar(this)">
+                <img src="../assets/perfil/torre_neon.svg" alt="Torre">
+            </div>
+            <div class="avatar-item" onclick="selecionarAvatar(this)">
+                <img src="../assets/perfil/dama_kawaii.svg" alt="Rainha">
+            </div>
+            <div class="avatar-item" onclick="selecionarAvatar(this)">
+                <img src="../assets/perfil/rei_dourado.svg" alt="Rei">
+            </div>
+            <div class="avatar-item" onclick="selecionarAvatar(this)">
+                <img src="../assets/perfil/bispo_nanquim.svg" alt="Bispo">
+            </div>
+        </div>
+
+        <p id="msgFoto" style="color: #ff6b6b; font-size: 13px;"></p>
+
+        <div class="botoes-direita">
+            <button type="button" class="btn-cancelar" onclick="fecharModalFoto()">Cancelar</button>
+            <button type="button" class="btn-salvar" onclick="alterarFoto()">Salvar foto</button>
+        </div>
+    </dialog>
     <!-- Conteúdo principal -->
     <main>
         <section class="perfil">
@@ -95,7 +123,8 @@
                     <div class="perfil-esquerda">
                         <div class="foto-wrapper">
                             <img id="perfilFoto" src="../assets/perfil/peao_pixelart.svg" alt="Foto de perfil">
-                            <button type="button" class="btn-trocar-foto" title="Alterar foto">
+                            <button type="button" class="btn-trocar-foto" title="Alterar foto"
+                                onclick="abrirModalFoto()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -156,40 +185,10 @@
     var emailOriginal = "";
     let statusValidacao = false;
 
-    // carrega os dados na tela
-    function carregarPerfil() {
-        var foto = sessionStorage.FOTO_USUARIO;
-
-        if (foto) {
-            perfilFoto.src = "../assets/perfil/" + foto;
-            b_foto.src = "../assets/perfil/" + foto;
-        }
-
-        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
-        fetch(`/usuarios/${idUsuario}/nome`)
-            .then(function (resposta) {
-                resposta.json().then(function (usuario) {
-                    ipt_nome.value = usuario.nome;
-                    ipt_email.value = usuario.email;
-                    nomeOriginal = usuario.nome;
-                    emailOriginal = usuario.email;
-                });
-            })
-            .catch(function (erro) {
-                console.log(erro);
-            });
-    }
-
     // salva nome e e-mail
     function salvarAlteracoes() {
         var nome = ipt_nome.value;
         var email = ipt_email.value;
-
-        if (nome == "" || email == "") {
-            alert("Preencha o nome e o e-mail!");
-            return;
-        }
 
         if (nome != nomeOriginal) {
             fetch(`/usuarios/${idUsuario}/nome`, {
@@ -200,6 +199,7 @@
                 if (resposta.ok) {
                     nomeOriginal = nome;
                     sessionStorage.NOME_USUARIO = nome;
+                    perfilNome.innerHTML = "@" + nome;
                     b_usuario.innerHTML = nome;
                     alert("Nome atualizado!");
                 } else {
@@ -328,5 +328,59 @@
                     alert("Erro ao excluir a conta.");
                 }
             });
+    }
+
+    var fotoVar = "";
+
+    function abrirModalFoto() {
+        modalFoto.showModal();
+    }
+
+    function fecharModalFoto() {
+        var avatares = document.querySelectorAll('.avatar-item');
+
+        for (let i = 0; i < avatares.length; i++) {
+            avatares[i].classList.remove('selecionado');
+        }
+
+        fotoVar = "";
+        msgFoto.innerHTML = "";
+        modalFoto.close();
+    }
+
+    function selecionarAvatar(elementoHtml) {
+        var avatares = document.querySelectorAll('.avatar-item');
+
+        for (let i = 0; i < avatares.length; i++) {
+            avatares[i].classList.remove('selecionado');
+        }
+
+        elementoHtml.classList.add('selecionado');
+
+        var imagem = elementoHtml.querySelector('img').getAttribute('src');
+        fotoVar = imagem.split('/').pop();
+    }
+
+    function alterarFoto() {
+        if (fotoVar == "") {
+            msgFoto.innerHTML = "Escolha uma foto.";
+            return;
+        }
+
+        fetch(`/usuarios/${idUsuario}/foto`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ foto: fotoVar })
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                sessionStorage.FOTO_USUARIO = fotoVar;
+                perfilFoto.src = "../assets/perfil/" + fotoVar;
+                b_foto.src = "../assets/perfil/" + fotoVar;
+                fecharModalFoto();
+                alert("Foto atualizada!");
+            } else {
+                msgFoto.innerHTML = "Erro ao atualizar a foto.";
+            }
+        });
     }
 </script>

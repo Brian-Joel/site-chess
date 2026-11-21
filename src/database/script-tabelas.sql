@@ -75,3 +75,5 @@ SELECT * FROM vw_panorama_comunidade;
 SELECT * FROM quiz_personalidade;
 SELECT id, nome FROM usuario;
 SELECT * FROM vw_historico;
+
+SELECT*FROM usuario;

@@ -278,3 +278,31 @@ dialog input {
 dialog h3 {
     margin-bottom: 10px;
 }
+
+.avatares {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.avatar-item {
+    border: 2px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.avatar-item img {
+    width: 100%;
+    border-radius: 50%;
+    display: block;
+}
+
+.avatar-item:hover {
+    border-color: #555;
+}
+
+.avatar-item.selecionado {
+    border-color: #00cc33;
+}
