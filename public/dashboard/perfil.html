@@ -48,6 +48,27 @@
         </nav>
     </header>
 
+    <dialog id="modalSenha">
+        <h3>Alterar senha</h3>
+
+        <div class="campo-grupo">
+            <label for="ipt_senha_nova">Nova senha</label>
+            <input type="password" id="ipt_senha_nova">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="ipt_senha_confirmar">Confirmar nova senha</label>
+            <input type="password" id="ipt_senha_confirmar">
+        </div>
+
+        <p id="msgSenha"></p>
+
+        <div class="botoes-direita">
+            <button type="button" class="btn-cancelar" onclick="fecharModalSenha()">Cancelar</button>
+            <button type="button" class="btn-salvar" onclick="alterarSenha()">Atualizar senha</button>
+        </div>
+    </dialog>
+
     <!-- Conteúdo principal -->
     <main>
         <section class="perfil">
@@ -91,16 +112,16 @@
                         </div>
 
                         <div class="campo-grupo">
-                            <label for="ipt_senha">Alterar Senha</label>
+                            <label>Senha</label>
                             <div class="input-senha-box">
-                                <input type="password" id="ipt_senha" name="senha" placeholder="•••••" >
-                                <button type="button" class="btn-habilitar-senha" onclick="habilitarSenha()">
+                                <input type="password" value="••••••••" disabled>
+                                <button type="button" class="btn-habilitar-senha" onclick="abrirModalSenha()">
                                     Alterar senha
                                 </button>
                             </div>
                         </div>
-                    </form>
                 </div>
+                </form>
 
                 <!-- Rodapé do Card -->
                 <div class="perfil-footer">
@@ -112,6 +133,7 @@
                     </div>
                 </div>
             </div>
+            </div>
         </section>
     </main>
 
@@ -119,15 +141,14 @@
 
 </html>
 <script>
-    const foto = sessionStorage.FOTO_USUARIO;
+    var idUsuario = sessionStorage.ID_USUARIO;
+    var nomeOriginal, emailOriginal;
 
-    b_foto.src = foto
-        ? "../assets/perfil/" + foto
-        : "../assets/perfil/peao_pixelart.svg";
+    function carregarPerfil() {
+        var foto = sessionStorage.FOTO_USUARIO;
+        b_foto.src = foto ? "../assets/perfil/" + foto : "../assets/perfil/peao_pixelart.svg";
+        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
-
-
-
+    }
+    
 </script>

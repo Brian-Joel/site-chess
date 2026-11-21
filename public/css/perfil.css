@@ -240,3 +240,41 @@ main {
     background-color: #ffffff;
     color: black;
 }
+
+/* MODAL  */
+dialog {
+    margin: auto;
+    background: #17171a;
+    color: #fff;
+    border: 1px solid #2a2a2f;
+    border-radius: 14px;
+    padding: 28px;
+    width: 400px;
+    max-width: 90%;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+dialog .botoes-direita {
+    justify-content: center;
+    margin-top: 16px;
+}
+
+#msgSenha {
+    color: #ff6b6b;
+    font-size: 13px;
+}
+
+dialog label {
+    margin: 5px 0px;
+}
+
+dialog input {
+    margin-bottom: 5px;
+}
+
+dialog h3 {
+    margin-bottom: 10px;
+}

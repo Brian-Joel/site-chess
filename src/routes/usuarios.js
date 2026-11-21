@@ -16,7 +16,7 @@ router.get("/listar", function (req, res) {
     usuarioController.listar(req, res);
 });
 
-router.get('/:id/nome', function (req, res) {
+router.get('/:id/buscar', function (req, res) {
     usuarioController.buscar(req,res);
 })
 
