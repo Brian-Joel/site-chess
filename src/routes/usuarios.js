@@ -17,23 +17,28 @@ router.get("/listar", function (req, res) {
 });
 
 router.get('/:id/buscar', function (req, res) {
-    usuarioController.buscar(req,res);
+    usuarioController.buscar(req, res);
 })
 
 router.post('/:id/nome', function (req, res) {
-    usuarioController.atualizarNome(req,res);
+    usuarioController.atualizarNome(req, res);
 })
 
 router.post('/:id/email', function (req, res) {
-    usuarioController.atualizarEmail(req,res);
+    usuarioController.atualizarEmail(req, res);
 })
 
 router.post('/:id/senha', function (req, res) {
-    usuarioController.atualizarSenha(req,res);
+    usuarioController.atualizarSenha(req, res);
+})
+
+router.post('/:id/foto', function (req, res) {
+    usuarioController.atualizarFoto(req, res);
 })
 
 router.delete('/:id', function (req, res) {
-    usuarioController.excluir(req,res);
+    usuarioController.excluir(req, res);
 })
+
 
 module.exports = router;

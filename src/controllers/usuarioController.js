@@ -188,6 +188,26 @@ function atualizarSenha(req, res) {
     }
 }
 
+function atualizarFoto(req, res) {
+    var id = req.params.id;
+    var foto = req.body.foto;
+
+    if (foto == undefined) {
+        res.status(400).send("Sua foto está undefined!");
+    } else {
+        usuarioModel.atualizarFoto(id, foto).then(
+            function (resultadoFoto) {
+                res.sendStatus(200);
+                console.log('Foto alterada com sucesso!');
+            }).catch(
+                function (erro) {
+                    console.log(erro);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            )
+    }
+}
+
 function excluir(req, res) {
     var id = req.params.id;
 
