@@ -27,6 +27,49 @@
   font-family: var(--fonte-titulo);
 }
 
+/* BARRA DE AÇÕES (TENTATIVA / REFAZER) */
+
+.barra-acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 30px 20px;
+  color: var(--cor-texto-t1);
+  font-family: var(--fonte-texto);
+  font-size: 15px;
+}
+
+.barra-acoes select {
+  background-color: var(--cor-fundo-card);
+  color: var(--cor-texto-t1);
+  border: 2px solid var(--cor-borda-card);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: var(--fonte-texto);
+  cursor: pointer;
+}
+
+.barra-acoes select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-refazer {
+  background-color: var(--cor-verde);
+  color: var(--cor-btn-texto);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-refazer:hover {
+  background-color: var(--cor-verde-hover);
+}
+
 /* AVISO ENQUANTO OS DADOS DO BANCO NÃO CHEGAM */
 .aviso-dados {
   margin: 20px 30px 0;
@@ -108,7 +151,7 @@
 .grafico-vazio {
   position: absolute;
   inset: 0;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   color: var(--cor-texto-suave);

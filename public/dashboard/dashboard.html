@@ -16,19 +16,18 @@
     <link rel="stylesheet" href="../css/base/loading.css">
     <link rel="stylesheet" href="../css/dashboards.css">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!--FONT AWESOME-->
-    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload=" atualizarFeed()">
+<body>
 
     <!-- Tela de carregamento -->
     <div id="loading-screen">
@@ -64,7 +63,6 @@
         </nav>
     </header>
 
-    <!-- Conteúdo principal -->
     <!-- Conteúdo principal -->
     <main>
         <div class="dash">
@@ -131,6 +129,9 @@
 </html>
 
 <script>
+    // Garante que apenas usuários logados acessem o dashboard.
+    validarSessao();
+
     // ===== CONFIGURAÇÃO: troque os nomes pelos seus (a chave A-D não muda) =====
     const PERFIS = [
         { chave: "A", campo: "qtd_perfil_a", nome: "Perfil A", cor: "#3b82f6" }, // azul
@@ -201,7 +202,7 @@
 
         const vazio = document.getElementById("vazio1");
         vazio.innerHTML = "Sem dados ainda.";
-        vazio.style.display = "block";
+        vazio.style.display = "flex";
     }
 
     // Preenche o <select> com uma opção por tentativa
@@ -319,7 +320,7 @@
                 console.error('Nenhum dado encontrado ou erro na API');
                 const vazio = document.getElementById("vazio2");
                 vazio.innerHTML = "Não foi possível carregar a comunidade.";
-                vazio.style.display = "block";
+                vazio.style.display = "flex";
             }
         })
             .catch(function (error) {

@@ -4,9 +4,9 @@
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background: #0a0a0a;
-    color: #f4f4f5;
+    font-family: var(--fonte-texto);
+    background: var(--cor-principal);
+    color: var(--cor-texto-t1);
     min-height: 100vh;
 }
 
@@ -27,11 +27,17 @@ body {
     padding: 1rem 2.5rem;
     font-size: 1.1rem;
     font-weight: 700;
+    font-family: var(--fonte-titulo);
     border: none;
     border-radius: 12px;
-    background: #22c55e;
-    color: #0a0a0a;
+    background: var(--cor-verde);
+    color: var(--cor-btn-texto);
     cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn_comecar:hover {
+    background: var(--cor-verde-hover);
 }
 
 
@@ -44,20 +50,26 @@ body {
 
 .bloco-info {
     font-size: 0.85rem;
-    color: #f4f4f5;
+    color: var(--cor-texto-t1);
 }
 
 
 /* pseudoelemento da barra de progresão, pega o ID*/
 #barra_progressao {
     border-radius: 200px;
+    width: 100% !important;
+    height: 100% !important;
 }
 
 /* barra de progressão  */
 .barra-progresso {
     display: block;
+    width: 100%;
     margin: 0;
     height: 30px;
+    border-radius: 200px;
+    overflow: hidden;
+    background-color: var(--cor-cinza-escuro);
 }
 
 .caixa-jogo {
@@ -85,15 +97,15 @@ body {
     align-items: center;
     gap: .9rem;
     padding: .9rem 1rem;
-    background: #1e1e1e;
-    border: 1px solid #333333;
+    background: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda-card);
     border-radius: 8px;
     cursor: pointer;
 }
 
 
 .cartao-opcao:hover {
-    border-color: #22c55e;
+    border-color: var(--cor-verde);
 }
 
 /* pseuelemento do botao tipo radio */
@@ -108,15 +120,15 @@ body {
     width: 32px;
     height: 32px;
     border-radius: 6px;
-    background: #22c55e;
-    color: #ffffff;
+    background: var(--cor-verde);
+    color: var(--cor-btn-texto);
     font-weight: 700;
 }
 
 /*  pseuelemento selecionado */
 .cartao-opcao:has(input:checked) {
-    background: #0a2e12;
-    border-color: #22c55e;
+    background: rgba(0, 184, 34, 0.12);
+    border-color: var(--cor-verde);
 }
 
 /* pseuelemento selecionado, muda cor para preto  */
@@ -125,7 +137,7 @@ body {
 }
 
 .option {
-    color: #f4f4f5;
+    color: var(--cor-texto-t1);
 }
 
 .grupo-botoes {
@@ -137,29 +149,34 @@ body {
 
 .grupo-botoes button {
     padding: 0.7rem 1.25rem;
-    border: 1px solid #444444;
+    border: 1px solid var(--cor-borda-card);
     border-radius: 8px;
-    background: #0a0a0a;
-    color: #ffffff;
+    background: var(--cor-principal);
+    color: var(--cor-texto-t1);
     cursor: pointer;
     font-weight: 600;
+    font-family: var(--fonte-texto);
 }
 
 #btnSubmeter {
-    background: #000000;
-    border: white solid 1px;
+    background: var(--cor-principal);
+    border: 1px solid var(--cor-texto-t1);
     padding: 10px 45px;
-    color: #ffffff;
+    color: var(--cor-texto-t1);
     font-weight: 700;
 }
 
 
 #btnProx {
-    background: #22c55e;
+    background: var(--cor-verde);
     border: none;
-    color: #ffffff;
+    color: var(--cor-btn-texto);
     font-weight: 700;
     padding: 10px 45px;
+}
+
+#btnProx:hover {
+    background: var(--cor-verde-hover);
 }
 
 .grupo-botoes button:disabled {

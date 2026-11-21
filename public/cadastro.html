@@ -292,6 +292,9 @@
             })
             .catch(function (resposta) {
               console.log(`#ERRO: ${resposta}`);
+              cardErro.style.display = "block";
+              mensagem_erro.innerHTML = "(ERRO: Não foi possível realizar o cadastro. Tente novamente.)";
+              setTimeout(sumirMensagem, 5000);
               finalizarAguardar();
             });
  

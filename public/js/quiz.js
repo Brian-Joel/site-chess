@@ -36,8 +36,10 @@ let qtdB = 0
 let qtdC = 0
 let qtdD = 0
 let quantidadeDeQuestoes = listaDeQuestoes.length
+let graficoProgresso = null
 
 function onloadEsconder() {
+    validarSessao();
     document.getElementById('pontuacao').style.display = "none"
     document.getElementById('jogo').style.display = "none"
 }
@@ -50,6 +52,7 @@ function iniciarQuiz() {
     document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
 
     preencherHTMLcomQuestaoAtual(0)
+    atualizarBarraProgresso()
 
     btnSubmeter.disabled = false
     btnProx.disabled = true
@@ -68,6 +71,8 @@ function preencherHTMLcomQuestaoAtual(index) {
     document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
     document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
     document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
+
+    atualizarBarraProgresso()
 }
 
 function submeter() {
@@ -155,6 +160,58 @@ function desmarcarRadioButtons() {
     for (let i = 0; i < options.length; i++) {
         options[i].checked = false;
     }
+}
+
+// Desenha a barra de progresso do quiz com o Chart.js.
+function atualizarBarraProgresso() {
+    const respondidas = Math.min(numeroDaQuestaoAtual, quantidadeDeQuestoes)
+    const restantes = quantidadeDeQuestoes - respondidas
+
+    const dados = {
+        labels: ["Progresso"],
+        datasets: [
+            {
+                data: [respondidas],
+                backgroundColor: ["#00b822"],
+                borderWidth: 0
+            },
+            {
+                data: [restantes],
+                backgroundColor: ["#262626"],
+                borderWidth: 0
+            }
+        ]
+    }
+
+    if (graficoProgresso) {
+        graficoProgresso.data = dados
+        graficoProgresso.update()
+        return
+    }
+
+    graficoProgresso = new Chart(document.getElementById("barra_progressao"), {
+        type: "bar",
+        data: dados,
+        options: {
+            indexAxis: "y",
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false }
+            },
+            scales: {
+                x: { stacked: true, display: false, max: quantidadeDeQuestoes },
+                y: { stacked: true, display: false }
+            },
+            animation: { duration: 200 }
+        }
+    })
+}
+
+// A tela de resultado não é usada: o botão leva direto ao dashboard.
+function verEstatisticas() {
+    window.location = "./dashboard.html"
 }
 
 function finalizarJogo() {                                                // ALTERADO

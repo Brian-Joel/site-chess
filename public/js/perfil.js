@@ -16,7 +16,7 @@ function carregarPerfil() {
         emailPerfil.textContent = email || "E-mail não informado";
     }
 
-    if (foto) {
+    if (fotoPerfil) {
         fotoPerfil.src = foto
             ? "../assets/perfil/" + foto
             : "../assets/perfil/peao_pixelart.svg";

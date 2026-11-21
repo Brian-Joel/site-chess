@@ -101,6 +101,8 @@
     <!-- SCRIPT (agora dentro do body, antes de fechar) -->
     <script>
 
+        // Guarda o timer da mensagem de erro para não acumular vários.
+        let tempoMensagem = null;
 
         function entrar() {
             aguardar();
@@ -121,7 +123,8 @@
                 return false;
             }
             else {
-                setInterval(sumirMensagem, 5000)
+                clearTimeout(tempoMensagem);
+                tempoMensagem = setTimeout(sumirMensagem, 5000);
             }
 
             console.log("FORM LOGIN: ", emailVar);
@@ -168,6 +171,7 @@
 
             }).catch(function (erro) {
                 console.log(erro);
+                finalizarAguardar("Erro de conexão. Tente novamente.");
             })
 
             return false;
