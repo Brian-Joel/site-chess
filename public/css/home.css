@@ -30,9 +30,9 @@ main {
 
 .titulo-hero {
     position: relative;
-    right: 200px;
+    right: 250px;
     color: var(--cor-texto-t1);
-    max-width: 1000px;
+    max-width: 700px;
     width: 100%;
     text-shadow: 2px 2px 10px black;
     font-size: 3rem;

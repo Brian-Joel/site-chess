@@ -48,161 +48,271 @@
 
   <main class="pagina-xadrez">
 
-    <!-- HERO: texto dentro da imagem, com sombreado atrás -->
-    <section class="hero-xadrez">
-      <div class="hero-texto">
-        <div class="container-xadrez">
-          <h1 class="hero-titulo">O que é xadrez?</h1>
-          <p class="hero-subtitulo">Um jogo de estratégia para dois jogadores. Não depende de sorte: ganha quem pensa melhor.</p>
-        </div>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="imagem-fundo">
+        <span class="alinhar-texto-hero">
+          <h1 class="titulo-hero">Todo grande jogador  <span class="destaque">começa aprendendo.</span></h1>
+        </span>
       </div>
     </section>
 
-    <!-- O BÁSICO -->
+    <!-- REGRAS BÁSICAS -->
     <section class="bloco">
       <div class="container-xadrez">
-        <h2 class="bloco-titulo">O básico em um minuto</h2>
-        <p class="bloco-intro texto-suave">O xadrez existe há cerca de 1.500 anos e hoje é jogado no mundo todo, em
-          tabuleiros de madeira e em celulares.</p>
+        <h2 class="bloco-titulo">Como jogar: Regras Básicas</h2>
+        <p class="bloco-intro">Entenda o essencial da partida antes de conhecer as peças</p>
 
-        <div class="basico">
-          <div class="tabuleiro" role="img" aria-label="Tabuleiro de xadrez com 64 casas"></div>
-
-          <ul class="fatos">
-            <li class="fato">
-              <strong>Um tabuleiro com 64 casas</strong>
-              <span class="texto-suave">São 8 fileiras por 8 colunas, com casas claras e escuras alternadas.</span>
-            </li>
-            <li class="fato">
-              <strong>16 peças para cada jogador</strong>
-              <span class="texto-suave">Um joga com as brancas e o outro com as pretas. Cada peça se move de um jeito.</span>
-            </li>
-            <li class="fato">
-              <strong>Um objetivo só: o xeque-mate</strong>
-              <span class="texto-suave">Vence quem encurrala o rei do adversário, sem que ele consiga escapar.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- AS PEÇAS -->
-    <section class="bloco">
-      <div class="container-xadrez">
-        <h2 class="bloco-titulo">Conheça as peças</h2>
-        <p class="bloco-intro texto-suave">Cada peça tem o seu jeito de andar. Comece por aqui.</p>
-
-        <div class="pecas-grid">
-          <article class="peca-card">
-            <img src="./assets/imgs/peao.png" alt="Peão">
-            <h3>Peão</h3>
-            <p class="texto-suave">Anda para a frente, uma casa por vez (duas no primeiro lance), e captura na diagonal.</p>
+        <div class="regras">
+          <article class="regra">
+            <div class="icone-regra">&#9638;</div>
+            <h3>O Campo de Batalha</h3>
+            <p>O jogo acontece em um tabuleiro de 64 casas alternadas entre claras e escuras.</p>
           </article>
-
-          <article class="peca-card">
-            <img src="./assets/imgs/cavalo.png" alt="Cavalo">
-            <h3>Cavalo</h3>
-            <p class="texto-suave">Anda em "L" e é a única peça que pula sobre as outras.</p>
+          <article class="regra">
+            <div class="icone-regra">&#9815;&#xFE0E;</div>
+            <h3>A Ordem da Batalha</h3>
+            <p>As peças Brancas sempre fazem o primeiro lance. Depois, os jogadores alternam um movimento por vez.</p>
           </article>
-
-          <article class="peca-card">
-            <img src="./assets/imgs/bispo.png" alt="Bispo">
-            <h3>Bispo</h3>
-            <p class="texto-suave">Anda nas diagonais, quantas casas quiser.</p>
+          <article class="regra">
+            <div class="icone-regra">&#9818;&#xFE0E;</div>
+            <h3>Xeque e Xeque-Mate</h3>
+            <p>Xeque é quando o Rei está sob ataque. Xeque-mate é quando o Rei não tem saída legal e o jogo termina com
+              vitória.</p>
           </article>
-
-          <article class="peca-card">
-            <img src="./assets/imgs/torre.png" alt="Torre">
-            <h3>Torre</h3>
-            <p class="texto-suave">Anda em linha reta, na horizontal ou na vertical, quantas casas quiser.</p>
-          </article>
-
-          <article class="peca-card">
-            <img src="./assets/imgs/dama.png" alt="Dama">
-            <h3>Dama</h3>
-            <p class="texto-suave">A peça mais forte: junta os movimentos da torre e do bispo.</p>
-          </article>
-
-          <article class="peca-card">
-            <img src="./assets/imgs/rei.png" alt="Rei">
-            <h3>Rei</h3>
-            <p class="texto-suave">Anda uma casa em qualquer direção. Se ele cair, a partida termina.</p>
+          <article class="regra">
+            <div class="icone-regra">&#129309;</div>
+            <h3>Rei Afogado e Empates</h3>
+            <p>Se o jogador da vez não está em xeque mas não possui nenhum lance legal, ocorre o afogamento e o jogo
+              empata.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- COMO UMA PARTIDA FUNCIONA -->
+    <!-- CONHEÇA AS PEÇAS -->
     <section class="bloco">
       <div class="container-xadrez">
-        <h2 class="bloco-titulo">Como uma partida funciona</h2>
+        <h2 class="bloco-titulo">Conheça as peças:</h2>
+        <p class="bloco-intro">A trilha completa para começar a jogar xadrez</p>
 
-        <ol class="passos">
-          <li class="passo">
-            <div>
-              <h3>As brancas começam</h3>
-              <p class="texto-suave">Cada jogador move uma peça por vez, alternando a vez.</p>
+        <!-- PEÃO -->
+        <details class="peca">
+          <summary class="informacoes">
+            <div class="identidade">
+              <div class="icone">♙</div>
+              <div class="nome">Peão</div>
             </div>
-          </li>
-          <li class="passo">
-            <div>
-              <h3>Ataque e defenda</h3>
-              <p class="texto-suave">Se sua peça chega a uma casa ocupada por uma peça adversária, você a captura e ela
-                sai do tabuleiro.</p>
+            <div class="descricao">
+              <div class="etiqueta">A Vanguarda do Exército</div>
+              <p>Os primeiros a entrar em batalha e os únicos que nunca dão um passo atrás. Embora pareçam humildes,
+                carregam o potencial de se tornar a peça mais poderosa do tabuleiro.</p>
+              <p><strong>Regras básicas do peão</strong>Cada jogador começa com 8 peões.</p>
+              <p><strong>Movimento:</strong>Anda 1 casa para frente por vez e nunca volta. No primeiro lance, pode andar
+                1
+                ou 2 casas se o caminho estiver livre.</p>
             </div>
-          </li>
-          <li class="passo">
-            <div>
-              <h3>Ameace o rei</h3>
-              <p class="texto-suave">Quando o rei está ameaçado, é xeque, e o jogador precisa tirá-lo do perigo no
-                mesmo lance.</p>
+          </summary>
+          <div class="demonstracoes">
+            <div class="demonstracao">
+              <h4>Movimento e Captura</h4><img class="tabuleiro" src="./assets/gifs/peao-movimento-captura.gif"
+                alt="peao movimento captura">
+              <p>Avança 1 casa (ou 2 no início), não anda se bloqueado e captura na diagonal.</p>
             </div>
-          </li>
-          <li class="passo">
-            <div>
-              <h3>Dê o xeque-mate</h3>
-              <p class="texto-suave">Se o rei está em xeque e não tem como escapar, a partida acaba e quem deu o
-                xeque-mate vence.</p>
+            <div class="demonstracao">
+              <h4>En passant</h4><img class="tabuleiro" src="./assets/gifs/peao-en-passant.gif" alt="peao en passant">
+              <p>Captura especial: pega o peão inimigo que avançou 2 casas ao lado do seu (apenas no lance seguinte).
+              </p>
             </div>
-          </li>
-        </ol>
-      </div>
-    </section>
+            <div class="demonstracao">
+              <h4>Promoção</h4><img class="tabuleiro" src="./assets/gifs/peao-promocao.gif" alt="peao promocao">
+              <p><em>Ao chegar no fim do tabuleiro, vira dama, torre, bispo ou cavalo.</em></p>
+            </div>
+          </div>
+        </details>
 
-    <!-- PALAVRAS PARA COMEÇAR -->
-    <section class="bloco">
-      <div class="container-xadrez">
-        <h2 class="bloco-titulo">Três palavras que você vai ouvir</h2>
+        <!-- CAVALO -->
+        <details class="peca">
+          <summary class="informacoes">
+            <div class="identidade">
+              <div class="icone">♘</div>
+              <div class="nome">Cavalo</div>
+            </div>
+            <div class="descricao">
+              <div class="etiqueta">Os Mestres da Emboscada</div>
+              <p>Ágeis e imprevisíveis, ignoram barreiras e saltam sobre as linhas inimigas onde ninguém espera. Sua
+                habilidade de atacar de ângulos ocultos cria o caos nas defesas adversárias.</p>
+              <p><strong>Regras básicas do cavalo</strong>Cada jogador começa com 2 cavalos.</p>
+              <p><strong>Movimento:</strong>Anda em formato de "L" (duas casas em uma direção e uma para o lado) e é a
+                única peça que pode pular sobre outras.</p>
+            </div>
+          </summary>
+          <div class="demonstracoes">
+            <div class="demonstracao">
+              <h4>Movimento em "L"</h4><img class="tabuleiro" src="./assets/gifs/cavalo-movimento-l.gif"
+                alt="cavalo movimento l">
+              <p>Move-se duas casas na vertical ou horizontal e uma para o lado, formando um "L".</p>
+            </div>
+            <div class="demonstracao">
+              <h4>Salto sobre peças</h4><img class="tabuleiro" src="./assets/gifs/cavalo-salto.gif" alt="cavalo salto">
+              <p>É a única peça do jogo capaz de pular por cima de peças aliadas ou inimigas.</p>
+            </div>
+            <div class="demonstracao">
+              <h4>Captura</h4><img class="tabuleiro" src="./assets/gifs/cavalo-captura.gif" alt="cavalo captura">
+              <p>Captura apenas a peça inimiga que estiver na casa final onde o "L" termina (nunca as peças que ele
+                pula).
+              </p>
+            </div>
+          </div>
+        </details>
 
-        <div class="palavras-grid">
-          <article class="palavra-card">
-            <h3>Xeque</h3>
-            <p class="texto-suave">O rei está sendo atacado e precisa sair do perigo.</p>
-          </article>
-          <article class="palavra-card">
-            <h3>Xeque-mate</h3>
-            <p class="texto-suave">O rei está em xeque e não tem como escapar. Fim de jogo.</p>
-          </article>
-          <article class="palavra-card">
-            <h3>Empate</h3>
-            <p class="texto-suave">Ninguém consegue vencer. Acontece, por exemplo, quando o jogador da vez não tem
-              nenhum lance possível e seu rei não está em xeque.</p>
-          </article>
-        </div>
+        <!-- BISPO -->
+        <details class="peca">
+          <summary class="informacoes">
+            <div class="identidade">
+              <div class="icone">♗</div>
+              <div class="nome">Bispo</div>
+            </div>
+            <div class="descricao">
+              <div class="etiqueta">Os Estrategistas das Diagonais</div>
+              <p>Mestres da precisão de longo alcance, cortam o campo de batalha em ângulos silenciosos. Cada bispo
+                domina
+                apenas uma cor do tabuleiro, tornando a dupla letal quando atua em conjunto.</p>
+              <p><strong>Regras básicas do bispo</strong>Cada jogador começa com 2 bispos (um nas casas claras e outro
+                nas
+                escuras).</p>
+              <p><strong>Movimento:</strong>Anda quantas casas quiser apenas nas diagonais, desde que o caminho esteja
+                livre.</p>
+            </div>
+          </summary>
+          <div class="demonstracoes">
+            <div class="demonstracao">
+              <h4>Movimento diagonal</h4><img class="tabuleiro" src="./assets/gifs/bispo-movimento.gif"
+                alt="bispo movimento">
+              <p>Desliza quantas casas quiser na diagonal, para frente ou para trás, sem pular peças.</p>
+            </div>
+            <div class="demonstracao">
+              <h4>Domínio de cor</h4><img class="tabuleiro" src="./assets/gifs/bispo-cor.gif" alt="bispo cor">
+              <p>Nunca muda a cor da casa em que começou — o bispo da casa clara só anda nas claras.</p>
+            </div>
+            <div class="demonstracao">
+              <h4>Captura</h4><img class="tabuleiro" src="./assets/gifs/bispo-captura.gif" alt="bispo captura">
+              <p>Captura a primeira peça inimiga que encontrar na sua diagonal, ocupando o lugar dela.</p>
+            </div>
+          </div>
+        </details>
+
+        <!-- TORRE -->
+        <details class="peca">
+          <summary class="informacoes">
+            <div class="identidade">
+              <div class="icone">♖</div>
+              <div class="nome">Torre</div>
+            </div>
+            <div class="descricao">
+              <div class="etiqueta">As Fortalezas Implacáveis</div>
+              <p>Guardiãs dos flancos do reino, avançam como colossos imparáveis em linhas retas. Quando entram em jogo
+                com colunas abertas, dominam o território e esmagam as defesas adversárias.</p>
+              <p><strong>Regras básicas da torre</strong>Cada jogador começa com 2 torres (nos cantos do tabuleiro).</p>
+              <p><strong>Movimento:</strong>Anda quantas casas quiser na horizontal ou na vertical, desde que o caminho
+                esteja livre.</p>
+            </div>
+          </summary>
+          <div class="demonstracoes">
+            <div class="demonstracao">
+              <h4>Movimento em linha reta</h4><img class="tabuleiro" src="./assets/gifs/torre-movimento.gif"
+                alt="torre movimento">
+              <p>Desliza quantas casas quiser para frente, para trás ou para os lados, sem pular peças.</p>
+            </div>
+            <div class="demonstracao">
+              <h4>Captura</h4><img class="tabuleiro" src="./assets/gifs/torre-captura.gif" alt="torre captura">
+              <p>Captura a primeira peça inimiga no seu caminho reto, ocupando a casa dela.</p>
+            </div>
+            <div class="demonstracao">
+              <h4>Roque</h4><img class="tabuleiro" src="./assets/gifs/torre-roque.gif" alt="torre roque">
+              <p>Movimento especial em conjunto com o Rei para proteger o monarca e ativar a torre rápido.</p>
+            </div>
+          </div>
+        </details>
+
+        <!-- DAMA -->
+        <details class="peca">
+          <summary class="informacoes">
+            <div class="identidade">
+              <div class="icone">♕</div>
+              <div class="nome">Dama</div>
+            </div>
+            <div class="descricao">
+              <div class="etiqueta">A Soberana Absoluta</div>
+              <p>A força mais temida e versátil de todo o tabuleiro. Combinando o alcance implacável da torre e a
+                precisão
+                mortal do bispo, domina todas as direções e decide o destino da batalha.</p>
+              <p><strong>Regras básicas da dama</strong>Cada jogador começa com 1 dama (sempre na casa da sua própria
+                cor).</p>
+              <p><strong>Movimento:</strong>Anda quantas casas quiser na horizontal, vertical ou diagonal, desde que o
+                caminho esteja livre.</p>
+            </div>
+          </summary>
+          <div class="demonstracoes">
+            <div class="demonstracao">
+              <h4>Movimento total</h4><img class="tabuleiro" src="./assets/gifs/dama-movimento.gif"
+                alt="dama movimento">
+              <p>Combina os poderes de torre e do bispo, deslizando em linhas retas e diagonais.</p>
+            </div>
+            <div class="demonstracao">
+              <h4>Bloqueio</h4><img class="tabuleiro" src="./assets/gifs/dama-bloqueio.gif" alt="dama bloqueio">
+              <p>Apesar de ser a peça mais forte, não pode pular por cima de outras peças.</p>
+            </div>
+            <div class="demonstracao">
+              <h4>Captura</h4><img class="tabuleiro" src="./assets/gifs/dama-captura.gif" alt="dama captura">
+              <p>Captura qualquer peça inimiga no seu alcance direito, ocupando a casa dela.</p>
+            </div>
+          </div>
+        </details>
+
+        <!-- REI -->
+        <details class="peca">
+          <summary class="informacoes">
+            <div class="identidade">
+              <div class="icone">♔</div>
+              <div class="nome">Rei</div>
+            </div>
+            <div class="descricao">
+              <div class="etiqueta">O Coração do Exército</div>
+              <p>A peça mais importante do jogo: se ele cair, a partida acaba. Lento e vulnerável, precisa ser protegido
+                a
+                todo custo enquanto ajuda no ataque nos momentos finais.</p>
+              <p><strong>Regras básicas do rei</strong>Cada jogador começa com 1 rei.</p>
+              <p><strong>Movimento:</strong>Anda quantas casas quiser na horizontal, vertical ou diagonal, desde que o
+                caminho esteja livre — mas apenas 1 casa por vez.</p>
+            </div>
+          </summary>
+          <div class="demonstracoes">
+            <div class="demonstracao">
+              <h4>Movimento e Captura</h4><img class="tabuleiro" src="./assets/gifs/rei-movimento-captura.gif"
+                alt="rei movimento captura">
+              <p>Anda e captura apenas 1 casa por vez em qualquer direção (horizontal, vertical ou diagonal).</p>
+            </div>
+            <div class="demonstracao">
+              <h4>Casas proibidas / Xeque</h4><img class="tabuleiro" src="./assets/gifs/rei-xeque.gif" alt="rei xeque">
+              <p>Nunca pode entrar ou ficar em uma casa atacada por uma peça inimiga.</p>
+            </div>
+            <div class="demonstracao">
+              <h4>Roque</h4><img class="tabuleiro" src="./assets/gifs/rei-roque.gif" alt="rei roque">
+              <p>Movimento defensivo especial feito junto com a torre para colocar o rei em segurança no canto.</p>
+            </div>
+          </div>
+        </details>
       </div>
     </section>
 
     <!-- CHAMADA FINAL -->
     <section class="bloco">
-      <div class="container-xadrez">
-        <div class="cta-final">
-          <h2 class="bloco-titulo">Pronto para o primeiro puzzle?</h2>
-          <p class="texto-suave">Não precisa saber nada de xadrez. A trilha ensina uma peça de cada vez.</p>
-          <div class="cta-botoes">
-            <a class="btn-principal" href="cadastro.html">Criar conta</a>
-            <a class="btn-secundario" href="login.html">Já tenho conta</a>
-          </div>
-        </div>
+      <div class="cta-final">
+        <h2 class="cta-titulo">Qual é o seu estilo de jogo no <span class="destaque">tabuleiro?</span>
+        </h2>
+        <p>Você parte para o ataque sem medo, arma emboscadas ou constrói uma defesa impenetrável? Descubra agora!</p>
+        <a class="btn-principal" href="./login.html">Descobrir meu estilo &rarr;</a>
       </div>
     </section>
 
