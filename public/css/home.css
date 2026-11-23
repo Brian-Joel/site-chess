@@ -13,6 +13,7 @@ main {
     flex: 1;
 }
 
+/* ---------- HERO ---------- */
 .hero {
     width: 100%;
 }
@@ -27,36 +28,32 @@ main {
     padding: 0 20px;
 }
 
-.texto-hero {
-    font-weight: 500;
-    color: var(--cor-texto-t1);
-    max-width: 500px;
-    width: 100%;
-    text-shadow: 2px 2px 10px black;
-    font-size: 1.1rem;
-    margin-top: 15px;
-}
-
 .titulo-hero {
+    position: relative;
+    right: 200px;
     color: var(--cor-texto-t1);
-    max-width: 500px;
+    max-width: 1000px;
     width: 100%;
     text-shadow: 2px 2px 10px black;
-    font-size: 2.5rem;
+    font-size: 3rem;
+    font-family: var(--fonte-titulo);
 }
 
 .imagem-fundo {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-image: url('../assets/imgs/danca-chess2.png');
-    height: 850px;
+    height: 900px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 
+/* ---------- BOTÃO ---------- */
 .botao {
+    display: inline-block;
     background: var(--cor-btn-topbar);
     color: var(--cor-btn-texto);
     font-weight: 700;
@@ -65,66 +62,113 @@ main {
     margin-top: 20px;
 }
 
-/* CARDS  */
-.alinhar-moldura {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-    margin: 90px;
+.botao:hover {
+    background: var(--cor-btn-topbar-hover);
+    color: var(--cor-btn-texto-hover);
 }
 
-.moldura {
-    padding: 120px;
-    background-color: #262626;
-    border: 2px solid rgb(49, 49, 49);
+/* ---------- SEÇÕES ---------- */
+.secao {
+    margin: 80px;
+    padding: 10px 0px;
 }
 
 .alinhar-texto-secao {
-    margin: 20px;
+    display: flex;
+    margin: 20px 0;
+    height: 50px;
 }
 
-/* ---------- CARDS ---------- */
-.secao {
-    margin: 50px 80px;
+.alinhar-texto-secao.centro {
+    text-align: center;
 }
 
-.passos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-}
-
-.card {
-    background: var(--cor-fundo-card);
-    border: 1px solid var(--cor-borda-card);
-    border-radius: 15px;
-    padding: 3rem 2em;
-}
-
-.passo-numero {
-    color: green;
+.alinhar-texto-secao h2 {
+    font-family: var(--fonte-titulo);
     font-size: 2rem;
-    font-weight: bolder;
-    margin-bottom: 0.5rem;
 }
 
-.passo h3 {
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-    font-weight: bolder;
+/* ---------- INTRO : TABULEIRO + TEXTO ---------- */
+.intro {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin: 50px;
+    padding: 10rem 5rem;
 }
 
-.passo p {
-    font-weight: lighter;
-    font-size: 0.85rem;
+.tabuleiro {
+    width: 280px;
+    height: 280px;
+    border: 6px solid var(--cor-cinza-escuro);
+    background: repeating-conic-gradient(#d08c4a 0 25%, #ffd9a8 0 50%) 0 0 / 25% 25%;
 }
 
-/* ---------- SESSAO TRILHA---------- */
+.intro-texto {
+    margin: 10px;
+}
+
+.intro-texto p {
+    font-size: 1.5rem;
+}
+
+.subtitulo-verde {
+    color: var(--cor-verde);
+    font-family: var(--fonte-titulo);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+
+/* ---------- FAIXAS VERDES ---------- */
+.faixa {
+    background: rgba(0, 128, 0, 0.2);
+    padding: 4rem 80px;
+}
+
+.faixa-centro {
+    text-align: center;
+}
+
+.titulo-faixa {
+    font-family: var(--fonte-titulo);
+    font-size: 2.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.titulo-faixa--esq {
+    margin-left: 0px;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    max-width: 1000px;
+}
+
+.destaque {
+    color: var(--cor-verde);
+}
+
+.texto-faixa {
+    font-size: 1.5rem;
+}
+
+.faixa-faq {
+    padding: 2rem 80px;
+    margin-top: 200px;
+}
+
+.faixa-faq h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 2rem;
+}
+
+/* ---------- SESSAO TRILHA ---------- */
 .card-trilha {
     background: var(--cor-fundo-card);
     border: 1px solid var(--cor-borda-card);
     border-radius: 15px;
-    padding: 3rem;
+    padding: 2rem 3rem;
 }
 
 .trilha-lista {
@@ -139,6 +183,7 @@ main {
     flex-direction: column;
     align-items: center;
     font-size: 1rem;
+    letter-spacing: 0.1em;
 }
 
 .peca {
@@ -150,32 +195,42 @@ main {
     line-height: 1;
 }
 
-.peca--tabuleiro {
-    width: 2.6rem;
-    height: 2.6rem;
-    border: 1px solid white;
-    align-self: center;
-    margin-bottom: 5px;
-    background: repeating-conic-gradient(black 0 25%, white 0 50%) 0 0 / 50% 50%;
+/* ---------- AUTOR ---------- */
+.autor {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
 }
 
-/* ---------- CTA : CHAMADA PARA AÇÃO ---------- */
-.cta {
-    background: rgba(0, 128, 0, 0.342);
-    border: 1px solid green;
-    border-radius: 12px;
-    padding: 2rem 1rem;
-    text-align: center;
+.autor-foto,
+.autor-texto {
+    background: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda-card);
+    border-radius: 15px;
 }
 
-.cta h2 {
-    margin-bottom: 1rem;
+.autor-foto {
+    display: grid;
+    place-items: center;
+    min-height: 240px;
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+}
+
+.autor-texto {
+    display: flex;
+    align-items: center;
+}
+
+.autor-texto p {
+    font-size: 1.5rem;
+    padding: 8rem 4rem;
 }
 
 /* ---------- FAQ ---------- */
 .faq {
     display: grid;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .faq-item {
@@ -186,25 +241,15 @@ main {
 
 .faq-item summary {
     padding: 1rem;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
 }
 
-
 .faq-item p {
     padding: 1rem 2.4rem;
-    color: var(--cor-texto-t1);
-    font-size: 0.85rem;
+    font-size: 1rem;
 }
 
-/* ANIMAÇÕES  */
-
-.faq-item:hover{
+.faq-item:hover {
     border: 1px solid var(--cor-btn-topbar-hover);
-}
-
-.botao:hover {
-    background: var(--cor-btn-topbar-hover);
-    color: var(--cor-btn-texto-hover);
 }
