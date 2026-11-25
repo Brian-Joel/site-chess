@@ -1,38 +1,107 @@
 const listaDeQuestoes = [
 
-    {
-        pergunta: "Em um fim de semana livre, você prefere:",
-        alternativaA: "Estudar algo novo sozinho",
-        alternativaB: "Sair com os amigos",
-        alternativaC: "Descansar e relaxar",
-        alternativaD: "Praticar um hobby criativo",
-        perfilA: "A", perfilB: "B", perfilC: "C", perfilD: "D"
-    },
-
-    {
-        pergunta: "Diante de um problema difícil, você:",
-        alternativaA: "Analisa todos os detalhes",
-        alternativaB: "Pede ajuda a alguém",
-        alternativaC: "Tenta algo diferente",
-        alternativaD: "Respira e planeja com calma",
-        perfilA: "B", perfilB: "C", perfilC: "D", perfilD: "A"
-    },
-
-    {
-        pergunta: "Qual frase mais combina com você?",
-        alternativaA: "Quero ver o mundo",
-        alternativaB: "Valorizo minha paz",
-        alternativaC: "Gosto de aprender sempre",
-        alternativaD: "Amo estar com pessoas",
-        perfilA: "D", perfilB: "C", perfilC: "A", perfilD: "B"
-    },
+    // Q1: agressivo na B, posicional na A, versátil na D, defensivo na C
     {
         pergunta: "Brancas jogam. O que você faria nesta posição?",
         imgPergunta: "../assets/quiz/posicao1.gif",
-        alternativaA: "Avançar o cavalo para perto do rei adversário, criando ameaça imediata de ataque ao ponto fraco ao lado do rei. (Ng5)",
-        alternativaB: "Fazer um lance tranquilo que reforça o centro e prepara o desenvolvimento das peças. (d3)",
+        alternativaA: "Fazer um lance tranquilo que reforça o centro e prepara o desenvolvimento das peças. (d3)",
+        alternativaB: "Avançar o cavalo para perto do rei adversário, criando ameaça imediata de ataque ao ponto fraco ao lado do rei. (Ng5)",
         alternativaC: "Colocar o rei em segurança fazendo o roque, antes de qualquer coisa. (O-O)",
         alternativaD: "Abrir o centro com um avanço de peão, mantendo a tensão e as opções abertas. (d4)",
+        perfilA: "B", perfilB: "A", perfilC: "C", perfilD: "D"
+    },
+
+    // Q3: agressivo na D, posicional na A, defensivo na C, versátil na B
+    {
+        pergunta: "Brancas jogam. O que você faria nesta posição?",
+        imgPergunta: "../assets/quiz/posicao3.gif",
+        alternativaA: "Recuar o bispo para uma casa segura, consolidando a estrutura. (Be2)",
+        alternativaB: "Trazer a dama para uma casa central, conectando as torres e mantendo a tensão. (Qd2)",
+        alternativaC: "Fazer o roque e tirar o rei do centro o quanto antes. (O-O)",
+        alternativaD: "Levar o bispo para pressionar o cavalo adversário, criando uma cravada e ameaça de ataque. (Bb5)",
+        perfilA: "B", perfilB: "D", perfilC: "C", perfilD: "A"
+    },
+
+    // Q9: A → Agressivo, B → Posicional, C → Defensivo, D → Versátil.
+    {
+        pergunta: "Numa posição difícil, com o relógio correndo, você:",
+        alternativaA: "Ataca de forma ousada, mesmo com risco, para tentar virar o jogo.",
+        alternativaB: "Mantém a calma e busca o lance mais sólido, sem se desesperar.",
+        alternativaC: "Defende com unhas e dentes e espera o adversário errar.",
+        alternativaD: "Avalia as opções e escolhe o plano que a posição pede, sem se prender a um estilo.",
+        perfilA: "A", perfilB: "B", perfilC: "C", perfilD: "D"
+    },
+
+    // Q4: agressivo na B, posicional na D, defensivo na C, versátil na A
+    {
+        pergunta: "Brancas jogam. O que você faria nesta posição?",
+        imgPergunta: "../assets/quiz/posicao4.gif",
+        alternativaA: "Avançar o peão da ala do rei para ganhar espaço e criar passagem. (f4)",
+        alternativaB: "Avançar o peão lateral para tentar abrir espaço na ala. (hxg6) (se houver peça preta em g6 para capturar)",
+        alternativaC: "Manter o rei recuado, protegendo a estrutura e esperando o adversário se mexer. (Kg2)",
+        alternativaD: "Melhorar a posição do rei, aproximando-o do centro para apoiar os peões. (Kf2)",
+        perfilA: "D", perfilB: "A", perfilC: "C", perfilD: "B"
+    },
+
+    // Q5: agressivo na C, posicional na B, defensivo na A, versátil na D
+    {
+        pergunta: "Brancas jogam. O que você faria nesta posição?",
+        imgPergunta: "../assets/quiz/posicao5.gif",
+        alternativaA: "Trocar um par de peças para aliviar a pressão e simplificar. (Nxd5)",
+        alternativaB: "Reforçar o controle do centro com um lance de peão sólido. (c4)",
+        alternativaC: "Lançar um peão para frente para abrir linhas de ataque contra o rei adversário. (e5)",
+        alternativaD: "Manter a tensão no centro, desenvolvendo uma peça e esperando. (Be2)",
+        perfilA: "C", perfilB: "B", perfilC: "A", perfilD: "D"
+    },
+
+    // Mapeamento: A → Posicional (peão), B → Versátil (dama), C → Agressivo (cavalo), D → Defensivo (rei).
+    {
+        pergunta: "Qual peça de xadrez mais combina com você?",
+        alternativaA: "O Peão — simples, mas essencial; avança devagar e nunca recua.",
+        alternativaB: "A Dama — poderosa e versátil, atua em qualquer parte do tabuleiro.",
+        alternativaC: "O Cavalo — imprevisível, salta por cima dos obstáculos e aparece onde ninguém espera.",
+        alternativaD: "O Rei — fica no centro das atenções, mas precisa de proteção constante.",
+        perfilA: "B", perfilB: "D", perfilC: "A", perfilD: "C"
+    },
+
+    // Q7:  A → Agressivo, B → Posicional, C → Defensivo, D → Versátil.
+    {
+        pergunta: "Que tipo de jogador você mais admira no xadrez?",
+        alternativaA: "Os que sacrificam peças e criam ataques brilhantes, como Mikhail Tal.",
+        alternativaB: "Os que dominam a posição com precisão cirúrgica, como Anatoly Karpov.",
+        alternativaC: "Os que resistem a tudo e vencem nos detalhes, como Tigran Petrosian.",
+        alternativaD: "Os que jogam qualquer estilo com maestria, como Magnus Carlsen.",
+        perfilA: "A", perfilB: "B", perfilC: "C", perfilD: "D"
+    },
+
+    // Q2: agressivo na A, posicional na C, defensivo na B, versátil na D
+    {
+        pergunta: "Brancas jogam. O que você faria nesta posição?",
+        imgPergunta: "../assets/quiz/posicao2.gif",
+        alternativaA: "Levar o bispo para perto do cavalo adversário, criando pressão e ameaça de ataque. (Bb5)",
+        alternativaB: "Fazer o roque e garantir a segurança do rei antes de pensar em ataque. (O-O)",
+        alternativaC: "Desenvolver o bispo para uma casa central, ocupando uma diagonal forte. (Bd3)",
+        alternativaD: "Empurrar um peão lateral para controlar uma casa importante e esperar a resposta do adversário. (a3)",
+        perfilA: "A", perfilB: "C", perfilC: "B", perfilD: "D"
+    },
+
+    // Q8: A → Agressivo, B → Posicional, C → Defensivo, D → Versátil.
+    {
+        pergunta: "Você comete um erro numa partida importante. O que você faz?",
+        alternativaA: "Parto para o ataque imediatamente, tentando compensar com agressividade.",
+        alternativaB: "Avalio a posição com calma e busco a melhor forma de corrigir o erro.",
+        alternativaC: "Simplifico o jogo e tento segurar a posição até o final.",
+        alternativaD: "Mudo meu plano e adapto o estilo ao que a posição pede agora.",
+        perfilA: "A", perfilB: "B", perfilC: "C", perfilD: "D"
+    },
+
+    // Q10: A → Agressivo, B → Posicional, C → Defensivo, D → Versátil.
+    {
+        pergunta: "Se você pudesse escolher uma única qualidade para levar para todas as suas partidas, qual seria?",
+        alternativaA: "Coragem para sacrificar e atacar sem medo.",
+        alternativaB: "Paciência para construir vantagens aos poucos.",
+        alternativaC: "Resistência para defender até o último lance.",
+        alternativaD: "Flexibilidade para mudar de plano quando a posição pedir.",
         perfilA: "A", perfilB: "B", perfilC: "C", perfilD: "D"
     }
 
