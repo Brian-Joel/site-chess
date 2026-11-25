@@ -51,26 +51,10 @@ main {
     background-position: center;
 }
 
-/* ---------- BOTÃO ---------- */
-.botao {
-    display: inline-block;
-    background: var(--cor-btn-topbar);
-    color: var(--cor-btn-texto);
-    font-weight: 700;
-    padding: 0.6rem 2.5rem;
-    border-radius: 12px;
-    margin-top: 20px;
-}
-
-.botao:hover {
-    background: var(--cor-btn-topbar-hover);
-    color: var(--cor-btn-texto-hover);
-}
-
 /* ---------- SEÇÕES ---------- */
 .secao {
     margin: 80px;
-    padding: 10px 0px;
+    padding: 8rem 0;
 }
 
 .alinhar-texto-secao {
@@ -95,14 +79,18 @@ main {
     gap: 3rem;
     align-items: center;
     margin: 50px;
-    padding: 10rem 5rem;
+    padding: 5rem;
 }
 
 .tabuleiro {
-    width: 280px;
-    height: 280px;
-    border: 6px solid var(--cor-cinza-escuro);
-    background: repeating-conic-gradient(#d08c4a 0 25%, #ffd9a8 0 50%) 0 0 / 25% 25%;
+    width: 500px;
+    height: 500px;
+    box-shadow: 0px 0px 30px rgb(187, 153, 0);
+    border-radius: 10px;
+    background-image: url('../assets/gifs/jogoHome.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .intro-texto {
@@ -154,8 +142,9 @@ main {
 }
 
 .faixa-faq {
+    position: relative;
+    top: 120px;
     padding: 2rem 80px;
-    margin-top: 200px;
 }
 
 .faixa-faq h2 {
@@ -168,7 +157,7 @@ main {
     background: var(--cor-fundo-card);
     border: 1px solid var(--cor-borda-card);
     border-radius: 15px;
-    padding: 2rem 3rem;
+    padding: 4rem 3rem;
 }
 
 .trilha-lista {
@@ -182,18 +171,31 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 1rem;
-    letter-spacing: 0.1em;
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-.peca {
-    display: grid;
-    place-items: center;
-    width: 3rem;
-    height: 3rem;
-    font-size: 3rem;
-    line-height: 1;
+.trilha-lista li:hover {
+    transform: translateY(-5px);
 }
+
+.trilha-lista li:hover span {
+    color: var(--cor-verde);
+}
+
+.trilha-lista img {
+    display: block;
+    width: 7rem;
+    height: 7rem;
+}
+
+/* muda a luminosidade para pintar, sepia, saturacao, matiz em 85 graus e luminodiade 1  */
+.trilha-lista li:hover img {
+    filter: brightness(0.6) sepia(50%) saturate(2000%) hue-rotate(85deg) brightness(1);
+}
+
 
 /* ---------- AUTOR ---------- */
 .autor {
@@ -241,7 +243,8 @@ main {
 
 .faq-item summary {
     padding: 1rem;
-    font-size: 1rem;
+    font-weight: 600;
+    font-size: 1.2rem;
     cursor: pointer;
 }
 

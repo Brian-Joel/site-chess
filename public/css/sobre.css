@@ -220,3 +220,13 @@
     background-color: var(--cor-btn-topbar-hover);
     color: var(--cor-btn-texto-hover);
 }
+
+
+#peao,
+#cavalo,
+#bispo,
+#torre,
+#dama,
+#rei {
+    scroll-margin-top: 35vh;
+}
