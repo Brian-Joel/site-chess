@@ -6,7 +6,7 @@ const listaDeQuestoes = [
         alternativaB: "Sair com os amigos",
         alternativaC: "Descansar e relaxar",
         alternativaD: "Praticar um hobby criativo",
-        perfilA: "A", perfilB: "B", perfilC: "C", perfilD: "D"      
+        perfilA: "A", perfilB: "B", perfilC: "C", perfilD: "D"
     },
 
     {
@@ -25,13 +25,22 @@ const listaDeQuestoes = [
         alternativaC: "Gosto de aprender sempre",
         alternativaD: "Amo estar com pessoas",
         perfilA: "D", perfilB: "C", perfilC: "A", perfilD: "B"
+    },
+    {
+        pergunta: "Brancas jogam. O que você faria nesta posição?",
+        imgPergunta: "../assets/quiz/posicao1.gif",
+        alternativaA: "Avançar o cavalo para perto do rei adversário, criando ameaça imediata de ataque ao ponto fraco ao lado do rei. (Ng5)",
+        alternativaB: "Fazer um lance tranquilo que reforça o centro e prepara o desenvolvimento das peças. (d3)",
+        alternativaC: "Colocar o rei em segurança fazendo o roque, antes de qualquer coisa. (O-O)",
+        alternativaD: "Abrir o centro com um avanço de peão, mantendo a tensão e as opções abertas. (d4)",
+        perfilA: "A", perfilB: "B", perfilC: "C", perfilD: "D"
     }
 
 ]
 
 // variáveis globais
 let numeroDaQuestaoAtual = 0
-let qtdA = 0 
+let qtdA = 0
 let qtdB = 0
 let qtdC = 0
 let qtdD = 0
@@ -67,6 +76,7 @@ function preencherHTMLcomQuestaoAtual(index) {
     console.log(questaoAtual)
     document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
     document.getElementById("spanEnunciado").innerHTML = questaoAtual.pergunta;       // id do seu front atual
+    renderizarImagemPergunta(questaoAtual.imgPergunta);
     document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
     document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
     document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
@@ -241,6 +251,20 @@ function finalizarJogo() {                                                // ALT
         btnTentarNovamente.disabled = false
     })
 }
+
+// para mostrar a imagem no quiz
+function renderizarImagemPergunta(caminho) {
+    const img = document.getElementById("imgPergunta");
+    if (caminho) {
+        img.src = caminho;
+        img.style.display = "block";
+    } else {
+        img.removeAttribute("src");
+        img.style.display = "none";
+    }
+}
+
+
 
 // function limparCoresBackgroundOpcoes() {
 //     const options = document.getElementsByName("option");
