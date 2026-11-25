@@ -52,7 +52,7 @@
     <section class="hero">
       <div class="imagem-fundo">
         <span class="alinhar-texto-hero">
-          <h1 class="titulo-hero">Todo grande jogador  <span class="destaque">começa aprendendo.</span></h1>
+          <h1 class="titulo-hero">Todo grande jogador <span class="destaque">começa aprendendo.</span></h1>
         </span>
       </div>
     </section>
@@ -63,32 +63,41 @@
         <h2 class="bloco-titulo">Como jogar: Regras Básicas</h2>
         <p class="bloco-intro">Entenda o essencial da partida antes de conhecer as peças</p>
 
-        <div class="regras">
-          <article class="regra">
-            <div class="icone-regra">&#9638;</div>
-            <h3>O Campo de Batalha</h3>
-            <p>O jogo acontece em um tabuleiro de 64 casas alternadas entre claras e escuras.</p>
-          </article>
-          <article class="regra">
-            <div class="icone-regra">&#9815;&#xFE0E;</div>
-            <h3>A Ordem da Batalha</h3>
-            <p>As peças Brancas sempre fazem o primeiro lance. Depois, os jogadores alternam um movimento por vez.</p>
-          </article>
-          <article class="regra">
-            <div class="icone-regra">&#9818;&#xFE0E;</div>
-            <h3>Xeque e Xeque-Mate</h3>
-            <p>Xeque é quando o Rei está sob ataque. Xeque-mate é quando o Rei não tem saída legal e o jogo termina com
-              vitória.</p>
-          </article>
-          <article class="regra">
-            <div class="icone-regra">&#129309;</div>
-            <h3>Rei Afogado e Empates</h3>
-            <p>Se o jogador da vez não está em xeque mas não possui nenhum lance legal, ocorre o afogamento e o jogo
-              empata.</p>
-          </article>
+
+        <div class="conteudo-regras">
+          <div class="img-tabuleiro">
+            <img src="./assets/imgs/chessboard-inicial.jpeg" alt="tabuleiro inicial">
+          </div>
+
+          <div class="regras">
+            <article class="regra">
+              <div class="icone-regra"><img src="./assets/imgs/chessboard.png" alt="tabuleiro"></div>
+              <h3>O Campo de Batalha</h3>
+
+              <p>O jogo acontece em um tabuleiro de 64 casas alternadas entre claras e escuras.</p>
+            </article>
+            <article class="regra">
+              <div class="icone-regra"><img src="./assets/imgs/rei.png" alt="rei branco"></div>
+              <h3>A Ordem da Batalha</h3>
+              <p>As peças Brancas sempre fazem o primeiro lance. Depois, os jogadores alternam um movimento por vez.</p>
+            </article>
+            <article class="regra">
+              <div class="icone-regra"><img src="./assets/imgs/xeque.png" alt="xeque"></div>
+              <h3>Xeque e Xeque-Mate</h3>
+              <p>Xeque é quando o Rei está sob ataque. Xeque-mate é quando o Rei não tem saída legal e o jogo termina
+                com
+                vitória.</p>
+            </article>
+            <article class="regra">
+              <div class="icone-regra">&#129309;</div>
+              <h3>Rei Afogado e Empates</h3>
+              <p>Se o jogador da vez não está em xeque mas não possui nenhum lance legal, ocorre o afogamento e o jogo
+                empata.</p>
+            </article>
+          </div>
         </div>
-      </div>
     </section>
+
 
     <!-- CONHEÇA AS PEÇAS -->
     <section class="bloco">
@@ -100,7 +109,9 @@
         <details id="peao" class="peca">
           <summary class="informacoes">
             <div class="identidade">
-              <div class="icone">♙</div>
+              <div>
+                <img src="./assets/pecas/peao.png"></img>
+              </div>
               <div class="nome">Peão</div>
             </div>
             <div class="descricao">
@@ -135,7 +146,9 @@
         <details id="cavalo" class="peca">
           <summary class="informacoes">
             <div class="identidade">
-              <div class="icone">♘</div>
+              <div>
+                <img src="./assets/pecas/cavalo.png"></img>
+              </div>
               <div class="nome">Cavalo</div>
             </div>
             <div class="descricao">
@@ -170,7 +183,9 @@
         <details id="bispo" class="peca">
           <summary class="informacoes">
             <div class="identidade">
-              <div class="icone">♗</div>
+              <div>
+                <img src="./assets/pecas/bispo.png"></img>
+              </div>
               <div class="nome">Bispo</div>
             </div>
             <div class="descricao">
@@ -206,7 +221,9 @@
         <details id="torre" class="peca">
           <summary class="informacoes">
             <div class="identidade">
-              <div class="icone">♖</div>
+              <div>
+                <img src="./assets/pecas/torre.png"></img>
+              </div>
               <div class="nome">Torre</div>
             </div>
             <div class="descricao">
@@ -239,7 +256,9 @@
         <details id="dama" class="peca">
           <summary class="informacoes">
             <div class="identidade">
-              <div class="icone">♕</div>
+              <div>
+                <img src="./assets/pecas/dama.png"></img>
+              </div>
               <div class="nome">Dama</div>
             </div>
             <div class="descricao">
@@ -274,7 +293,9 @@
         <details id="rei" class="peca">
           <summary class="informacoes">
             <div class="identidade">
-              <div class="icone">♔</div>
+              <div>
+                <img src="./assets/pecas/rei.png"></img>
+              </div>
               <div class="nome">Rei</div>
             </div>
             <div class="descricao">

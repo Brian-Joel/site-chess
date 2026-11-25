@@ -85,9 +85,9 @@ main {
 .tabuleiro {
     width: 500px;
     height: 500px;
-    box-shadow: 0px 0px 30px rgb(187, 153, 0);
+    box-shadow: 0px 0px 60px 1px rgb(126, 204, 25);
     border-radius: 10px;
-    background-image: url('../assets/gifs/jogoHome.gif');
+    background-image: url('../assets/imgs/chessboard-inicial.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
