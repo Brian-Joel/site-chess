@@ -230,6 +230,9 @@ function checarResposta() {                                               // ALT
             numeroDaQuestaoAtual++
         }
     })
+
+    // Atualiza a barra assim que a resposta é contabilizada, sem esperar o "Continuar".
+    atualizarBarraProgresso()
 }
 
 
@@ -294,6 +297,10 @@ function verEstatisticas() {
 }
 
 function finalizarJogo() {                                                // ALTERADO
+    // Garante que a barra de progresso fique cheia (10/10) antes de sair da tela.
+    numeroDaQuestaoAtual = quantidadeDeQuestoes
+    atualizarBarraProgresso()
+
     btnProx.disabled = true
     btnSubmeter.disabled = true
 

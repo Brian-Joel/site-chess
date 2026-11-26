@@ -136,18 +136,6 @@
   align-items: flex-start;
 }
 
-.grafico-1,
-.grafico-2 {
-  position: relative;
-  flex: 1;
-  min-width: 0;
-  height: 400px;
-  padding: 25px;
-  background-color: var(--cor-fundo-card);
-  border: solid 2px var(--cor-borda-card);
-  border-radius: 20px;
-}
-
 .grafico-vazio {
   position: absolute;
   inset: 0;
@@ -159,7 +147,24 @@
   text-align: center;
 }
 
+.grafico-1,
+.grafico-2 {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 400px;
+  padding: 25px;
+  background-color: var(--cor-fundo-card);
+  border: solid 2px var(--cor-borda-card);
+  border-radius: 20px;
+
+  /* Centraliza o gráfico perfeitamente no meio do card */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 canvas {
-  width: 100% !important;
-  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
 }
