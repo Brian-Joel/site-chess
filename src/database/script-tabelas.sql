@@ -56,7 +56,7 @@ FROM quiz_personalidade;
 -- ORDER BY id ASC;
 
 
--- grafico da comunidade
+-- grafico da comunidade -- verifica se tal coluna é maior
 CREATE VIEW vw_panorama_comunidade AS
 SELECT
     CASE
