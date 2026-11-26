@@ -177,13 +177,14 @@ function submeter() {
     }
 }
 
-function habilitarAlternativas(trueOrFalse) {
-    let opcaoEscolhida = trueOrFalse ? false : true
+// conjunto de radius para habilitar ou desabilitar
+function habilitarAlternativas(habilitar) {
+    let desabilitar = !habilitar;
 
-    primeiraOpcao.disabled = opcaoEscolhida
-    segundaOpcao.disabled = opcaoEscolhida
-    terceiraOpcao.disabled = opcaoEscolhida
-    quartaOpcao.disabled = opcaoEscolhida
+    primeiraOpcao.disabled = desabilitar
+    segundaOpcao.disabled = desabilitar
+    terceiraOpcao.disabled = desabilitar
+    quartaOpcao.disabled = desabilitar
 }
 
 function avancar() {
@@ -207,14 +208,14 @@ function tentarNovamente() {
     window.location.reload()
 }
 
-function checarResposta() {                                               // ALTERADO
+function checarResposta() {   
     const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual
 
     const options = document.getElementsByName("option"); // recupera alternativas no html
 
     options.forEach((option) => {
         if (option.checked === true) {
-            // "alternativaA" -> "perfilA" -> perfil dessa alternativa
+            // "alternativaA" -> "perfilA" -> perfil dessa alternativa | mudança de nome no value
             const perfil = questaoAtual[option.value.replace("alternativa", "perfil")]
 
             if (perfil == "A") {
@@ -236,7 +237,7 @@ function checarResposta() {                                               // ALT
 }
 
 
-
+// desmarca todos
 function desmarcarRadioButtons() {
     const options = document.getElementsByName("option");
     for (let i = 0; i < options.length; i++) {

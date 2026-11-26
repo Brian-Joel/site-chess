@@ -215,9 +215,12 @@ main {
     display: grid;
     place-items: center;
     min-height: 240px;
-    font-family: var(--fonte-titulo);
-    font-weight: 700;
+    background-image: url('../assets/imgs/brian-foto.jpeg'); 
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: cover;
 }
+
 
 .autor-texto {
     display: flex;
